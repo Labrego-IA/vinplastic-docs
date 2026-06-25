@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentação Técnica — Agente de Atendimento + CRM VinPlast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-900: #0D2B15;
+      --green-800: #1A4A2A;
+      --green-700: #1B5E20;
+      --green-600: #2E7D32;
+      --green-500: #388E3C;
+      --green-400: #4CAF50;
+      --green-200: #A5D6A7;
+      --green-100: #C8E6C9;
+      --green-50: #E8F5E9;
+      --bg: #F7FAF8;
+      --card: #FFFFFF;
+      --border: #C8E6C9;
+      --text: #0D2B15;
+      --text-muted: #546E7A;
+      --hot: #D32F2F;
+      --hot-bg: #FFEBEE;
+      --warm: #F57C00;
+      --warm-bg: #FFF3E0;
+      --cold: #1565C0;
+      --cold-bg: #E3F2FD;
+      --radius: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(26,74,42,.1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ── Header ─────────────────────────────── */
+    .doc-header {
+      background: var(--green-800);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .header-brand img {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      object-fit: contain;
+    }
+    .header-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,.3);
+    }
+    .header-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,.9);
+      white-space: nowrap;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .header-nav a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all .15s ease;
+    }
+    .header-nav a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .header-nav a.active { color: #fff; background: rgba(255,255,255,.15); }
+
+    /* ── Hero ────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 60%, var(--green-600) 100%);
+      color: #fff;
+      padding: 64px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234CAF50' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { max-width: 720px; margin: 0 auto; position: relative; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(76,175,80,.2);
+      border: 1px solid rgba(76,175,80,.4);
+      color: var(--green-200);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -.02em;
+    }
+    .hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,.8);
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Stats bar ───────────────────────────── */
+    .stats-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 8px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--green-800);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Main layout ──────────────────────────── */
+    .doc-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── Sidebar nav ──────────────────────────── */
+    .sidebar-nav {
+      position: sticky;
+      top: 80px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 0;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-nav h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 20px 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .sidebar-nav a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all .15s ease;
+    }
+    .sidebar-nav a:hover {
+      color: var(--green-800);
+      background: var(--green-50);
+      border-left-color: var(--green-400);
+    }
+
+    /* ── Content ──────────────────────────────── */
+    .doc-content { min-width: 0; }
+
+    .section {
+      margin-bottom: 64px;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-num {
+      width: 40px;
+      height: 40px;
+      background: var(--green-800);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-info h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 6px;
+    }
+    .section-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    /* Paragrafos do to-be */
+    .prose p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #2D3748;
+      margin-bottom: 20px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--green-800); font-weight: 600; }
+
+    /* ── Module card ──────────────────────────── */
+    .module-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .module-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .module-icon svg { width: 22px; height: 22px; }
+    .module-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .module-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green-900);
+    }
+    .module-body { padding: 24px; }
+    .module-body p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #374151;
+      margin-bottom: 16px;
+    }
+    .module-body p:last-child { margin-bottom: 0; }
+
+    /* ── Feature list ─────────────────────────── */
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.5;
+    }
+    .feature-list li::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 18px;
+      background: var(--green-50);
+      border: 1.5px solid var(--green-400);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2 2 4-4' stroke='%232E7D32' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ── Info boxes ───────────────────────────── */
+    .info-box {
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .info-box.green {
+      background: var(--green-50);
+      border: 1px solid var(--green-100);
+      color: var(--green-900);
+    }
+    .info-box.blue {
+      background: #E3F2FD;
+      border: 1px solid #BBDEFB;
+      color: #0D47A1;
+    }
+    .info-box.amber {
+      background: #FFF8E1;
+      border: 1px solid #FFE082;
+      color: #E65100;
+    }
+    .info-box svg { flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Comparison table ─────────────────────── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .compare-col {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .compare-header {
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-header.antes { background: #FFF3E0; color: #E65100; border-bottom: 1px solid #FFE082; }
+    .compare-header.depois { background: var(--green-50); color: var(--green-800); border-bottom: 1px solid var(--green-100); }
+    .compare-body { padding: 12px 16px; }
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #374151;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--bg);
+      line-height: 1.5;
+    }
+    .compare-item:last-child { border-bottom: none; }
+    .compare-icon-x { color: #D32F2F; flex-shrink: 0; margin-top: 1px; }
+    .compare-icon-check { color: var(--green-500); flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Escopo table ─────────────────────────── */
+    .escopo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+    }
+    .escopo-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .escopo-header {
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+    .escopo-header.inclui { background: var(--green-50); color: var(--green-800); border-bottom: 1px solid var(--green-100); }
+    .escopo-header.nao-inclui { background: #FAFAFA; color: #455A64; border-bottom: 1px solid var(--border); }
+    .escopo-body { padding: 12px 18px; }
+    .escopo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg);
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.5;
+    }
+    .escopo-item:last-child { border-bottom: none; }
+    .escopo-item-nota {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* ── Integration table ────────────────────── */
+    .integration-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+    .integration-table th {
+      background: var(--green-800);
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .integration-table th:first-child { border-radius: 8px 0 0 0; }
+    .integration-table th:last-child { border-radius: 0 8px 0 0; }
+    .integration-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #374151;
+      vertical-align: top;
+    }
+    .integration-table tr:last-child td { border-bottom: none; }
+    .integration-table tr:nth-child(even) td { background: var(--green-50); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-green { background: var(--green-50); color: var(--green-800); border: 1px solid var(--green-100); }
+    .badge-blue { background: #E3F2FD; color: #1565C0; border: 1px solid #BBDEFB; }
+    .badge-amber { background: #FFF8E1; color: #E65100; border: 1px solid #FFE082; }
+
+    /* ── Fase steps ───────────────────────────── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      margin: 24px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: var(--green-100);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding: 0 0 24px;
+      position: relative;
+    }
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--green-800);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+    .timeline-content {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .timeline-meta {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green-500);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 8px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    /* ── Funil kanban visual ──────────────────── */
+    .funnel-visual {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 8px 0 16px;
+      margin: 20px 0;
+      scrollbar-width: thin;
+    }
+    .funnel-col {
+      flex-shrink: 0;
+      width: 140px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .funnel-col-header {
+      background: var(--green-800);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .funnel-col-body { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .funnel-lead-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 11px;
+    }
+    .funnel-lead-name { font-weight: 600; color: var(--green-900); margin-bottom: 3px; }
+    .funnel-lead-company { color: var(--text-muted); margin-bottom: 4px; }
+    .funnel-lead-temp {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+    .temp-hot { background: var(--hot-bg); color: var(--hot); }
+    .temp-warm { background: var(--warm-bg); color: var(--warm); }
+    .temp-cold { background: var(--cold-bg); color: var(--cold); }
+    .funnel-lead-value { color: var(--text-muted); margin-top: 4px; }
+
+    /* ── Footer ───────────────────────────────── */
+    .doc-footer {
+      background: var(--green-900);
+      color: rgba(255,255,255,.6);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .doc-footer img { height: 16px; opacity: .5; filter: brightness(0) invert(1); }
+
+    /* ── Responsive ───────────────────────────── */
+    @media (max-width: 900px) {
+      .doc-layout { grid-template-columns: 1fr; }
+      .sidebar-nav { display: none; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .compare-grid { grid-template-columns: 1fr; }
+      .escopo-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .header-inner { padding: 0 16px; }
+      .header-title { display: none; }
+      .header-divider { display: none; }
+      .header-nav { gap: 2px; }
+      .header-nav a { padding: 5px 8px; font-size: 12px; }
+      .hero { padding: 40px 16px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 12px; }
+      .doc-layout { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <img src="/logo-vinplast.webp" alt="VinPlast" onerror="this.style.display='none';document.getElementById('brand-text').style.display='flex'" />
+      <span id="brand-text" style="display:none;color:#fff;font-weight:800;font-size:16px;letter-spacing:-.02em;">VIN PLASTIC</span>
+      <div class="header-divider"></div>
+      <span class="header-title">Agente de Atendimento + CRM</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#" class="active">Documentação</a>
+      <a href="/02-fluxograma.html">Fluxograma</a>
+      <a href="/design-system.html">Design System</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Documentação Técnica To-Be — v1.0
+    </div>
+    <h1>Agente de Atendimento + CRM VinPlast</h1>
+    <p>Sistema completo que qualifica leads automaticamente, distribui ao vendedor certo e mantém o follow-up ativo — eliminando a perda silenciosa de oportunidades no funil comercial.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Briefing: 24/06/2026
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Responsável: Vinícius Ferreira
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Go-live: 12/08/2026
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">20–40</div>
+      <div class="stat-label">leads por dia (Google Ads)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">R$ 16k</div>
+      <div class="stat-label">investimento/mês em tráfego</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">625</div>
+      <div class="stat-label">propostas abertas desde jan/26</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5.000</div>
+      <div class="stat-label">contatos na base a reativar</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="doc-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar-nav">
+    <h4>Seções</h4>
+    <a href="#contexto">Contexto e Problema</a>
+    <a href="#solucao">A Solução</a>
+    <a href="#agente">Agente de Atendimento</a>
+    <a href="#crm">CRM Personalizado</a>
+    <a href="#followup">Follow-up Automático</a>
+    <a href="#integracoes">Integrações</a>
+    <a href="#perfis">Perfis de Usuário</a>
+    <a href="#funil">Funil de Vendas</a>
+    <a href="#escopo">Escopo do Projeto</a>
+    <a href="#cronograma">Cronograma</a>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="doc-content">
+
+    <!-- SEÇÃO 1: CONTEXTO -->
+    <section class="section" id="contexto">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-info">
+          <h2>Contexto e Problema Atual</h2>
+          <p>Como funciona hoje — e por que está limitando o crescimento</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="prose">
+        <p>A VinPlast distribui produtos plásticos — conexões, tubulações, acessórios e insumos industriais — para consumidores finais e empresas em todo o Brasil. O investimento em Google Ads chega a <strong>R$ 16.000 por mês</strong> e gera entre 20 e 40 leads diários. Esse volume é a matéria-prima de vendas da empresa. O problema é que, hoje, quase toda essa demanda passa por um funil frágil: três números de WhatsApp distintos, operados individualmente por cada atendente, sem centralização, sem visibilidade coletiva e sem automação.</p>
+
+        <p>O processo começa quando um lead preenche o formulário no site. Esse dado vai para o RD Station — usado apenas como repositório de cadastro, não como CRM de verdade. De lá, <strong>Vinícius repassa manualmente</strong> para o vendedor disponível, que faz a abordagem, qualifica o cliente e monta o orçamento no Bling. Com 20 leads por dia chegando, o vendedor consegue dar atenção de qualidade para 10 a 15. Os demais ficam esperando — e enquanto esperam, estão cotando com três, quatro outros fornecedores. Quem responder primeiro tem vantagem real.</p>
+
+        <p>A situação se agrava no follow-up. Depois que a proposta sai pelo WhatsApp, o acompanhamento é 100% manual: depende da memória do vendedor, sem sistema, sem alerta, sem cadência definida. A VinPlast acumulou <strong>625 propostas em aberto desde janeiro de 2026</strong> e tem uma base de quase 5.000 contatos — mas sem ferramentas para trabalhar ativamente esse ativo. O resultado é uma taxa de conversão aquém do potencial, mesmo com o investimento pesado em tráfego.</p>
+
+        <p>Além disso, Vinícius — que acumula funções estratégicas, comerciais e operacionais — ainda está no meio do processo de triagem, repassando manualmente cada lead. Isso o prende numa atividade que deveria ser automática e impede foco no crescimento da empresa, que está em fase de expansão: novo galpão com o dobro do tamanho e plano de contratações em andamento.</p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-header antes">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Como está hoje
+          </div>
+          <div class="compare-body">
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Triagem manual pelo Vinícius a cada lead</div>
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Primeiro contato pode demorar horas</div>
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Três WhatsApps sem centralização</div>
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Follow-up depende da memória do vendedor</div>
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Zero visibilidade do funil e da conversão</div>
+            <div class="compare-item"><svg class="compare-icon-x" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>625 propostas abertas sem acompanhamento</div>
+          </div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-header depois">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 11 12 14 22 4"/></svg>
+            Como vai ficar
+          </div>
+          <div class="compare-body">
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Agente qualifica automaticamente 24h/dia</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Resposta ao lead em segundos</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>CRM centralizado + histórico completo</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Follow-up automático com cadência diária</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboard com taxa de conversão em tempo real</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Campanha de reativação da base histórica</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: A SOLUÇÃO -->
+    <section class="section" id="solucao">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-info">
+          <h2>A Solução</h2>
+          <p>Dois componentes que trabalham juntos — Agente no WhatsApp + CRM no browser</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="prose">
+        <p>O sistema VinPlast é composto por dois módulos integrados. O primeiro é o <strong>Agente de Atendimento com IA</strong> — um assistente inteligente que opera no WhatsApp da empresa 24 horas por dia, sete dias por semana. Ele responde ao lead em segundos, conduz a qualificação por perguntas naturais e categoriza o contato antes que qualquer vendedor precise intervir. O segundo é o <strong>CRM Labrego Personalizado</strong> — um painel web sob medida onde tudo fica registrado: cada lead, cada proposta, cada follow-up, com visibilidade total para Vinícius e visão individual para cada vendedor.</p>
+
+        <p>O fluxo começa no WhatsApp — seja por formulário do Google ou por contato direto. O Agente atende imediatamente, se apresenta de forma natural pelo nome definido pela empresa (masculino, sem revelar que é IA a não ser que seja diretamente perguntado), e conduz a conversa para entender o perfil do contato. As regras de triagem são rígidas: <strong>fornecedores</strong> tentando vender matéria-prima para a VinPlast são descartados gentilmente; <strong>revendedores</strong> são descartados porque a VinPlast não tem tabela de preços para revenda; <strong>consumidores finais com ticket abaixo de R$ 2.000</strong> são direcionados para o e-commerce; apenas consumidores finais com ticket qualificado seguem para o vendedor.</p>
+
+        <p>Para os leads qualificados com CNPJ, o Agente consulta automaticamente o Serasa, prepara um resumo com nome, produto de interesse, quantidade estimada, valor aproximado e score de crédito, e notifica o vendedor no WhatsApp. O vendedor tem <strong>5 minutos para responder</strong>. Se não responder, o lead é repassado ao outro vendedor. No CRM, tudo é registrado automaticamente — sem entrada manual — e o funil visual mostra em tempo real o estado de cada oportunidade.</p>
+      </div>
+
+      <div class="info-box green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div><strong>Premissa de negócio:</strong> com 20–40 leads/dia e ticket médio de ~R$ 3.500, a recuperação de 1 a 2% na taxa de conversão — resultado direto da velocidade de atendimento e do follow-up consistente — tende a pagar o investimento em torno de 2 meses.</div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: AGENTE DE ATENDIMENTO -->
+    <section class="section" id="agente">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-info">
+          <h2>Agente de Atendimento Inteligente</h2>
+          <p>WhatsApp — qualificação automática, triagem, consulta Serasa e distribuição ao vendedor</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon" style="background:#E8F5E9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A4A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <div class="module-tag" style="color:#2E7D32">Módulo 01 — 50% do escopo</div>
+            <div class="module-title">Agente de Atendimento (WhatsApp)</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p>O Agente é a nova porta de entrada da VinPlast. Quando um lead preenche o formulário no site ou manda mensagem diretamente no WhatsApp, o Agente responde em segundos — a qualquer hora, qualquer dia da semana. Ele se apresenta pelo nome definido pela empresa (gênero masculino, tom informal, com emojis, sem usar a palavra "virtual" ou "IA"), conduz a conversa de forma natural para entender quem é esse contato e o que ele precisa.</p>
+          <p>A qualificação segue as regras de negócio definidas pela VinPlast. O Agente identifica se o contato é consumidor final, revendedor ou fornecedor tentando vender algo. Revendedores recebem uma resposta gentil explicando que a VinPlast não atende revenda — sem constrangimento para o cliente. Fornecedores que chegam pedindo espaço de distribuição também são descartados. Consumidor final com valor estimado abaixo de R$ 2.000 é direcionado para o e-commerce da VinPlast, sem intervenção humana. Quem está acima de R$ 2.000 e é qualificado segue para o vendedor.</p>
+
+          <ul class="feature-list">
+            <li>Resposta imediata ao lead — qualquer hora, 7 dias por semana</li>
+            <li>Persona masculina, informal, com emojis — sem revelar que é IA (configurável)</li>
+            <li>Triagem automática: consumidor final × revendedor × fornecedor × CPF × CNPJ</li>
+            <li>Bifurcação por ticket estimado: abaixo de R$ 2.000 → e-commerce; acima → vendedor</li>
+            <li>Coleta de dados: nome, e-mail, telefone, CNPJ e produto de interesse</li>
+            <li>Consulta Serasa automática por CNPJ — score e limite de crédito no resumo do lead</li>
+            <li>Notificação ao vendedor no WhatsApp com resumo completo — prazo de 5 minutos</li>
+            <li>Round-robin entre vendedores; se não responder em 5 min, passa ao próximo</li>
+            <li>Escalação para Vinícius em caso de reclamação</li>
+            <li>Encaminhamento para humano quando o cliente solicitar</li>
+            <li>Fora do horário comercial (Seg–Sex 8h–18h): qualifica e avisa que o vendedor retorna no próximo dia útil</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box blue">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div><strong>Serasa (cortesia):</strong> a integração de consulta de score por CNPJ é incluída sem custo adicional de desenvolvimento. As tarifas de consulta cobradas pelo bureau são repassadas ao cliente conforme o consumo real.</div>
+      </div>
+
+      <div class="info-box amber">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div><strong>Atenção — dados necessários antes do desenvolvimento:</strong> para o Agente funcionar corretamente, a VinPlast precisa fornecer: exemplos reais de conversas de qualificação bem-sucedidas, faixas de score Serasa que definem o limite de crédito, textos de follow-up de referência e FAQ com perguntas frequentes dos clientes. Esses materiais são solicitados nas Semanas 1 e 2 (Mapeamento).</div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: CRM -->
+    <section class="section" id="crm">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-info">
+          <h2>CRM Labrego Personalizado</h2>
+          <p>Funil visual, fichas completas de lead e dashboard de performance — tudo integrado ao Agente</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon" style="background:#E8F5E9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A4A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg>
+          </div>
+          <div>
+            <div class="module-tag" style="color:#2E7D32">Módulo 02 — 35% do escopo</div>
+            <div class="module-title">CRM Labrego Personalizado</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p>O CRM substitui o RD Station e o controle manual que existe hoje. Cada lead que chega — pelo formulário do Google, pelo WhatsApp ou registrado manualmente pelo vendedor para ligações diretas — tem sua ficha criada automaticamente pelo Agente, com nome, contato, CNPJ, produto de interesse, score Serasa e todo o histórico de conversas. O vendedor abre a ficha e já tem o contexto completo antes de ligar.</p>
+          <p>O funil visual mostra em que etapa está cada oportunidade, há quanto tempo está parada e qual vendedor é responsável. O Vinícius enxerga tudo — todos os vendedores, todas as etapas. Cada vendedor enxerga apenas os próprios leads. As propostas geradas no Bling podem ser exportadas como PDF e anexadas à ficha do cliente para que o Agente possa referenciar o número e o conteúdo nas cadências de follow-up.</p>
+
+          <ul class="feature-list">
+            <li>Cadastro automático do lead pela IA — sem digitação manual pela equipe</li>
+            <li>Funil visual (Kanban) com 7 colunas: Novo · Qualificado · Em Atendimento · Proposta Enviada · Follow-up · Fechado · Perdido</li>
+            <li>Ficha do lead: histórico completo de conversas, dados do Serasa, temperatura, propostas anexadas (PDF Bling), anotações, timeline de eventos</li>
+            <li>Badge de temperatura do lead: Quente (alta intenção) · Morno (em avaliação) · Frio (aguardando decisão)</li>
+            <li>Acesso diferenciado: Admin vê todos os vendedores; cada vendedor vê apenas os próprios leads</li>
+            <li>Dashboard de performance: leads/dia, taxa de qualificação, conversão por vendedor, valor em propostas, meta vs. realizado</li>
+            <li>Alerta de proposta respondida: notificação imediata ao vendedor para ligar</li>
+            <li>Cadastro manual de leads provenientes de ligações diretas (campo de origem "Ligação recebida")</li>
+            <li>Migração da base do RD Station (5.000 contatos) para o novo CRM</li>
+            <li>Captura automática de leads do Google Forms/webhook</li>
+            <li>Acesso responsivo — funciona no computador e no celular</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Funil visual -->
+      <h3 style="font-size:15px;font-weight:700;color:var(--green-900);margin:24px 0 12px;">Visualização do funil de vendas</h3>
+      <div class="funnel-visual">
+        <div class="funnel-col">
+          <div class="funnel-col-header">Novo</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Rafael Andrade</div>
+              <div class="funnel-lead-company">Andrade Construções</div>
+              <div><span class="funnel-lead-temp temp-hot">● Quente</span></div>
+              <div class="funnel-lead-value">~R$ 4.200</div>
+            </div>
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Carlos Mota</div>
+              <div class="funnel-lead-company">Plast Fácil LTDA</div>
+              <div><span class="funnel-lead-temp temp-warm">● Morno</span></div>
+              <div class="funnel-lead-value">~R$ 2.800</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header">Qualificado</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Marina Santos</div>
+              <div class="funnel-lead-company">Fix Hidráulica</div>
+              <div><span class="funnel-lead-temp temp-hot">● Quente</span></div>
+              <div class="funnel-lead-value">~R$ 6.500</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header">Em Atendimento</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Pedro Lima</div>
+              <div class="funnel-lead-company">Lima & Filhos</div>
+              <div><span class="funnel-lead-temp temp-warm">● Morno</span></div>
+              <div class="funnel-lead-value">~R$ 3.100</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header">Proposta Enviada</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Beatriz Costa</div>
+              <div class="funnel-lead-company">Construções Costa</div>
+              <div><span class="funnel-lead-temp temp-hot">● Quente</span></div>
+              <div class="funnel-lead-value">R$ 8.900</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header">Follow-up</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">João Alves</div>
+              <div class="funnel-lead-company">Alves Irrigação</div>
+              <div><span class="funnel-lead-temp temp-cold">● Frio</span></div>
+              <div class="funnel-lead-value">R$ 4.750</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header" style="background:var(--green-600)">Fechado</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Ana Pereira</div>
+              <div class="funnel-lead-company">AnaPlast LTDA</div>
+              <div><span class="funnel-lead-temp temp-hot">● Quente</span></div>
+              <div class="funnel-lead-value">R$ 5.200</div>
+            </div>
+          </div>
+        </div>
+        <div class="funnel-col">
+          <div class="funnel-col-header" style="background:#607D8B">Perdido</div>
+          <div class="funnel-col-body">
+            <div class="funnel-lead-card">
+              <div class="funnel-lead-name">Roberto Faria</div>
+              <div class="funnel-lead-company">Faria Distribuidora</div>
+              <div><span class="funnel-lead-temp temp-cold">● Frio</span></div>
+              <div class="funnel-lead-value">R$ 2.100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: FOLLOW-UP -->
+    <section class="section" id="followup">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-info">
+          <h2>Follow-up Automático e Reativação de Base</h2>
+          <p>Cadência diária inteligente para propostas abertas + campanha para os 5.000 contatos da base</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon" style="background:#E8F5E9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1A4A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          </div>
+          <div>
+            <div class="module-tag" style="color:#2E7D32">Módulo 03 — 15% do escopo</div>
+            <div class="module-title">Follow-up Automático e Reativação de Base</div>
+          </div>
+        </div>
+        <div class="module-body">
+          <p>Quando o vendedor move o lead para "Proposta Enviada" no CRM, o Agente entra na cadência de follow-up. O padrão é uma mensagem por dia, enviada de manhã (horário configurável), enquanto o cliente não responder. O texto referencia o nome do cliente e o número da proposta, é escrito de forma natural e varia a cada envio para não parecer robótico.</p>
+          <p>Quando o cliente responde — mesmo que seja para pedir mais 30 dias — o Agente avisa o vendedor imediatamente e pausa a cadência automática. Se o cliente pedir para ser contatado numa data futura, o Agente anota e retoma automaticamente naquele dia, com uma mensagem que contextualiza que é o retorno combinado. Se o cliente sinalizar que não tem mais interesse, o Agente tenta captar o motivo (preço, frete, análise interna, outro fornecedor) e registra no CRM antes de mover o card para "Perdido".</p>
+          <p>Além do follow-up de propostas ativas, o escopo inclui trabalhar a base histórica de 5.000 contatos em três segmentos: contatos cadastrados sem proposta, contatos com proposta não fechada por motivo desconhecido, e as 625 propostas abertas desde janeiro de 2026 — cada um com uma mensagem personalizada pelo contexto do relacionamento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: INTEGRAÇÕES -->
+    <section class="section" id="integracoes">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <div class="section-info">
+          <h2>Integrações</h2>
+          <p>Sistemas externos conectados ao Agente e ao CRM</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <table class="integration-table">
+        <thead>
+          <tr>
+            <th>Sistema</th>
+            <th>Tipo</th>
+            <th>Função</th>
+            <th>Custo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>WhatsApp (Z-API ou similar)</strong></td>
+            <td><span class="badge badge-green">Canal</span></td>
+            <td>Canal primário do Agente — recepção de leads e escalação para vendedor</td>
+            <td>R$ 99/mês por número</td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI / Anthropic</strong></td>
+            <td><span class="badge badge-blue">API IA</span></td>
+            <td>Processamento de linguagem natural do Agente</td>
+            <td>~R$ 20–30/mês</td>
+          </tr>
+          <tr>
+            <td><strong>Serasa (ou bureau equiv.)</strong></td>
+            <td><span class="badge badge-amber">API Crédito</span></td>
+            <td>Consulta de score por CNPJ — informativo para o vendedor</td>
+            <td>Por consulta (repassado)</td>
+          </tr>
+          <tr>
+            <td><strong>Google (formulário atual)</strong></td>
+            <td><span class="badge badge-green">Webhook</span></td>
+            <td>Captura leads do Google para o CRM — substitui o RD Station nesta função</td>
+            <td>Incluso</td>
+          </tr>
+          <tr>
+            <td><strong>Bling (ERP)</strong></td>
+            <td><span class="badge badge-amber">Manual</span></td>
+            <td>Orçamentos continuam sendo gerados no Bling. PDFs exportados e anexados manualmente à ficha no CRM</td>
+            <td>Não incluído (integração futura)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box amber">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div><strong>Bling:</strong> a integração completa com o Bling (orçamento ponta a ponta, estoque em tempo real, pós-venda) não está no escopo desta fase. O orçamento continua sendo gerado pelo vendedor no Bling. A integração com o Bling pode ser contratada como evolução futura na fase de Manutenção Continuada.</div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: PERFIS -->
+    <section class="section" id="perfis">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <div class="section-info">
+          <h2>Perfis de Usuário</h2>
+          <p>Quem acessa o quê — Admin vs. Vendedor</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-header" style="background:var(--green-50);color:var(--green-800);border-bottom:1px solid var(--green-100)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Admin (Vinícius)
+          </div>
+          <div class="compare-body">
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vê leads de todos os vendedores</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboard completo de performance</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Configura regras do Agente</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Gerencia vendedores e metas</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Recebe escalação de reclamações</div>
+          </div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-header" style="background:#FAFAFA;color:#455A64;border-bottom:1px solid var(--border)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Vendedor
+          </div>
+          <div class="compare-body">
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Vê apenas os próprios leads</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboard dos próprios números</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Move leads no funil</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Anexa propostas em PDF</div>
+            <div class="compare-item"><svg class="compare-icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Agenda follow-ups e próximo contato</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8: ESCOPO -->
+    <section class="section" id="escopo">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <div class="section-info">
+          <h2>Escopo Contratado</h2>
+          <p>O que está incluído e o que não está — sem ambiguidade</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="escopo-grid">
+        <div class="escopo-card">
+          <div class="escopo-header inclui">Incluído neste contrato</div>
+          <div class="escopo-body">
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>Agente de Atendimento no WhatsApp (qualificação, triagem, distribuição, follow-up)</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>CRM Labrego personalizado com funil, fichas de lead e dashboard de performance</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>Integração Serasa — consulta de score por CNPJ (cortesia de desenvolvimento)</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>Integração Google → CRM (formulário/webhook para captura de leads)</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>Campanha de reativação da base histórica (3 segmentos)</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>Migração da base do RD Station para o novo CRM</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>2 sessões de treinamento gravadas (Operação do Agente + CRM e dashboard)</div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>21 dias de Hyper Care com acompanhamento ativo após o go-live</div>
+            </div>
+          </div>
+        </div>
+        <div class="escopo-card">
+          <div class="escopo-header nao-inclui">Não incluído (evolução futura)</div>
+          <div class="escopo-body">
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#90A4AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                Integração com Bling (orçamento ponta a ponta, estoque em tempo real)
+                <div class="escopo-item-nota">Orçamento continua no Bling; PDFs podem ser anexados ao CRM manualmente</div>
+              </div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#90A4AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                Atendimento autônomo ponta a ponta para CPF (compra de baixo ticket)
+                <div class="escopo-item-nota">CPF com ticket abaixo de R$ 2k vai para o e-commerce — autonomia total é próximo passo</div>
+              </div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#90A4AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                Instagram, Meta Ads, Shopee, Mercado Livre
+                <div class="escopo-item-nota">Canais adicionais via pacote de horas na Manutenção Continuada</div>
+              </div>
+            </div>
+            <div class="escopo-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#90A4AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                Disparo em massa / e-mail marketing
+                <div class="escopo-item-nota">Requer provedor verificado (Twilio) e configuração separada</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 9: CRONOGRAMA -->
+    <section class="section" id="cronograma">
+      <div class="section-header">
+        <div class="section-num">09</div>
+        <div class="section-info">
+          <h2>Cronograma</h2>
+          <p>8 semanas de desenvolvimento + 21 dias de Hyper Care — go-live em 12/08/2026</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <div class="timeline-meta">Semanas 1–2 · até 01/07/2026</div>
+            <div class="timeline-title">Mapeamento e Documento Técnico</div>
+            <div class="timeline-desc">Onboarding, levantamento das regras de qualificação e roteamento, definição das faixas de score Serasa, mapeamento das mensagens do Agente e cadências de follow-up. Elaboração e validação do Documento Técnico pelo Vinícius.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <div class="timeline-meta">Semanas 3–6 · até 29/07/2026</div>
+            <div class="timeline-title">Desenvolvimento — Agente + CRM</div>
+            <div class="timeline-desc">Implementação do Agente (WhatsApp via Z-API), construção do CRM com funil e dashboard, integrações Serasa e Google Forms, implementação do follow-up automático, migração da base do RD Station. Validações parciais a cada 2 semanas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <div class="timeline-meta">Semanas 7–8 · até 12/08/2026</div>
+            <div class="timeline-title">Testes, Treinamento e Go-live</div>
+            <div class="timeline-desc">Ambiente de testes liberado para a equipe VinPlast, ajustes pós-teste, 2 sessões de treinamento gravadas (Agente + CRM), aprovação final de Vinícius e ativação em produção.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <div class="timeline-meta">+21 dias · até ~02/09/2026</div>
+            <div class="timeline-title">Hyper Care</div>
+            <div class="timeline-desc">Acompanhamento ativo, até 8 ajustes técnicos ou 10h de trabalho, correção ilimitada de bugs, check-ins semanais. Transição para Manutenção Continuada (tier PRO — R$ 999/mês).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 11 12 14 22 4"/></svg>
+        <div><strong>Validação deste documento:</strong> após a leitura, Vinícius deve validar (ou apontar ajustes) em até 5 dias úteis. Com a validação, o desenvolvimento tem início imediato nas Semanas 3–6. Sem manifestação no prazo, considera-se aprovado conforme o Contrato (Cláusula 8.3).</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <img src="/logo-labrego.png" alt="Labrego IA" />
+  <span>Documentação Técnica — Agente de Atendimento + CRM VinPlast — 25/06/2026</span>
+</footer>
+
+</body>
+</html>
