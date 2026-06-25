@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VinPlast CRM · Configuracoes do Agente IA | Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50:#E8F5E9;--green-100:#C8E6C9;--green-200:#A5D6A7;--green-300:#81C784;--green-400:#66BB6A;--green-500:#4CAF50;--green-600:#43A047;--green-700:#388E3C;--green-800:#2E7D32;--green-900:#1A4A2A;--green-950:#0D2B15;
+    --lime-50:#F1F8E9;--lime-100:#DCEDC8;--lime-200:#C5E1A5;--lime-300:#AED581;--lime-400:#9CCC65;--lime-500:#8BC34A;
+    --slate-50:#F8FAFB;--slate-100:#F0F3F5;--slate-200:#E2E7EB;--slate-300:#CBD3DA;--slate-400:#9BA8B4;--slate-500:#6B7B8A;--slate-600:#546471;--slate-700:#3E4C57;--slate-800:#2B3640;--slate-900:#1A2129;--slate-950:#0F1419;
+    --success:#2E8B57;--success-bg:#E6F2EB;--warning:#E6A817;--warning-bg:#FFF8E1;--danger:#D32F2F;--danger-bg:#FFEBEE;--info:#1976D2;--info-bg:#E3F2FD;
+    --bg:#F8FAFB;--surface:#FFFFFF;--surface-2:#F0F3F5;--text:#1A2129;--text-2:#546471;--muted:#6B7B8A;--border:#E2E7EB;--primary:#1A4A2A;--primary-contrast:#FFFFFF;--accent:#4CAF50;
+    --r-sm:6px;--r:10px;--r-md:14px;--r-lg:20px;
+    --font-head:'Plus Jakarta Sans',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow-sm:0 1px 2px rgba(26,33,41,.04),0 1px 3px rgba(26,33,41,.06);
+    --shadow-md:0 4px 16px rgba(26,33,41,0.07),0 1px 4px rgba(26,33,41,.05);
+    --shadow-lg:0 18px 44px rgba(13,43,21,0.12),0 4px 12px rgba(13,43,21,.06);
+    --ring-focus:0 0 0 3px rgba(76,175,80,.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); background:#E2E7EB; color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:92px 20px 48px; -webkit-font-smoothing:antialiased; }
+
+  /* ── HEADER FIXO COMPARTILHADO ── */
+  .shared-header { position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--green-950); height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-shadow:0 2px 12px rgba(0,0,0,0.18); }
+  .sh-left { display:flex; align-items:center; gap:14px; }
+  .sh-left a { text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .sh-logo { width:26px; height:26px; border-radius:4px; }
+  .sh-divider { width:1px; height:22px; background:rgba(255,255,255,0.15); }
+  .sh-project { color:#fff; font-family:var(--font-head); font-size:15px; font-weight:700; text-decoration:none; }
+  .sh-nav { display:flex; align-items:center; gap:8px; }
+  .sh-nav a { color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; text-decoration:none; padding:6px 14px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:6px; transition:all 0.2s; }
+  .sh-nav a:hover { color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); }
+  .sh-nav a.active { color:var(--accent); border-color:rgba(76,175,80,0.45); background:rgba(76,175,80,0.14); }
+  .sh-hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .sh-hamburger svg { stroke:rgba(255,255,255,0.8); }
+  .sh-mobile-menu { display:none; position:fixed; top:52px; left:0; right:0; background:var(--green-950); border-top:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); z-index:9998; padding:8px 0; }
+  .sh-mobile-menu.open { display:block; }
+  .sh-mobile-menu a { display:flex; align-items:center; gap:10px; padding:12px 24px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px; font-weight:500; }
+  .sh-mobile-menu a.active { color:var(--accent); }
+  .sh-overlay { display:none; position:fixed; inset:0; top:52px; background:rgba(0,0,0,0.4); z-index:9997; }
+  .sh-overlay.open { display:block; }
+  @media (max-width:768px) { .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; } }
+
+  /* ── MOCKUP HEADER + TOGGLE ── */
+  .mockup-header { text-align:center; margin-bottom:26px; max-width:700px; }
+  .mockup-header .badge { display:inline-block; background:var(--primary); color:#fff; font-size:10px; font-weight:600; padding:5px 14px; border-radius:20px; margin-bottom:12px; letter-spacing:0.8px; text-transform:uppercase; }
+  .mockup-header h1 { font-family:var(--font-head); font-size:29px; font-weight:700; color:var(--slate-900); margin-bottom:7px; letter-spacing:-0.025em; line-height:1.1; }
+  .mockup-header p { font-size:14px; color:var(--text-2); line-height:1.6; }
+  .toggle-row { display:flex; gap:6px; justify-content:center; margin:0 auto 36px; background:#fff; padding:4px; border-radius:40px; box-shadow:var(--shadow-sm); border:1px solid var(--border); width:fit-content; }
+  .toggle-btn { padding:10px 22px; border:none; border-radius:36px; background:transparent; font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--text-2); cursor:pointer; transition:all 0.25s; display:flex; align-items:center; gap:6px; }
+  .toggle-btn.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(26,74,42,0.3); }
+  .toggle-btn svg { stroke:currentColor; }
+
+  .devices { display:flex; gap:48px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+  .device { display:none; }
+  .device.visible { display:block; }
+  .device-label { text-align:center; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:14px; }
+
+  /* ── FRAMES ── */
+  .frame-desktop { width:1100px; max-width:95vw; height:680px; background:var(--bg); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.06); }
+  .browser-bar { height:38px; background:var(--slate-100); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; gap:8px; }
+  .browser-dot { width:10px; height:10px; border-radius:50%; }
+  .browser-dot.red { background:#ff5f57; } .browser-dot.yellow { background:#febc2e; } .browser-dot.green { background:#28c840; }
+  .browser-url { flex:1; margin-left:12px; background:#fff; border-radius:6px; padding:5px 14px; font-size:11.5px; color:var(--muted); border:1px solid var(--border); font-family:var(--font-body); }
+  .viewport-d { height:calc(100% - 38px); overflow:hidden; display:flex; }
+
+  .frame-mobile { width:375px; height:760px; background:var(--bg); border-radius:44px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.08); position:relative; border:6px solid #1c1c1e; }
+  .notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:126px; height:28px; background:#1c1c1e; border-radius:0 0 18px 18px; z-index:10; }
+  .viewport-m { height:100%; overflow:auto; padding-top:28px; background:var(--bg); }
+
+  /* ══════════════════════════════════════════════════
+     SIDEBAR
+     ══════════════════════════════════════════════════ */
+  .sidebar { width:256px; min-width:256px; background:var(--green-900); display:flex; flex-direction:column; height:100%; overflow-y:auto; }
+  .sidebar-logo { padding:20px 20px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .sidebar-logo img { width:120px; height:auto; filter:brightness(0) invert(1); opacity:0.92; }
+  .sidebar-section { padding:16px 12px 6px; }
+  .sidebar-section-title { font-family:var(--font-body); font-size:10px; font-weight:600; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:1.2px; padding:0 10px; margin-bottom:6px; }
+  .sidebar-item { display:flex; align-items:center; gap:11px; padding:9px 14px; border-radius:var(--r-sm); color:rgba(255,255,255,0.72); font-size:13px; font-weight:500; text-decoration:none; transition:all 0.15s; cursor:pointer; margin-bottom:2px; }
+  .sidebar-item:hover { background:rgba(255,255,255,0.07); color:#fff; }
+  .sidebar-item.active { background:rgba(76,175,80,0.18); color:#fff; font-weight:600; }
+  .sidebar-item svg { width:18px; height:18px; stroke:currentColor; flex-shrink:0; }
+  .sidebar-spacer { flex:1; }
+  .sidebar-footer { padding:12px; border-top:1px solid rgba(255,255,255,0.08); }
+  .sidebar-user { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:var(--r-sm); }
+  .sidebar-avatar { width:34px; height:34px; border-radius:50%; background:var(--green-700); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-head); font-size:13px; font-weight:700; flex-shrink:0; }
+  .sidebar-user-info { flex:1; min-width:0; }
+  .sidebar-user-name { font-size:12.5px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .sidebar-user-role { font-size:10.5px; color:rgba(255,255,255,0.45); }
+  .sidebar-logout { background:none; border:none; cursor:pointer; padding:6px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+  .sidebar-logout:hover { background:rgba(255,255,255,0.08); }
+  .sidebar-logout svg { width:16px; height:16px; stroke:rgba(255,255,255,0.5); }
+
+  /* ══════════════════════════════════════════════════
+     MAIN CONTENT AREA
+     ══════════════════════════════════════════════════ */
+  .main-content { flex:1; overflow-y:auto; padding:28px 32px; background:var(--bg); }
+  .page-title-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:12px; }
+  .page-title { font-family:var(--font-head); font-size:22px; font-weight:700; color:var(--text); letter-spacing:-0.02em; }
+  .page-subtitle { font-size:13px; color:var(--muted); margin-bottom:24px; }
+
+  /* ── CONFIG CARDS ── */
+  .config-card { background:var(--surface); border-radius:var(--r-md); box-shadow:var(--shadow-sm); border:1px solid var(--border); padding:24px 28px; margin-bottom:18px; }
+  .config-card-header { display:flex; align-items:center; gap:10px; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+  .config-card-icon { width:36px; height:36px; border-radius:var(--r); background:var(--green-50); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .config-card-icon svg { width:18px; height:18px; stroke:var(--green-800); }
+  .config-card-title { font-family:var(--font-head); font-size:15px; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+  .config-card-desc { font-size:12px; color:var(--muted); margin-top:1px; }
+
+  /* ── FORM ELEMENTS ── */
+  .form-group { margin-bottom:18px; }
+  .form-label { display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:7px; letter-spacing:-0.01em; }
+  .form-input { width:100%; height:42px; padding:0 14px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:13px; color:var(--text); background:var(--surface); transition:border-color 0.2s, box-shadow 0.2s; }
+  .form-input:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+  .form-input::placeholder { color:var(--slate-400); }
+  .form-textarea { width:100%; min-height:90px; padding:12px 14px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:13px; color:var(--text); background:var(--surface); resize:vertical; line-height:1.5; transition:border-color 0.2s, box-shadow 0.2s; }
+  .form-textarea:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+  .form-counter { text-align:right; font-size:11px; color:var(--muted); margin-top:4px; font-family:var(--font-mono); }
+
+  /* ── CUSTOM SELECT ── */
+  .form-select { width:100%; height:42px; padding:0 36px 0 14px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:13px; color:var(--text); background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7B8A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center; appearance:none; -webkit-appearance:none; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s; }
+  .form-select:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+
+  /* ── CHECKBOXES (DS style) ── */
+  .checkbox-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .ds-checkbox { display:flex; align-items:center; gap:8px; cursor:pointer; padding:8px 14px; border:1.5px solid var(--border); border-radius:var(--r); background:var(--surface); transition:all 0.15s; user-select:none; }
+  .ds-checkbox:hover { border-color:var(--slate-300); }
+  .ds-checkbox.checked { border-color:var(--accent); background:var(--green-50); }
+  .ds-checkbox-box { width:18px; height:18px; border:2px solid var(--slate-300); border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.15s; }
+  .ds-checkbox.checked .ds-checkbox-box { background:var(--accent); border-color:var(--accent); }
+  .ds-checkbox.checked .ds-checkbox-box svg { display:block; }
+  .ds-checkbox-box svg { width:12px; height:12px; stroke:#fff; stroke-width:3; display:none; }
+  .ds-checkbox-label { font-size:13px; font-weight:500; color:var(--text); }
+
+  /* ── TIME PICKER ── */
+  .time-row { display:flex; gap:14px; align-items:flex-end; }
+  .time-group { flex:1; }
+  .form-time { width:100%; height:42px; padding:0 14px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:13px; color:var(--text); background:var(--surface); transition:border-color 0.2s, box-shadow 0.2s; }
+  .form-time:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+
+  /* ── TAG CHIPS ── */
+  .tag-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .tag-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:4px; background:var(--surface-2); font-family:var(--font-mono); font-size:11px; color:var(--text-2); border:1px solid var(--border); }
+
+  /* ── DS TOGGLE ── */
+  .toggle-list { display:flex; flex-direction:column; gap:14px; }
+  .toggle-item { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:var(--surface-2); border-radius:var(--r); border:1px solid var(--border); }
+  .toggle-item-label { font-size:13px; font-weight:600; color:var(--text); }
+  .toggle-item-desc { font-size:11.5px; color:var(--muted); margin-top:2px; }
+  .ds-toggle { position:relative; width:44px; height:24px; cursor:pointer; flex-shrink:0; }
+  .ds-toggle input { display:none; }
+  .ds-toggle-track { position:absolute; inset:0; border-radius:12px; background:var(--slate-300); transition:background 0.2s; }
+  .ds-toggle input:checked + .ds-toggle-track { background:var(--accent); }
+  .ds-toggle-thumb { position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.15); transition:transform 0.2s; }
+  .ds-toggle input:checked ~ .ds-toggle-thumb { transform:translateX(20px); }
+
+  /* ── BUTTONS ── */
+  .btn-save { height:40px; padding:0 24px; border:none; border-radius:var(--r); background:var(--primary); color:var(--primary-contrast); font-family:var(--font-body); font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:background 0.2s, box-shadow 0.2s; margin-top:4px; }
+  .btn-save:hover { background:var(--green-800); box-shadow:0 2px 10px rgba(26,74,42,0.2); }
+  .btn-save svg { width:15px; height:15px; stroke:currentColor; }
+
+  /* ══════════════════════════════════════════════════
+     MOBILE LAYOUT
+     ══════════════════════════════════════════════════ */
+  .m-app-shell { display:flex; flex-direction:column; min-height:100%; background:var(--bg); }
+  .m-topbar { height:56px; background:var(--green-900); display:flex; align-items:center; padding:0 16px; gap:12px; flex-shrink:0; }
+  .m-topbar-hamburger { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; }
+  .m-topbar-hamburger svg { width:20px; height:20px; stroke:#fff; }
+  .m-topbar-logo { height:24px; filter:brightness(0) invert(1); opacity:0.9; }
+  .m-topbar-title { font-family:var(--font-head); font-size:14px; font-weight:700; color:#fff; margin-left:auto; }
+  .m-content { flex:1; padding:18px 16px; overflow-y:auto; }
+  .m-page-title { font-family:var(--font-head); font-size:18px; font-weight:700; color:var(--text); margin-bottom:4px; }
+  .m-page-subtitle { font-size:12px; color:var(--muted); margin-bottom:16px; line-height:1.5; }
+
+  .m-config-card { background:var(--surface); border-radius:var(--r); border:1px solid var(--border); padding:16px; margin-bottom:12px; box-shadow:var(--shadow-sm); }
+  .m-config-card-header { display:flex; align-items:center; gap:8px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+  .m-config-card-icon { width:30px; height:30px; border-radius:var(--r-sm); background:var(--green-50); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .m-config-card-icon svg { width:15px; height:15px; stroke:var(--green-800); }
+  .m-config-card-title { font-family:var(--font-head); font-size:13px; font-weight:700; color:var(--text); }
+
+  .m-form-group { margin-bottom:14px; }
+  .m-form-label { display:block; font-size:12px; font-weight:600; color:var(--text); margin-bottom:5px; }
+  .m-form-input { width:100%; height:38px; padding:0 12px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:12px; color:var(--text); background:var(--surface); }
+  .m-form-input:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+  .m-form-textarea { width:100%; min-height:70px; padding:10px 12px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:12px; color:var(--text); background:var(--surface); resize:vertical; line-height:1.5; }
+  .m-form-textarea:focus { border-color:var(--accent); outline:none; box-shadow:var(--ring-focus); }
+  .m-form-select { width:100%; height:38px; padding:0 30px 0 12px; border:1.5px solid var(--border); border-radius:var(--r); font-family:var(--font-body); font-size:12px; color:var(--text); background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236B7B8A' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center; appearance:none; -webkit-appearance:none; }
+  .m-form-counter { text-align:right; font-size:10px; color:var(--muted); margin-top:3px; font-family:var(--font-mono); }
+  .m-btn-save { width:100%; height:38px; border:none; border-radius:var(--r); background:var(--primary); color:#fff; font-family:var(--font-body); font-size:12px; font-weight:600; cursor:pointer; margin-top:4px; }
+  .m-checkbox-row { display:flex; flex-wrap:wrap; gap:6px; }
+  .m-ds-checkbox { display:flex; align-items:center; gap:6px; cursor:pointer; padding:6px 10px; border:1.5px solid var(--border); border-radius:var(--r-sm); background:var(--surface); font-size:11px; font-weight:500; color:var(--text); }
+  .m-ds-checkbox.checked { border-color:var(--accent); background:var(--green-50); }
+  .m-ds-checkbox-box { width:15px; height:15px; border:2px solid var(--slate-300); border-radius:3px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .m-ds-checkbox.checked .m-ds-checkbox-box { background:var(--accent); border-color:var(--accent); }
+  .m-ds-checkbox.checked .m-ds-checkbox-box svg { display:block; }
+  .m-ds-checkbox-box svg { width:10px; height:10px; stroke:#fff; stroke-width:3; display:none; }
+
+  .m-toggle-item { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
+  .m-toggle-item:last-child { border-bottom:none; }
+  .m-toggle-item-label { font-size:12px; font-weight:600; color:var(--text); }
+  .m-ds-toggle { position:relative; width:38px; height:20px; cursor:pointer; flex-shrink:0; }
+  .m-ds-toggle input { display:none; }
+  .m-ds-toggle-track { position:absolute; inset:0; border-radius:10px; background:var(--slate-300); transition:background 0.2s; }
+  .m-ds-toggle input:checked + .m-ds-toggle-track { background:var(--accent); }
+  .m-ds-toggle-thumb { position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.15); transition:transform 0.2s; }
+  .m-ds-toggle input:checked ~ .m-ds-toggle-thumb { transform:translateX(18px); }
+
+  .m-bottom-bar { height:56px; background:var(--surface); border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-around; flex-shrink:0; }
+  .m-bottom-item { display:flex; flex-direction:column; align-items:center; gap:2px; font-size:9px; font-weight:500; color:var(--muted); text-decoration:none; padding:4px 8px; }
+  .m-bottom-item.active { color:var(--primary); }
+  .m-bottom-item svg { width:18px; height:18px; stroke:currentColor; }
+
+  /* ── FOOTER GERAL DA PAGINA ── */
+  .page-footer { margin-top:40px; text-align:center; font-size:12px; color:var(--muted); line-height:1.7; }
+  .page-footer strong { color:var(--text-2); }
+  .page-footer .ft-logo { height:18px; width:auto; opacity:0.4; display:inline-block; vertical-align:middle; margin-right:6px; }
+
+  /* ── EMBED STYLE ── */
+  html.embedded .shared-header, html.embedded .sh-mobile-menu, html.embedded .sh-overlay { display:none !important; }
+  html.embedded body { padding-top:0 !important; }
+  .embed-back { display:none; }
+  html.embedded .embed-back {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; position:sticky; top:0; z-index:9999;
+    background:var(--green-950); color:#fff; text-decoration:none;
+    font-family:var(--font-body); font-size:13px; font-weight:600;
+    padding:13px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.16);
+    border-radius:0 0 12px 12px;
+  }
+  html.embedded .embed-back svg { stroke:var(--accent); }
+  html.embedded .embed-back:hover { background:#081a0e; }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width:480px) {
+    body { padding:84px 0 28px !important; background:#E2E7EB !important; }
+    html.embedded body { padding:14px 0 28px !important; }
+    .mockup-header { padding:0 18px; margin-bottom:0; max-width:100%; }
+    .mockup-header .badge { font-size:9px; padding:4px 11px; margin-bottom:9px; }
+    .mockup-header h1 { font-size:19px; margin-bottom:5px; }
+    .mockup-header p { font-size:12.5px; line-height:1.55; }
+    .toggle-row { display:none !important; }
+    .devices { gap:0 !important; width:100%; padding:0 14px; box-sizing:border-box; }
+    #device-desktop { display:none !important; }
+    #device-mobile { display:block !important; width:100%; margin-top:22px; }
+    #device-mobile .device-label {
+      display:flex !important; align-items:center; justify-content:center; gap:7px;
+      font-size:0; font-weight:600; color:var(--muted); text-transform:uppercase;
+      letter-spacing:1.4px; margin-bottom:11px;
+    }
+    #device-mobile .device-label::before {
+      content:""; width:13px; height:20px; border:1.6px solid var(--muted);
+      border-radius:4px; display:inline-block; flex-shrink:0;
+    }
+    #device-mobile .device-label::after {
+      content:"Visualizacao do app"; font-size:10px; letter-spacing:1.4px;
+    }
+    .frame-mobile {
+      width:100% !important; max-width:420px !important; margin:0 auto !important;
+      height:auto !important; min-height:72vh;
+      border-radius:26px !important;
+      border:1px solid rgba(26,74,42,0.10) !important;
+      box-shadow:0 18px 44px rgba(13,43,21,0.16), 0 2px 8px rgba(13,43,21,0.08) !important;
+    }
+    .notch { display:none !important; }
+    .viewport-m { height:auto !important; padding-top:0 !important; border-radius:25px; overflow:hidden; }
+  }
+</style>
+</head>
+<body>
+
+<a class="embed-back" href="index.html" aria-label="Voltar aos mockups">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Voltar aos mockups
+</a>
+
+<header class="shared-header">
+  <div class="sh-left">
+    <a href="../01-documentacao-tecnica.html"><img class="sh-logo" src="../favicon.png" alt="VinPlast" /></a>
+    <div class="sh-divider"></div>
+    <a href="../01-documentacao-tecnica.html" class="sh-project">VinPlast CRM</a>
+  </div>
+  <nav class="sh-nav">
+    <a href="../01-documentacao-tecnica.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Documentacao</a>
+    <a href="index.html" class="active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Mockups</a>
+    <a href="../design-system.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>Design System</a>
+  </nav>
+  <button class="sh-hamburger" onclick="document.getElementById('sh-menu').classList.toggle('open');document.getElementById('sh-overlay').classList.toggle('open');" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</header>
+<div id="sh-overlay" class="sh-overlay" onclick="this.classList.remove('open');document.getElementById('sh-menu').classList.remove('open');"></div>
+<nav id="sh-menu" class="sh-mobile-menu">
+  <a href="../01-documentacao-tecnica.html">Documentacao</a>
+  <a href="index.html" class="active">Mockups</a>
+  <a href="../design-system.html">Design System</a>
+</nav>
+
+<div class="mockup-header">
+  <span class="badge">Mockup 07 — Configuracoes do Agente</span>
+  <h1>Configuracoes do Agente IA</h1>
+  <p>Defina a persona, horario de atendimento, mensagem fora de horario, escalacao e funcionalidades ativas do agente de atendimento automatizado.</p>
+</div>
+
+<div class="toggle-row">
+  <button class="toggle-btn active" onclick="showView('desktop')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Desktop</button>
+  <button class="toggle-btn" onclick="showView('mobile')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Mobile</button>
+  <button class="toggle-btn" onclick="showView('both')">Ambos</button>
+</div>
+
+<div class="devices">
+
+  <!-- ══════════ DESKTOP ══════════ -->
+  <div class="device visible" id="device-desktop">
+    <div class="device-label">Desktop — 1100px</div>
+    <div class="frame-desktop">
+      <div class="browser-bar">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <div class="browser-url">crm.vinplast.com.br/configuracoes/agente</div>
+      </div>
+      <div class="viewport-d">
+
+        <!-- SIDEBAR -->
+        <nav class="sidebar">
+          <div class="sidebar-logo">
+            <img src="../logo-vinplast.webp" alt="VinPlast" />
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-section-title">Principal</div>
+            <a class="sidebar-item" href="02-dashboard.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Dashboard
+            </a>
+            <a class="sidebar-item" href="03-funil-kanban.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="6" height="16" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/><rect x="16" y="4" width="6" height="16" rx="1"/></svg>
+              Funil
+            </a>
+            <a class="sidebar-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Leads
+            </a>
+            <a class="sidebar-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+              Conversas
+            </a>
+            <a class="sidebar-item" href="06-follow-up.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+              Follow-ups
+            </a>
+            <a class="sidebar-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              Reativacao
+            </a>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-section-title">Configuracoes</div>
+            <a class="sidebar-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="8" y="8" width="8" height="12" rx="2"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M10 16h4"/></svg>
+              Agente IA
+            </a>
+            <a class="sidebar-item" href="08-vendedores-metas.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="m15 3 3 3-3 3"/></svg>
+              Vendedores
+            </a>
+            <a class="sidebar-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/><path d="M12 17v0"/></svg>
+              Integracoes
+            </a>
+            <a class="sidebar-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              Sistema
+            </a>
+          </div>
+
+          <div class="sidebar-spacer"></div>
+
+          <div class="sidebar-footer">
+            <div class="sidebar-user">
+              <div class="sidebar-avatar">VF</div>
+              <div class="sidebar-user-info">
+                <div class="sidebar-user-name">Vinicius Ferreira</div>
+                <div class="sidebar-user-role">Administrador</div>
+              </div>
+              <button class="sidebar-logout" title="Sair">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+          <div class="page-title-row">
+            <h1 class="page-title">Configuracoes do Agente IA</h1>
+          </div>
+          <p class="page-subtitle">Defina a persona, horario de atendimento e comportamento do agente</p>
+
+          <!-- SECTION: Persona do Agente -->
+          <div class="config-card">
+            <div class="config-card-header">
+              <div class="config-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="8" y="8" width="8" height="12" rx="2"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M10 16h4"/></svg>
+              </div>
+              <div>
+                <div class="config-card-title">Persona do Agente</div>
+                <div class="config-card-desc">Configure o nome, genero e tom de voz do atendente virtual</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:18px;">
+              <div class="form-group" style="flex:1;">
+                <label class="form-label">Nome do agente</label>
+                <input class="form-input" type="text" value="Lia" />
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label class="form-label">Genero</label>
+                <select class="form-select">
+                  <option selected>Feminino</option>
+                  <option>Masculino</option>
+                  <option>Neutro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tom de voz</label>
+              <textarea class="form-textarea">Amigavel e profissional. Usa linguagem simples e direta. Trata o cliente por voce. Oferece ajuda sem ser invasiva.</textarea>
+              <div class="form-counter">142/500</div>
+            </div>
+            <button class="btn-save">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Salvar
+            </button>
+          </div>
+
+          <!-- SECTION: Horario Comercial -->
+          <div class="config-card">
+            <div class="config-card-header">
+              <div class="config-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="config-card-title">Horario Comercial</div>
+                <div class="config-card-desc">Dias e horarios em que o agente atende automaticamente</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Dias de atendimento</label>
+              <div class="checkbox-row">
+                <label class="ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Seg</span>
+                </label>
+                <label class="ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Ter</span>
+                </label>
+                <label class="ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Qua</span>
+                </label>
+                <label class="ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Qui</span>
+                </label>
+                <label class="ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Sex</span>
+                </label>
+                <label class="ds-checkbox" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Sab</span>
+                </label>
+                <label class="ds-checkbox" onclick="this.classList.toggle('checked')">
+                  <span class="ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="ds-checkbox-label">Dom</span>
+                </label>
+              </div>
+            </div>
+            <div class="time-row">
+              <div class="time-group">
+                <label class="form-label">Inicio</label>
+                <input class="form-time" type="time" value="08:00" />
+              </div>
+              <div class="time-group">
+                <label class="form-label">Fim</label>
+                <input class="form-time" type="time" value="18:00" />
+              </div>
+            </div>
+            <button class="btn-save" style="margin-top:18px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Salvar
+            </button>
+          </div>
+
+          <!-- SECTION: Mensagem Fora de Horario -->
+          <div class="config-card">
+            <div class="config-card-header">
+              <div class="config-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              </div>
+              <div>
+                <div class="config-card-title">Mensagem Fora de Horario</div>
+                <div class="config-card-desc">Texto enviado automaticamente quando o lead entra em contato fora do expediente</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mensagem</label>
+              <textarea class="form-textarea" style="min-height:100px;">Ola {nome}! Nosso horario de atendimento e de segunda a sexta, das 8h as 18h. Retornaremos seu contato em {horario_retorno}. Obrigada pela compreensao!</textarea>
+              <div class="form-counter">178/1000</div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" style="font-size:11px; color:var(--muted);">Variaveis disponiveis</label>
+              <div class="tag-chips">
+                <span class="tag-chip">{nome}</span>
+                <span class="tag-chip">{horario_retorno}</span>
+              </div>
+            </div>
+            <button class="btn-save" style="margin-top:16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Salvar
+            </button>
+          </div>
+
+          <!-- SECTION: Escalacao de Reclamacoes -->
+          <div class="config-card">
+            <div class="config-card-header">
+              <div class="config-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div>
+                <div class="config-card-title">Escalacao de Reclamacoes</div>
+                <div class="config-card-desc">Responsavel que recebe notificacao quando um lead registra uma reclamacao</div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Responsavel pela escalacao</label>
+              <input class="form-input" type="text" value="Vinicius" />
+            </div>
+            <button class="btn-save" style="margin-top:16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Salvar
+            </button>
+          </div>
+
+          <!-- SECTION: Funcionalidades -->
+          <div class="config-card">
+            <div class="config-card-header">
+              <div class="config-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div>
+                <div class="config-card-title">Funcionalidades</div>
+                <div class="config-card-desc">Ative ou desative recursos do agente de atendimento</div>
+              </div>
+            </div>
+            <div class="toggle-list">
+              <div class="toggle-item">
+                <div>
+                  <div class="toggle-item-label">Qualificacao automatica</div>
+                  <div class="toggle-item-desc">O agente classifica leads por interesse e perfil durante o atendimento</div>
+                </div>
+                <label class="ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="ds-toggle-track"></span>
+                  <span class="ds-toggle-thumb"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div>
+                  <div class="toggle-item-label">Consulta Serasa automatica</div>
+                  <div class="toggle-item-desc">Verificacao de credito feita automaticamente ao qualificar o lead</div>
+                </div>
+                <label class="ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="ds-toggle-track"></span>
+                  <span class="ds-toggle-thumb"></span>
+                </label>
+              </div>
+              <div class="toggle-item">
+                <div>
+                  <div class="toggle-item-label">Notificacao WhatsApp ao vendedor</div>
+                  <div class="toggle-item-desc">Vendedor recebe alerta no WhatsApp quando um lead qualificado e atribuido</div>
+                </div>
+                <label class="ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="ds-toggle-track"></span>
+                  <span class="ds-toggle-thumb"></span>
+                </label>
+              </div>
+            </div>
+            <button class="btn-save" style="margin-top:18px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Salvar
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MOBILE ══════════ -->
+  <div class="device" id="device-mobile">
+    <div class="device-label">Mobile — 375px</div>
+    <div class="frame-mobile">
+      <div class="notch"></div>
+      <div class="viewport-m">
+
+        <div class="m-app-shell">
+          <div class="m-topbar">
+            <button class="m-topbar-hamburger">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <img class="m-topbar-logo" src="../logo-vinplast.webp" alt="VinPlast" />
+            <span class="m-topbar-title">Agente IA</span>
+          </div>
+
+          <div class="m-content">
+            <h1 class="m-page-title">Configuracoes do Agente</h1>
+            <p class="m-page-subtitle">Persona, horario e comportamento</p>
+
+            <!-- Persona -->
+            <div class="m-config-card">
+              <div class="m-config-card-header">
+                <div class="m-config-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="8" y="8" width="8" height="12" rx="2"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M10 16h4"/></svg>
+                </div>
+                <div class="m-config-card-title">Persona do Agente</div>
+              </div>
+              <div class="m-form-group">
+                <label class="m-form-label">Nome do agente</label>
+                <input class="m-form-input" type="text" value="Lia" />
+              </div>
+              <div class="m-form-group">
+                <label class="m-form-label">Genero</label>
+                <select class="m-form-select">
+                  <option selected>Feminino</option>
+                  <option>Masculino</option>
+                  <option>Neutro</option>
+                </select>
+              </div>
+              <div class="m-form-group">
+                <label class="m-form-label">Tom de voz</label>
+                <textarea class="m-form-textarea">Amigavel e profissional. Usa linguagem simples e direta.</textarea>
+                <div class="m-form-counter">142/500</div>
+              </div>
+              <button class="m-btn-save">Salvar</button>
+            </div>
+
+            <!-- Horario -->
+            <div class="m-config-card">
+              <div class="m-config-card-header">
+                <div class="m-config-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="m-config-card-title">Horario Comercial</div>
+              </div>
+              <div class="m-form-group">
+                <label class="m-form-label">Dias de atendimento</label>
+                <div class="m-checkbox-row">
+                  <label class="m-ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Seg
+                  </label>
+                  <label class="m-ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Ter
+                  </label>
+                  <label class="m-ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Qua
+                  </label>
+                  <label class="m-ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Qui
+                  </label>
+                  <label class="m-ds-checkbox checked" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Sex
+                  </label>
+                  <label class="m-ds-checkbox" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Sab
+                  </label>
+                  <label class="m-ds-checkbox" onclick="this.classList.toggle('checked')">
+                    <span class="m-ds-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Dom
+                  </label>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <div class="m-form-group" style="flex:1;">
+                  <label class="m-form-label">Inicio</label>
+                  <input class="m-form-input" type="time" value="08:00" />
+                </div>
+                <div class="m-form-group" style="flex:1;">
+                  <label class="m-form-label">Fim</label>
+                  <input class="m-form-input" type="time" value="18:00" />
+                </div>
+              </div>
+              <button class="m-btn-save">Salvar</button>
+            </div>
+
+            <!-- Funcionalidades -->
+            <div class="m-config-card">
+              <div class="m-config-card-header">
+                <div class="m-config-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div class="m-config-card-title">Funcionalidades</div>
+              </div>
+              <div class="m-toggle-item">
+                <span class="m-toggle-item-label">Qualificacao automatica</span>
+                <label class="m-ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="m-ds-toggle-track"></span>
+                  <span class="m-ds-toggle-thumb"></span>
+                </label>
+              </div>
+              <div class="m-toggle-item">
+                <span class="m-toggle-item-label">Consulta Serasa</span>
+                <label class="m-ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="m-ds-toggle-track"></span>
+                  <span class="m-ds-toggle-thumb"></span>
+                </label>
+              </div>
+              <div class="m-toggle-item">
+                <span class="m-toggle-item-label">Notificacao WhatsApp</span>
+                <label class="m-ds-toggle">
+                  <input type="checkbox" checked>
+                  <span class="m-ds-toggle-track"></span>
+                  <span class="m-ds-toggle-thumb"></span>
+                </label>
+              </div>
+              <button class="m-btn-save" style="margin-top:12px;">Salvar</button>
+            </div>
+
+          </div>
+
+          <nav class="m-bottom-bar">
+            <a class="m-bottom-item" href="02-dashboard.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Home
+            </a>
+            <a class="m-bottom-item" href="03-funil-kanban.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="6" height="16" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/><rect x="16" y="4" width="6" height="16" rx="1"/></svg>
+              Funil
+            </a>
+            <a class="m-bottom-item" href="06-follow-up.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+              Follow-ups
+            </a>
+            <a class="m-bottom-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              Config
+            </a>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <img class="ft-logo" src="../logo-labrego.png" alt="Labrego IA" />
+  <strong>Labrego IA</strong> — Mockup de alta fidelidade<br>
+  Agente de Atendimento + CRM VinPlast
+</div>
+
+<script>
+function showView(view) {
+  document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('active'); });
+  event.target.closest('.toggle-btn').classList.add('active');
+  var d = document.getElementById('device-desktop');
+  var m = document.getElementById('device-mobile');
+  d.classList.remove('visible');
+  m.classList.remove('visible');
+  if (view === 'desktop') d.classList.add('visible');
+  else if (view === 'mobile') m.classList.add('visible');
+  else { d.classList.add('visible'); m.classList.add('visible'); }
+}
+</script>
+<script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
+</body>
+</html>

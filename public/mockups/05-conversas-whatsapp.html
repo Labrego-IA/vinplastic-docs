@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VinPlast CRM · Conversas WhatsApp | Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50:#E8F5E9;--green-100:#C8E6C9;--green-200:#A5D6A7;--green-300:#81C784;--green-400:#66BB6A;--green-500:#4CAF50;--green-600:#43A047;--green-700:#388E3C;--green-800:#2E7D32;--green-900:#1A4A2A;--green-950:#0D2B15;
+    --slate-50:#F8FAFB;--slate-100:#F0F3F5;--slate-200:#E2E7EB;--slate-300:#CBD3DA;--slate-400:#9BA8B4;--slate-500:#6B7B8A;--slate-600:#546471;--slate-700:#3E4C57;--slate-800:#2B3640;--slate-900:#1A2129;--slate-950:#0F1419;
+    --success:#2E8B57;--success-bg:#E6F2EB;--warning:#E6A817;--warning-bg:#FFF8E1;--danger:#D32F2F;--danger-bg:#FFEBEE;--info:#1976D2;--info-bg:#E3F2FD;
+    --bg:#F8FAFB;--surface:#FFFFFF;--surface-2:#F0F3F5;--text:#1A2129;--text-2:#546471;--muted:#6B7B8A;--border:#E2E7EB;--primary:#1A4A2A;--primary-contrast:#FFFFFF;--accent:#4CAF50;
+    --r-sm:6px;--r:10px;--r-md:14px;--r-lg:20px;
+    --font-head:'Plus Jakarta Sans',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow-sm:0 1px 2px rgba(26,33,41,.04),0 1px 3px rgba(26,33,41,.06);
+    --shadow-md:0 4px 16px rgba(26,33,41,0.07),0 1px 4px rgba(26,33,41,.05);
+    --shadow-lg:0 18px 44px rgba(13,43,21,0.12),0 4px 12px rgba(13,43,21,.06);
+    --ring-focus:0 0 0 3px rgba(76,175,80,.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); background:#E2E7EB; color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:92px 20px 48px; -webkit-font-smoothing:antialiased; }
+
+  /* ── HEADER FIXO COMPARTILHADO ── */
+  .shared-header { position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--green-950); height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-shadow:0 2px 12px rgba(0,0,0,0.18); }
+  .sh-left { display:flex; align-items:center; gap:14px; }
+  .sh-left a { text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .sh-logo { width:26px; height:26px; border-radius:4px; }
+  .sh-divider { width:1px; height:22px; background:rgba(255,255,255,0.15); }
+  .sh-project { color:#fff; font-family:var(--font-head); font-size:15px; font-weight:700; text-decoration:none; }
+  .sh-nav { display:flex; align-items:center; gap:8px; }
+  .sh-nav a { color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; text-decoration:none; padding:6px 14px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:6px; transition:all 0.2s; }
+  .sh-nav a:hover { color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); }
+  .sh-nav a.active { color:var(--accent); border-color:rgba(76,175,80,0.45); background:rgba(76,175,80,0.14); }
+  .sh-hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .sh-hamburger svg { stroke:rgba(255,255,255,0.8); }
+  .sh-mobile-menu { display:none; position:fixed; top:52px; left:0; right:0; background:var(--green-950); border-top:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); z-index:9998; padding:8px 0; }
+  .sh-mobile-menu.open { display:block; }
+  .sh-mobile-menu a { display:flex; align-items:center; gap:10px; padding:12px 24px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px; font-weight:500; }
+  .sh-mobile-menu a.active { color:var(--accent); }
+  .sh-overlay { display:none; position:fixed; inset:0; top:52px; background:rgba(0,0,0,0.4); z-index:9997; }
+  .sh-overlay.open { display:block; }
+  @media (max-width:768px) { .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; } }
+
+  /* ── MOCKUP HEADER + TOGGLE ── */
+  .mockup-header { text-align:center; margin-bottom:26px; max-width:700px; }
+  .mockup-header .badge { display:inline-block; background:var(--primary); color:#fff; font-size:10px; font-weight:600; padding:5px 14px; border-radius:20px; margin-bottom:12px; letter-spacing:0.8px; text-transform:uppercase; }
+  .mockup-header h1 { font-family:var(--font-head); font-size:29px; font-weight:600; color:#0D2B15; margin-bottom:7px; letter-spacing:-0.025em; line-height:1.1; }
+  .mockup-header p { font-size:14px; color:var(--text-2); line-height:1.6; }
+  .toggle-row { display:flex; gap:6px; justify-content:center; margin:0 auto 36px; background:#fff; padding:4px; border-radius:40px; box-shadow:var(--shadow-sm); border:1px solid var(--border); width:fit-content; }
+  .toggle-btn { padding:10px 22px; border:none; border-radius:36px; background:transparent; font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--text-2); cursor:pointer; transition:all 0.25s; display:flex; align-items:center; gap:6px; }
+  .toggle-btn.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(26,74,42,0.3); }
+  .toggle-btn svg { stroke:currentColor; }
+
+  .devices { display:flex; gap:48px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+  .device { display:none; }
+  .device.visible { display:block; }
+  .device-label { text-align:center; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:14px; }
+
+  /* ── FRAMES ── */
+  .frame-desktop { width:1100px; max-width:95vw; height:680px; background:var(--bg); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.06); }
+  .browser-bar { height:38px; background:var(--slate-100); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; gap:8px; }
+  .browser-dot { width:10px; height:10px; border-radius:50%; }
+  .browser-dot.red { background:#ff5f57; } .browser-dot.yellow { background:#febc2e; } .browser-dot.green { background:#28c840; }
+  .browser-url { flex:1; margin-left:12px; background:#fff; border-radius:6px; padding:5px 14px; font-size:11.5px; color:var(--muted); border:1px solid var(--border); font-family:var(--font-body); }
+  .viewport-d { height:calc(100% - 38px); overflow:hidden; }
+
+  .frame-mobile { width:375px; height:760px; background:var(--bg); border-radius:44px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.08); position:relative; border:6px solid #1c1c1e; }
+  .notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:126px; height:28px; background:#1c1c1e; border-radius:0 0 18px 18px; z-index:10; }
+  .viewport-m { height:100%; overflow:auto; padding-top:28px; background:var(--bg); }
+
+  /* ── PAGE FOOTER ── */
+  .page-footer { margin-top:48px; text-align:center; font-size:12px; color:var(--muted); line-height:1.6; }
+  .page-footer .ft-logo { height:18px; margin-bottom:6px; display:block; margin-left:auto; margin-right:auto; opacity:0.6; }
+  .page-footer strong { color:var(--text-2); }
+
+  /* ══════════════════════════════════════════════════
+     APP SHELL — SIDEBAR + MAIN
+     ══════════════════════════════════════════════════ */
+
+  .app-shell { display:flex; height:100%; width:100%; }
+
+  /* ── Sidebar ── */
+  .sidebar { width:256px; flex-shrink:0; background:var(--primary); display:flex; flex-direction:column; overflow-y:auto; }
+  .sb-brand { display:flex; align-items:center; gap:10px; padding:18px 22px 16px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .sb-brand img { height:30px; filter:brightness(0) invert(1); opacity:0.92; }
+  .sb-brand span { font-family:var(--font-head); font-size:11.5px; font-weight:700; color:rgba(255,255,255,0.75); letter-spacing:0.12em; text-transform:uppercase; }
+  .sb-group { padding:20px 0 6px; }
+  .sb-group-label { font-size:10px; font-weight:700; color:rgba(255,255,255,0.3); letter-spacing:0.14em; text-transform:uppercase; padding:0 22px 8px; }
+  .sb-item { display:flex; align-items:center; gap:11px; padding:10px 22px; color:rgba(255,255,255,0.6); font-size:13.5px; font-weight:500; cursor:pointer; transition:all 0.15s; text-decoration:none; position:relative; border-left:3px solid transparent; }
+  .sb-item:hover { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.04); }
+  .sb-item.active { color:#fff; background:rgba(76,175,80,0.12); border-left-color:var(--accent); }
+  .sb-item svg { width:18px; height:18px; stroke:currentColor; flex-shrink:0; }
+  .sb-item .sb-count { margin-left:auto; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; }
+  .sb-item.active .sb-count { background:rgba(76,175,80,0.25); color:var(--accent); }
+  .sb-spacer { flex:1; }
+  .sb-user { display:flex; align-items:center; gap:10px; padding:16px 22px; border-top:1px solid rgba(255,255,255,0.08); }
+  .sb-avatar { width:34px; height:34px; border-radius:50%; background:rgba(76,175,80,0.2); display:flex; align-items:center; justify-content:center; font-family:var(--font-head); font-size:13px; font-weight:700; color:var(--accent); flex-shrink:0; }
+  .sb-user-info { display:flex; flex-direction:column; }
+  .sb-user-name { font-size:13px; font-weight:600; color:#fff; }
+  .sb-user-role { font-size:11px; color:rgba(255,255,255,0.45); }
+
+  /* ── Main area ── */
+  .main-area { flex:1; display:flex; flex-direction:column; overflow:hidden; background:var(--bg); }
+
+  /* Topbar */
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:56px; background:var(--surface); border-bottom:1px solid var(--border); flex-shrink:0; }
+  .tb-left { display:flex; align-items:center; gap:14px; }
+  .tb-back { width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:var(--surface); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.15s; text-decoration:none; }
+  .tb-back:hover { background:var(--green-50); border-color:var(--accent); }
+  .tb-back svg { width:16px; height:16px; stroke:var(--text-2); }
+  .tb-breadcrumb { display:flex; align-items:center; gap:6px; font-size:13.5px; color:var(--muted); }
+  .tb-breadcrumb a { color:var(--muted); text-decoration:none; }
+  .tb-breadcrumb a:hover { color:var(--accent); }
+  .tb-breadcrumb .sep { color:var(--slate-300); }
+  .tb-breadcrumb .current { color:var(--text); font-weight:600; }
+  .tb-readonly { display:inline-flex; align-items:center; gap:5px; background:var(--slate-100); color:var(--muted); font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; margin-left:12px; }
+  .tb-readonly svg { width:13px; height:13px; stroke:currentColor; }
+  .tb-right { display:flex; align-items:center; gap:8px; }
+  .tb-icon-btn { width:34px; height:34px; border-radius:8px; border:1px solid var(--border); background:var(--surface); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.15s; }
+  .tb-icon-btn:hover { background:var(--green-50); border-color:var(--accent); }
+  .tb-icon-btn svg { width:16px; height:16px; stroke:var(--text-2); }
+  .tb-user-btn { width:32px; height:32px; border-radius:50%; background:var(--green-50); display:flex; align-items:center; justify-content:center; font-family:var(--font-head); font-size:12px; font-weight:700; color:var(--primary); cursor:pointer; border:1.5px solid var(--green-200); }
+
+  /* ── Chat Content ── */
+  .chat-container { flex:1; overflow-y:auto; position:relative; }
+  .chat-bg { padding:20px 28px 80px; min-height:100%; background:
+    linear-gradient(180deg, rgba(248,250,251,0.6) 0%, rgba(240,243,245,0.3) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(226,231,235,0.15) 20px, rgba(226,231,235,0.15) 21px),
+    repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(226,231,235,0.15) 20px, rgba(226,231,235,0.15) 21px);
+  }
+
+  /* Date separator */
+  .date-sep { display:flex; align-items:center; gap:14px; margin:24px 0 20px; }
+  .date-sep::before, .date-sep::after { content:''; flex:1; height:1px; background:var(--slate-200); }
+  .date-sep span { background:var(--slate-200); color:var(--muted); font-size:11px; font-weight:600; padding:5px 16px; border-radius:20px; white-space:nowrap; }
+
+  /* Message base */
+  .msg { display:flex; flex-direction:column; margin-bottom:12px; }
+  .msg.left { align-items:flex-start; }
+  .msg.right { align-items:flex-end; }
+  .msg-sender { display:flex; align-items:center; gap:5px; margin-bottom:4px; }
+  .msg-sender svg { width:16px; height:16px; flex-shrink:0; }
+  .msg-sender span { font-size:11px; font-weight:600; }
+  .msg-bubble { max-width:65%; padding:10px 14px; font-size:13.5px; line-height:1.55; color:var(--text); position:relative; word-wrap:break-word; }
+  .msg-footer { display:flex; align-items:center; gap:6px; margin-top:5px; justify-content:flex-end; }
+  .msg-time { font-size:10.5px; color:var(--muted); }
+  .msg-check svg { width:16px; height:14px; flex-shrink:0; }
+
+  /* Agent bubble */
+  .msg.agent .msg-sender svg { stroke:#1976D2; }
+  .msg.agent .msg-sender span { color:#1976D2; }
+  .msg.agent .msg-bubble { background:#E3F2FD; border-radius:4px 14px 14px 14px; }
+
+  /* Seller bubble */
+  .msg.seller .msg-sender svg { stroke:var(--primary); }
+  .msg.seller .msg-sender span { color:var(--primary); }
+  .msg.seller .msg-bubble { background:var(--green-50); border-radius:4px 14px 14px 14px; }
+
+  /* Lead bubble */
+  .msg.lead { align-items:flex-end; }
+  .msg.lead .msg-sender { justify-content:flex-end; }
+  .msg.lead .msg-sender span { color:var(--text-2); }
+  .msg.lead .msg-bubble { background:var(--slate-100); border-radius:14px 4px 14px 14px; }
+  .msg.lead .msg-footer { justify-content:flex-start; }
+
+  /* File attachment */
+  .msg-attachment { display:flex; align-items:center; gap:10px; margin-top:8px; padding:10px 12px; background:rgba(255,255,255,0.7); border:1px solid var(--border); border-radius:var(--r-sm); }
+  .msg-attachment-icon { width:36px; height:36px; border-radius:var(--r-sm); background:var(--danger-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .msg-attachment-icon svg { width:18px; height:18px; stroke:var(--danger); }
+  .msg-attachment-info { display:flex; flex-direction:column; }
+  .msg-attachment-name { font-size:12.5px; font-weight:600; color:var(--text); }
+  .msg-attachment-size { font-size:11px; color:var(--muted); }
+
+  /* Scroll-to-bottom FAB */
+  .scroll-fab { position:absolute; bottom:24px; right:24px; width:40px; height:40px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:var(--shadow-md); border:none; transition:all 0.2s; z-index:5; }
+  .scroll-fab:hover { background:var(--green-950); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+  .scroll-fab svg { width:20px; height:20px; stroke:#fff; }
+
+  /* ══════════════════════════════════════════════════
+     MOBILE VIEW
+     ══════════════════════════════════════════════════ */
+
+  .m-shell { display:flex; flex-direction:column; height:100%; }
+
+  /* Mobile top bar */
+  .m-topbar { display:flex; align-items:center; gap:10px; padding:10px 16px; background:var(--primary); flex-shrink:0; }
+  .m-topbar-back { width:30px; height:30px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; }
+  .m-topbar-back svg { width:16px; height:16px; stroke:#fff; }
+  .m-topbar-info { flex:1; display:flex; flex-direction:column; }
+  .m-topbar-name { font-size:15px; font-weight:600; color:#fff; font-family:var(--font-head); }
+  .m-topbar-sub { font-size:10.5px; color:rgba(255,255,255,0.55); font-weight:500; }
+
+  /* Mobile chat */
+  .m-chat { flex:1; overflow-y:auto; padding:14px 12px 72px; background:
+    linear-gradient(180deg, rgba(248,250,251,0.6) 0%, rgba(240,243,245,0.3) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(226,231,235,0.15) 20px, rgba(226,231,235,0.15) 21px),
+    repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(226,231,235,0.15) 20px, rgba(226,231,235,0.15) 21px);
+  }
+  .m-chat .msg-bubble { max-width:85%; }
+
+  /* Mobile tab bar */
+  .m-tabbar { display:flex; align-items:stretch; background:var(--surface); border-top:1px solid var(--border); flex-shrink:0; }
+  .m-tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:8px 0 10px; font-size:10px; font-weight:600; color:var(--muted); text-decoration:none; transition:color 0.15s; }
+  .m-tab svg { width:20px; height:20px; stroke:currentColor; }
+  .m-tab.active { color:var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:480px) {
+    body { padding-top:62px; }
+    .toggle-row { display:none !important; }
+    #device-desktop { display:none !important; }
+    #device-mobile { display:block !important; }
+    .frame-mobile { width:100%; border-radius:0; border:none; height:auto; min-height:85vh; }
+    .notch { display:none; }
+    .viewport-m { padding-top:0; }
+    .device-label { display:none; }
+  }
+
+  /* ── EMBED ── */
+  .embed-back { display:none; }
+</style>
+<style id="embed-style">
+html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none !important;}
+html.embedded body{padding-top:0 !important;}
+html.embedded .embed-back{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;position:sticky;top:0;z-index:9999;background:var(--green-950);color:#fff;text-decoration:none;font-family:var(--font-body);font-size:13px;font-weight:600;padding:13px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.16);border-radius:0 0 12px 12px;}
+html.embedded .embed-back svg{stroke:var(--accent);}
+html.embedded .embed-back:hover{background:#091a0e;}
+</style>
+</head>
+<body>
+
+<!-- ══════════ SHARED HEADER ══════════ -->
+<header class="shared-header">
+  <div class="sh-left">
+    <a href="index.html">
+      <img src="../favicon.png" alt="" class="sh-logo" />
+    </a>
+    <div class="sh-divider"></div>
+    <a href="index.html" class="sh-project">VinPlast CRM</a>
+  </div>
+  <nav class="sh-nav">
+    <a href="../01-documentacao-tecnica.html">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Documentacao
+    </a>
+    <a href="index.html" class="active">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+      Mockups
+    </a>
+    <a href="../design-system.html">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/></svg>
+      Design System
+    </a>
+  </nav>
+  <button class="sh-hamburger" onclick="toggleMenu()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
+</header>
+<div class="sh-mobile-menu" id="shMenu">
+  <a href="../01-documentacao-tecnica.html">Documentacao</a>
+  <a href="index.html" class="active">Mockups</a>
+  <a href="../design-system.html">Design System</a>
+</div>
+<div class="sh-overlay" id="shOverlay" onclick="toggleMenu()"></div>
+
+<!-- ══════════ EMBED BACK ══════════ -->
+<a class="embed-back" href="index.html?embed=1">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  Voltar aos Mockups
+</a>
+
+<!-- ══════════ MOCKUP HEADER ══════════ -->
+<div class="mockup-header">
+  <span class="badge">Mockup 05 — Conversas WhatsApp</span>
+  <h1>Conversas WhatsApp</h1>
+  <p>Historico completo da conversa entre o agente IA, o vendedor e o lead — visualizacao somente leitura com indicadores de entrega e leitura.</p>
+</div>
+
+<!-- ══════════ TOGGLE ══════════ -->
+<div class="toggle-row">
+  <button class="toggle-btn active" onclick="showView('desktop')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Desktop</button>
+  <button class="toggle-btn" onclick="showView('mobile')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Mobile</button>
+  <button class="toggle-btn" onclick="showView('both')">Ambos</button>
+</div>
+
+<!-- ══════════ DEVICES ══════════ -->
+<div class="devices">
+
+  <!-- ══════════ DESKTOP ══════════ -->
+  <div class="device visible" id="device-desktop">
+    <div class="device-label">Desktop — 1100px</div>
+    <div class="frame-desktop">
+      <div class="browser-bar">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <div class="browser-url">app.vinplast.com.br/conversas/felipe-souza</div>
+      </div>
+      <div class="viewport-d">
+
+        <div class="app-shell">
+          <!-- ── SIDEBAR ── -->
+          <aside class="sidebar">
+            <div class="sb-brand">
+              <img src="../logo-vinplast.webp" alt="VinPlast" />
+              <span>VinPlast CRM</span>
+            </div>
+
+            <div class="sb-group">
+              <div class="sb-group-label">Operacao</div>
+              <a class="sb-item" href="02-dashboard.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                Dashboard
+              </a>
+              <a class="sb-item" href="03-funil-kanban.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                Funil de Vendas
+              </a>
+              <a class="sb-item" href="04-ficha-lead.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Leads
+                <span class="sb-count">24</span>
+              </a>
+              <a class="sb-item active" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+                Conversas
+              </a>
+              <a class="sb-item" href="06-follow-up.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Follow-ups
+                <span class="sb-count">5</span>
+              </a>
+              <a class="sb-item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                Reativacao
+              </a>
+            </div>
+
+            <div class="sb-group">
+              <div class="sb-group-label">Configuracoes</div>
+              <a class="sb-item" href="07-config-agente.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                Configuracoes
+              </a>
+            </div>
+
+            <div class="sb-spacer"></div>
+
+            <div class="sb-user">
+              <div class="sb-avatar">CS</div>
+              <div class="sb-user-info">
+                <span class="sb-user-name">Carlos Silva</span>
+                <span class="sb-user-role">Vendedor</span>
+              </div>
+            </div>
+          </aside>
+
+          <!-- ── MAIN ── -->
+          <div class="main-area">
+            <!-- Topbar -->
+            <div class="topbar">
+              <div class="tb-left">
+                <a class="tb-back" href="04-ficha-lead.html" title="Voltar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+                <div class="tb-breadcrumb">
+                  <a href="#">Conversas</a>
+                  <span class="sep">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                  </span>
+                  <span class="current">Felipe Souza</span>
+                </div>
+                <span class="tb-readonly">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                  Somente leitura
+                </span>
+              </div>
+              <div class="tb-right">
+                <button class="tb-icon-btn" title="Buscar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button class="tb-icon-btn" title="Tema">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                </button>
+                <div class="tb-user-btn">CS</div>
+              </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="chat-container">
+              <div class="chat-bg">
+
+                <!-- ── 20 de junho de 2026 ── -->
+                <div class="date-sep"><span>20 de junho de 2026</span></div>
+
+                <!-- 1. Agent 14:32 -->
+                <div class="msg left agent">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                    <span>Agente IA</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Ola! Aqui e a Lia, da VinPlast Embalagens. Tudo bem? Vi que voce preencheu nosso formulario sobre sacolas plasticas. Posso te ajudar!
+                    <div class="msg-footer">
+                      <span class="msg-time">14:32</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Lead 14:35 -->
+                <div class="msg right lead">
+                  <div class="msg-sender">
+                    <span>Felipe Souza</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Oi Lia! Tudo sim. Preciso de sacolas PEBD personalizadas, uns 500 mil por mes.
+                    <div class="msg-footer">
+                      <span class="msg-time">14:35</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Agent 14:35 -->
+                <div class="msg left agent">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                    <span>Agente IA</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Que volume excelente! Para eu poder direcionar voce para o vendedor certo, preciso de algumas informacoes. Voce e pessoa fisica ou juridica?
+                    <div class="msg-footer">
+                      <span class="msg-time">14:35</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4. Lead 14:37 -->
+                <div class="msg right lead">
+                  <div class="msg-sender">
+                    <span>Felipe Souza</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Juridica. Brasil Plast Distribuidora LTDA
+                    <div class="msg-footer">
+                      <span class="msg-time">14:37</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 5. Agent 14:37 -->
+                <div class="msg left agent">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                    <span>Agente IA</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Perfeito! Pode me informar o CNPJ da empresa para eu fazer uma consulta rapida?
+                    <div class="msg-footer">
+                      <span class="msg-time">14:37</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 6. Lead 14:38 -->
+                <div class="msg right lead">
+                  <div class="msg-sender">
+                    <span>Felipe Souza</span>
+                  </div>
+                  <div class="msg-bubble">
+                    12.345.678/0001-90
+                    <div class="msg-footer">
+                      <span class="msg-time">14:38</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 7. Agent 14:40 -->
+                <div class="msg left agent">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                    <span>Agente IA</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Obrigada! Consultei e esta tudo certo com seu cadastro. Score aprovado! Vou encaminhar para o Carlos Silva, nosso especialista em grandes volumes. Ele vai entrar em contato pelo WhatsApp em instantes.
+                    <div class="msg-footer">
+                      <span class="msg-time">14:40</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 8. Seller 14:48 -->
+                <div class="msg left seller">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Carlos Silva</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Oi Felipe, aqui e o Carlos da VinPlast! A Lia ja me passou suas informacoes. Vi que precisa de 500 mil sacolas PEBD personalizadas por mes, certo?
+                    <div class="msg-footer">
+                      <span class="msg-time">14:48</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 9. Lead 14:52 -->
+                <div class="msg right lead">
+                  <div class="msg-sender">
+                    <span>Felipe Souza</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Isso mesmo Carlos! Preciso com a marca estampada, 30x40cm
+                    <div class="msg-footer">
+                      <span class="msg-time">14:52</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 10. Seller 14:55 -->
+                <div class="msg left seller">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Carlos Silva</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Otimo! Vou preparar uma proposta com valores especiais pra esse volume. Me da umas 2 horas que te mando o PDF aqui mesmo.
+                    <div class="msg-footer">
+                      <span class="msg-time">14:55</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ── 22 de junho de 2026 ── -->
+                <div class="date-sep"><span>22 de junho de 2026</span></div>
+
+                <!-- 11. Seller 09:42 with attachment -->
+                <div class="msg left seller">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Carlos Silva</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Felipe, segue a proposta conforme conversamos. Valor especial para 500 mil/mes, prazo de entrega 15 dias uteis.
+                    <div class="msg-attachment">
+                      <div class="msg-attachment-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                      </div>
+                      <div class="msg-attachment-info">
+                        <span class="msg-attachment-name">Proposta-VinPlast-2026-0142.pdf</span>
+                        <span class="msg-attachment-size">PDF - 245 KB</span>
+                      </div>
+                    </div>
+                    <div class="msg-footer">
+                      <span class="msg-time">09:42</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 12. Lead 10:15 -->
+                <div class="msg right lead">
+                  <div class="msg-sender">
+                    <span>Felipe Souza</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Recebi Carlos, vou analisar com meu socio. O prazo de pagamento e 30 dias?
+                    <div class="msg-footer">
+                      <span class="msg-time">10:15</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 13. Seller 10:20 -->
+                <div class="msg left seller">
+                  <div class="msg-sender">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Carlos Silva</span>
+                  </div>
+                  <div class="msg-bubble">
+                    Sim, 30 dias apos a entrega. Se precisar de 45 dias, consigo tambem mas preciso verificar.
+                    <div class="msg-footer">
+                      <span class="msg-time">10:20</span>
+                      <span class="msg-check">
+                        <svg viewBox="0 0 16 14" fill="none" stroke="var(--slate-400)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5 5.5 11l7-8"/></svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Scroll FAB -->
+              <button class="scroll-fab" title="Ir para o final">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 13 5 5 5-5"/><path d="m7 6 5 5 5-5"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MOBILE ══════════ -->
+  <div class="device" id="device-mobile">
+    <div class="device-label">Mobile — 375px</div>
+    <div class="frame-mobile">
+      <div class="notch"></div>
+      <div class="viewport-m">
+
+        <div class="m-shell">
+          <!-- Mobile topbar -->
+          <div class="m-topbar">
+            <a class="m-topbar-back" href="04-ficha-lead.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </a>
+            <div class="m-topbar-info">
+              <span class="m-topbar-name">Felipe Souza</span>
+              <span class="m-topbar-sub">Somente leitura</span>
+            </div>
+          </div>
+
+          <!-- Mobile chat -->
+          <div class="m-chat">
+
+            <!-- ── 20 de junho de 2026 ── -->
+            <div class="date-sep"><span>20 de junho de 2026</span></div>
+
+            <!-- 1. Agent 14:32 -->
+            <div class="msg left agent">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                <span>Agente IA</span>
+              </div>
+              <div class="msg-bubble">
+                Ola! Aqui e a Lia, da VinPlast Embalagens. Tudo bem? Vi que voce preencheu nosso formulario sobre sacolas plasticas. Posso te ajudar!
+                <div class="msg-footer">
+                  <span class="msg-time">14:32</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Lead 14:35 -->
+            <div class="msg right lead">
+              <div class="msg-sender">
+                <span>Felipe Souza</span>
+              </div>
+              <div class="msg-bubble">
+                Oi Lia! Tudo sim. Preciso de sacolas PEBD personalizadas, uns 500 mil por mes.
+                <div class="msg-footer">
+                  <span class="msg-time">14:35</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Agent 14:35 -->
+            <div class="msg left agent">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                <span>Agente IA</span>
+              </div>
+              <div class="msg-bubble">
+                Que volume excelente! Para eu poder direcionar voce para o vendedor certo, preciso de algumas informacoes. Voce e pessoa fisica ou juridica?
+                <div class="msg-footer">
+                  <span class="msg-time">14:35</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Lead 14:37 -->
+            <div class="msg right lead">
+              <div class="msg-sender">
+                <span>Felipe Souza</span>
+              </div>
+              <div class="msg-bubble">
+                Juridica. Brasil Plast Distribuidora LTDA
+                <div class="msg-footer">
+                  <span class="msg-time">14:37</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Agent 14:37 -->
+            <div class="msg left agent">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                <span>Agente IA</span>
+              </div>
+              <div class="msg-bubble">
+                Perfeito! Pode me informar o CNPJ da empresa para eu fazer uma consulta rapida?
+                <div class="msg-footer">
+                  <span class="msg-time">14:37</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Lead 14:38 -->
+            <div class="msg right lead">
+              <div class="msg-sender">
+                <span>Felipe Souza</span>
+              </div>
+              <div class="msg-bubble">
+                12.345.678/0001-90
+                <div class="msg-footer">
+                  <span class="msg-time">14:38</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Agent 14:40 -->
+            <div class="msg left agent">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M2 12h6"/><path d="M9 17c3.5 0 6-2 6-5s-2.5-5-6-5"/><path d="M22 12h-6"/></svg>
+                <span>Agente IA</span>
+              </div>
+              <div class="msg-bubble">
+                Obrigada! Consultei e esta tudo certo com seu cadastro. Score aprovado! Vou encaminhar para o Carlos Silva, nosso especialista em grandes volumes. Ele vai entrar em contato pelo WhatsApp em instantes.
+                <div class="msg-footer">
+                  <span class="msg-time">14:40</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Seller 14:48 -->
+            <div class="msg left seller">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Carlos Silva</span>
+              </div>
+              <div class="msg-bubble">
+                Oi Felipe, aqui e o Carlos da VinPlast! A Lia ja me passou suas informacoes. Vi que precisa de 500 mil sacolas PEBD personalizadas por mes, certo?
+                <div class="msg-footer">
+                  <span class="msg-time">14:48</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. Lead 14:52 -->
+            <div class="msg right lead">
+              <div class="msg-sender">
+                <span>Felipe Souza</span>
+              </div>
+              <div class="msg-bubble">
+                Isso mesmo Carlos! Preciso com a marca estampada, 30x40cm
+                <div class="msg-footer">
+                  <span class="msg-time">14:52</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10. Seller 14:55 -->
+            <div class="msg left seller">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Carlos Silva</span>
+              </div>
+              <div class="msg-bubble">
+                Otimo! Vou preparar uma proposta com valores especiais pra esse volume. Me da umas 2 horas que te mando o PDF aqui mesmo.
+                <div class="msg-footer">
+                  <span class="msg-time">14:55</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── 22 de junho de 2026 ── -->
+            <div class="date-sep"><span>22 de junho de 2026</span></div>
+
+            <!-- 11. Seller 09:42 with attachment -->
+            <div class="msg left seller">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Carlos Silva</span>
+              </div>
+              <div class="msg-bubble">
+                Felipe, segue a proposta conforme conversamos. Valor especial para 500 mil/mes, prazo de entrega 15 dias uteis.
+                <div class="msg-attachment">
+                  <div class="msg-attachment-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                  </div>
+                  <div class="msg-attachment-info">
+                    <span class="msg-attachment-name">Proposta-VinPlast-2026-0142.pdf</span>
+                    <span class="msg-attachment-size">PDF - 245 KB</span>
+                  </div>
+                </div>
+                <div class="msg-footer">
+                  <span class="msg-time">09:42</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="#1976D2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 5 11l6-8"/><path d="M5.5 7.5 9 11l6-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 12. Lead 10:15 -->
+            <div class="msg right lead">
+              <div class="msg-sender">
+                <span>Felipe Souza</span>
+              </div>
+              <div class="msg-bubble">
+                Recebi Carlos, vou analisar com meu socio. O prazo de pagamento e 30 dias?
+                <div class="msg-footer">
+                  <span class="msg-time">10:15</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 13. Seller 10:20 -->
+            <div class="msg left seller">
+              <div class="msg-sender">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Carlos Silva</span>
+              </div>
+              <div class="msg-bubble">
+                Sim, 30 dias apos a entrega. Se precisar de 45 dias, consigo tambem mas preciso verificar.
+                <div class="msg-footer">
+                  <span class="msg-time">10:20</span>
+                  <span class="msg-check">
+                    <svg viewBox="0 0 16 14" fill="none" stroke="var(--slate-400)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5 5.5 11l7-8"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mobile tab bar -->
+          <div class="m-tabbar">
+            <a class="m-tab" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+              Dashboard
+            </a>
+            <a class="m-tab" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              Funil
+            </a>
+            <a class="m-tab" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Leads
+            </a>
+            <a class="m-tab active" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+              Conversas
+            </a>
+            <a class="m-tab" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Follow-ups
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <img class="ft-logo" src="../logo-labrego.png" alt="Labrego IA" />
+  <strong>Labrego IA</strong> — Mockup de alta fidelidade<br>
+  Agente de Atendimento + CRM VinPlast
+</div>
+
+<script>
+function showView(view) {
+  document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('active'); });
+  event.target.closest('.toggle-btn').classList.add('active');
+  var d = document.getElementById('device-desktop');
+  var m = document.getElementById('device-mobile');
+  d.classList.remove('visible');
+  m.classList.remove('visible');
+  if (view === 'desktop') d.classList.add('visible');
+  else if (view === 'mobile') m.classList.add('visible');
+  else { d.classList.add('visible'); m.classList.add('visible'); }
+}
+
+function toggleMenu() {
+  var menu = document.getElementById('shMenu');
+  var overlay = document.getElementById('shOverlay');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+}
+</script>
+<script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
+</body>
+</html>

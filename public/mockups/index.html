@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockups Navegaveis — CRM VinPlast</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-50:#E8F5E9;--green-100:#C8E6C9;--green-200:#A5D6A7;--green-300:#81C784;--green-400:#66BB6A;
+  --green-500:#4CAF50;--green-600:#43A047;--green-700:#388E3C;--green-800:#2E7D32;--green-900:#1A4A2A;--green-950:#0D2B15;
+  --slate-50:#F8FAFB;--slate-100:#F0F3F5;--slate-200:#E2E7EB;--slate-300:#CBD3DA;--slate-400:#9BA8B4;
+  --slate-500:#6B7B8A;--slate-600:#546471;--slate-700:#3E4C57;--slate-800:#2B3640;--slate-900:#1A2129;
+  --bg:#F8FAFB;--surface:#FFFFFF;--text:#1A2129;--text-2:#546471;--muted:#6B7B8A;
+  --border:#E2E7EB;--primary:#1A4A2A;--accent:#4CAF50;
+  --r-sm:6px;--r:10px;--r-md:14px;--r-lg:20px;
+  --font-head:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --shadow-sm:0 1px 2px rgba(26,33,41,.04),0 1px 3px rgba(26,33,41,.06);
+  --shadow-md:0 4px 16px rgba(26,33,41,0.07),0 1px 4px rgba(26,33,41,.05);
+  --shadow-lg:0 18px 44px rgba(13,43,21,0.12),0 4px 12px rgba(13,43,21,.06);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Topbar ── */
+.topbar {
+  position:sticky; top:0; z-index:30;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:13px 28px;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.topbar .tb-left { display:flex; align-items:center; gap:12px; }
+.topbar .tb-mark { display:inline-flex; align-items:center; gap:9px; }
+.topbar .tb-mark img { height:28px; display:block; }
+.crumb { font-size:12.5px; color:var(--muted); }
+.crumb b { color:var(--text); font-weight:600; }
+.nav-links { display:flex; gap:6px; }
+.nav-links a {
+  font-size:12.5px; font-weight:600; color:var(--text-2);
+  text-decoration:none; padding:7px 14px;
+  border:1px solid var(--border); border-radius:999px;
+  background:var(--surface); transition:.15s;
+}
+.nav-links a:hover { color:var(--text); border-color:var(--accent); background:var(--green-50); }
+.nav-links a.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+/* ── Cover ── */
+.cover {
+  background:
+    radial-gradient(120% 140% at 88% -10%, rgba(76,175,80,.08), transparent 55%),
+    var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.cover-inner {
+  max-width:980px; margin:0 auto; padding:52px 28px 44px; position:relative;
+}
+.eyebrow {
+  display:inline-flex; align-items:center; gap:9px;
+  font-size:11px; font-weight:700; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--green-600); margin-bottom:18px;
+}
+.eyebrow svg { width:15px; height:15px; }
+.cover h1 {
+  font-family:var(--font-head); font-weight:700;
+  font-size:clamp(30px,4.5vw,48px); letter-spacing:-.03em;
+  max-width:18ch; line-height:1.08;
+}
+.cover h1 em { font-style:normal; font-weight:800; color:var(--accent); }
+.cover .desc {
+  margin-top:16px; max-width:60ch; font-size:16px;
+  color:var(--text-2); line-height:1.65;
+}
+.cover .meta-row {
+  margin-top:28px;
+  border-top:1px solid var(--green-300);
+  border-bottom:1px solid var(--green-300);
+  padding:16px 0;
+  display:flex; gap:32px; flex-wrap:wrap;
+}
+.cover .meta-item .k {
+  font-size:10.5px; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted);
+}
+.cover .meta-item .v {
+  font-family:var(--font-head); font-size:17px; font-weight:600;
+  color:var(--text); margin-top:3px; letter-spacing:-.01em;
+}
+
+/* ── Grid ── */
+.wrap { max-width:980px; margin:0 auto; padding:0 28px; }
+.section-title {
+  font-family:var(--font-head); font-size:13px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+  margin:40px 0 18px; display:flex; align-items:center; gap:10px;
+}
+.section-title .line { flex:1; height:1px; background:var(--border); }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:16px;
+  padding-bottom:60px;
+}
+
+.card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:0;
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .22s ease, border-color .22s ease, transform .22s ease;
+}
+.card:hover {
+  box-shadow:var(--shadow-md);
+  transform:translateY(-3px);
+  border-color:var(--green-300);
+}
+.card .card-top {
+  height:4px;
+  background:linear-gradient(90deg, var(--green-400), var(--green-500) 45%, var(--green-700));
+}
+.card .card-body { padding:22px 24px 20px; flex:1; }
+.card .card-num {
+  font-family:var(--font-head); font-weight:300;
+  font-size:28px; color:var(--green-400);
+  line-height:1; letter-spacing:.02em;
+  margin-bottom:10px;
+}
+.card .card-icon {
+  width:40px; height:40px; border-radius:var(--r);
+  background:var(--green-50); display:flex;
+  align-items:center; justify-content:center;
+  margin-bottom:14px;
+}
+.card .card-icon svg { width:20px; height:20px; color:var(--primary); }
+.card h3 {
+  font-family:var(--font-head); font-size:16px; font-weight:700;
+  letter-spacing:-.01em; margin-bottom:6px;
+}
+.card .card-desc {
+  font-size:13.5px; color:var(--text-2); line-height:1.55;
+}
+.card .card-footer {
+  padding:12px 24px;
+  border-top:1px solid var(--border);
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.tag {
+  font-size:10.5px; font-weight:600; padding:3px 10px;
+  border-radius:999px; letter-spacing:.02em;
+}
+.tag-desktop { background:var(--green-50); color:var(--green-900); }
+.tag-mobile { background:var(--slate-100); color:var(--slate-700); }
+.tag-auth { background:#FFF8E1; color:#9A7A12; }
+.tag-crm { background:var(--green-50); color:var(--green-900); }
+.tag-config { background:var(--slate-100); color:var(--slate-700); }
+.tag-chat { background:#E3F2FD; color:#1565C0; }
+
+/* ── Footer ── */
+.footer {
+  border-top:1px solid var(--border);
+  padding:28px;
+  text-align:center;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-size:12px; color:var(--muted);
+}
+.footer img { height:20px; opacity:.6; }
+
+@media(max-width:640px){
+  .grid { grid-template-columns:1fr; }
+  .topbar { padding:10px 16px; flex-wrap:wrap; gap:8px; }
+  .nav-links a { font-size:11px; padding:5px 10px; }
+  .cover-inner { padding:32px 16px 28px; }
+  .cover .meta-row { gap:20px; }
+  .wrap { padding:0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Topbar ── -->
+<div class="topbar">
+  <div class="tb-left">
+    <div class="tb-mark">
+      <img src="../logo-vinplast.webp" alt="VinPlast">
+    </div>
+    <span class="crumb"><b>CRM VinPlast</b> / Mockups</span>
+  </div>
+  <div class="nav-links">
+    <a href="../01-documentacao-tecnica.html">Documentacao</a>
+    <a href="index.html" class="active">Mockups</a>
+    <a href="../design-system.html">Design System</a>
+  </div>
+</div>
+
+<!-- ── Cover ── -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="eyebrow">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Mockups Navegaveis
+    </div>
+    <h1>Telas de <em>alta fidelidade</em> do CRM VinPlast</h1>
+    <p class="desc">
+      Cada mockup cobre 100% dos elementos especificados pelo Codex, com dados ficticios
+      realistas do segmento de embalagens plasticas. Navegue entre as telas pela sidebar ou
+      pelos links abaixo.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="k">Telas</div>
+        <div class="v">8 mockups</div>
+      </div>
+      <div class="meta-item">
+        <div class="k">Responsivo</div>
+        <div class="v">Desktop + Mobile 390px</div>
+      </div>
+      <div class="meta-item">
+        <div class="k">Design System</div>
+        <div class="v">VinPlast DS v1.0</div>
+      </div>
+      <div class="meta-item">
+        <div class="k">Autor</div>
+        <div class="v">Blueprint (Atlas)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Mockups Grid ── -->
+<div class="wrap">
+
+  <div class="section-title">
+    <span>Autenticacao</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 01 Login -->
+    <a href="01-login.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">01</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        </div>
+        <h3>Login</h3>
+        <p class="card-desc">Tela de autenticacao com layout split, identidade VinPlast no painel esquerdo e formulario de acesso no direito.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-auth">Autenticacao</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title">
+    <span>Dashboard</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 02 Dashboard -->
+    <a href="02-dashboard.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">02</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        </div>
+        <h3>Dashboard Admin</h3>
+        <p class="card-desc">Visao consolidada com KPIs, grafico de funil de vendas, ranking de vendedores e timeline de atividade recente.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-crm">Dashboard</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title">
+    <span>CRM / Funil de Vendas</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 03 Funil Kanban -->
+    <a href="03-funil-kanban.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">03</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+        </div>
+        <h3>Funil Kanban</h3>
+        <p class="card-desc">Board visual com 7 colunas do funil de vendas. Cards de lead com temperatura, valor estimado e dias na etapa.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-crm">CRM</span>
+      </div>
+    </a>
+
+    <!-- 04 Ficha do Lead -->
+    <a href="04-ficha-lead.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">04</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <h3>Ficha do Lead</h3>
+        <p class="card-desc">Detalhe completo com 6 abas: dados cadastrais, score Serasa, conversas, propostas, timeline e anotacoes.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-crm">CRM</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title">
+    <span>Conversas e Follow-up</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 05 Conversas WhatsApp -->
+    <a href="05-conversas-whatsapp.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">05</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Conversas WhatsApp</h3>
+        <p class="card-desc">Historico completo de mensagens entre Agente IA, vendedor e lead. Timeline de bolhas tipo chat, somente leitura.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-chat">Chat</span>
+      </div>
+    </a>
+
+    <!-- 06 Follow-up -->
+    <a href="06-follow-up.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">06</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h3>Follow-ups Ativos</h3>
+        <p class="card-desc">Lista de follow-ups automaticos com dia da cadencia, proximo envio, status e acoes de pausa/encerramento.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-crm">CRM</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-title">
+    <span>Configuracoes</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 07 Config Agente -->
+    <a href="07-config-agente.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">07</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+        </div>
+        <h3>Configuracao do Agente IA</h3>
+        <p class="card-desc">Persona, horario comercial, mensagem fora de horario, escalacao e toggles de funcionalidades do agente.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-config">Configuracao</span>
+      </div>
+    </a>
+
+    <!-- 08 Vendedores -->
+    <a href="08-vendedores-metas.html" class="card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-num">08</div>
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Vendedores e Metas</h3>
+        <p class="card-desc">Gestao da equipe de vendas com status, leads atribuidos, taxa de conversao e controle de round-robin.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag tag-desktop">Desktop</span>
+        <span class="tag tag-mobile">Mobile</span>
+        <span class="tag tag-config">Configuracao</span>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer">
+  <img src="../logo-labrego.png" alt="Labrego IA">
+  <span>Labrego IA — Mockups gerados por Blueprint (Atlas)</span>
+</div>
+
+</body>
+</html>
