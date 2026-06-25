@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VinPlast CRM · Pagina nao encontrada | Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50:#E8F5E9;--green-100:#C8E6C9;--green-200:#A5D6A7;--green-300:#81C784;--green-400:#66BB6A;--green-500:#4CAF50;--green-600:#43A047;--green-700:#388E3C;--green-800:#2E7D32;--green-900:#1A4A2A;--green-950:#0D2B15;
+    --slate-50:#F8FAFB;--slate-100:#F0F3F5;--slate-200:#E2E7EB;--slate-300:#CBD3DA;--slate-400:#9BA8B4;--slate-500:#6B7B8A;--slate-600:#546471;--slate-700:#3E4C57;--slate-800:#2B3640;--slate-900:#1A2129;--slate-950:#0F1419;
+    --success:#2E8B57;--success-bg:#E6F2EB;--warning:#E6A817;--warning-bg:#FFF8E1;--danger:#D32F2F;--danger-bg:#FFEBEE;--info:#1976D2;--info-bg:#E3F2FD;
+    --bg:#F8FAFB;--surface:#FFFFFF;--surface-2:#F0F3F5;--text:#1A2129;--text-2:#546471;--muted:#6B7B8A;--border:#E2E7EB;--primary:#1A4A2A;--primary-contrast:#FFFFFF;--accent:#4CAF50;
+    --r-sm:6px;--r:10px;--r-md:14px;--r-lg:20px;
+    --font-head:'Plus Jakarta Sans',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow-sm:0 1px 2px rgba(26,33,41,.04),0 1px 3px rgba(26,33,41,.06);
+    --shadow-md:0 4px 16px rgba(26,33,41,0.07),0 1px 4px rgba(26,33,41,.05);
+    --shadow-lg:0 18px 44px rgba(13,43,21,0.12),0 4px 12px rgba(13,43,21,.06);
+    --ring-focus:0 0 0 3px rgba(76,175,80,.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); background:#E4E8EB; color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:92px 20px 48px; -webkit-font-smoothing:antialiased; }
+
+  /* ── HEADER FIXO COMPARTILHADO ── */
+  .shared-header { position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--green-950); height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-shadow:0 2px 12px rgba(0,0,0,0.18); }
+  .sh-left { display:flex; align-items:center; gap:14px; }
+  .sh-left a { text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .sh-logo { width:26px; height:26px; border-radius:4px; }
+  .sh-divider { width:1px; height:22px; background:rgba(255,255,255,0.15); }
+  .sh-project { color:#fff; font-family:var(--font-head); font-size:15px; font-weight:700; text-decoration:none; }
+  .sh-nav { display:flex; align-items:center; gap:8px; }
+  .sh-nav a { color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; text-decoration:none; padding:6px 14px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:6px; transition:all 0.2s; }
+  .sh-nav a:hover { color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); }
+  .sh-nav a.active { color:var(--accent); border-color:rgba(76,175,80,0.45); background:rgba(76,175,80,0.14); }
+  .sh-hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .sh-hamburger svg { stroke:rgba(255,255,255,0.8); }
+  .sh-mobile-menu { display:none; position:fixed; top:52px; left:0; right:0; background:var(--green-950); border-top:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); z-index:9998; padding:8px 0; }
+  .sh-mobile-menu.open { display:block; }
+  .sh-mobile-menu a { display:flex; align-items:center; gap:10px; padding:12px 24px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px; font-weight:500; }
+  .sh-mobile-menu a.active { color:var(--accent); }
+  .sh-overlay { display:none; position:fixed; inset:0; top:52px; background:rgba(0,0,0,0.4); z-index:9997; }
+  .sh-overlay.open { display:block; }
+  @media (max-width:768px) { .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; } }
+
+  /* ── MOCKUP HEADER + TOGGLE ── */
+  .mockup-header { text-align:center; margin-bottom:26px; max-width:700px; }
+  .mockup-header .badge { display:inline-flex; align-items:center; gap:6px; background:var(--primary); color:#fff; font-size:10px; font-weight:600; padding:5px 14px; border-radius:20px; margin-bottom:12px; letter-spacing:0.8px; text-transform:uppercase; }
+  .mockup-header .badge svg { stroke:#fff; }
+  .mockup-header h1 { font-family:var(--font-head); font-size:29px; font-weight:700; color:var(--slate-900); margin-bottom:7px; letter-spacing:-0.025em; line-height:1.1; }
+  .mockup-header .sub { font-size:13px; color:var(--muted); font-weight:500; margin-bottom:10px; }
+  .mockup-header p { font-size:14px; color:var(--text-2); line-height:1.6; }
+  .toggle-row { display:flex; gap:6px; justify-content:center; margin:0 auto 36px; background:#fff; padding:4px; border-radius:40px; box-shadow:var(--shadow-sm); border:1px solid var(--border); width:fit-content; }
+  .toggle-btn { padding:10px 22px; border:none; border-radius:36px; background:transparent; font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--text-2); cursor:pointer; transition:all 0.25s; display:flex; align-items:center; gap:6px; }
+  .toggle-btn.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(26,74,42,0.3); }
+  .toggle-btn svg { stroke:currentColor; }
+
+  .devices { display:flex; gap:48px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+  .device { display:none; }
+  .device.visible { display:block; }
+  .device-label { text-align:center; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:14px; }
+
+  /* ── FRAMES ── */
+  .frame-desktop { width:1100px; max-width:95vw; height:680px; background:var(--bg); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.06); }
+  .browser-bar { height:38px; background:var(--slate-100); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; gap:8px; }
+  .browser-dot { width:10px; height:10px; border-radius:50%; }
+  .browser-dot.red { background:#ff5f57; } .browser-dot.yellow { background:#febc2e; } .browser-dot.green { background:#28c840; }
+  .browser-url { flex:1; margin-left:12px; background:#fff; border-radius:6px; padding:5px 14px; font-size:11.5px; color:var(--muted); border:1px solid var(--border); font-family:var(--font-body); }
+  .viewport-d { height:calc(100% - 38px); overflow:hidden; }
+
+  .frame-mobile { width:375px; height:760px; background:var(--bg); border-radius:44px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.08); position:relative; border:6px solid #1c1c1e; }
+  .notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:126px; height:28px; background:#1c1c1e; border-radius:0 0 18px 18px; z-index:10; }
+  .viewport-m { height:100%; overflow:auto; padding-top:28px; background:var(--bg); }
+
+  /* ══════════════════════════════════════════════════
+     ERROR 404 LAYOUT
+     ══════════════════════════════════════════════════ */
+  .error-page { display:flex; align-items:center; justify-content:center; height:100%; min-height:100%; background:var(--bg); }
+  .error-container { text-align:center; padding:40px; max-width:420px; }
+  .error-icon { stroke:var(--muted); margin-bottom:24px; opacity:0.6; }
+  .error-title { font-family:var(--font-head); font-size:28px; font-weight:800; color:var(--text); margin-bottom:10px; letter-spacing:-0.02em; }
+  .error-text { font-size:15px; color:var(--text-2); line-height:1.6; margin-bottom:28px; }
+  .error-btn { display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:var(--primary-contrast); border:none; border-radius:var(--r); padding:13px 28px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+  .error-btn:hover { background:var(--green-800); box-shadow:0 4px 16px rgba(26,74,42,0.25); }
+  .error-btn svg { stroke:currentColor; }
+
+  /* ── FOOTER GERAL DA PAGINA ── */
+  .page-footer { margin-top:40px; text-align:center; font-size:12px; color:var(--muted); line-height:1.7; }
+  .page-footer strong { color:var(--text-2); }
+  .page-footer img { height:18px; width:auto; opacity:0.4; display:inline-block; vertical-align:middle; margin-right:6px; }
+
+  /* ── EMBED STYLE ── */
+  html.embedded .shared-header, html.embedded .sh-mobile-menu, html.embedded .sh-overlay { display:none !important; }
+  html.embedded body { padding-top:0 !important; }
+  .embed-back { display:none; }
+  html.embedded .embed-back {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; position:sticky; top:0; z-index:9999;
+    background:var(--green-950); color:#fff; text-decoration:none;
+    font-family:var(--font-body); font-size:13px; font-weight:600;
+    padding:13px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.16);
+    border-radius:0 0 12px 12px;
+  }
+  html.embedded .embed-back svg { stroke:var(--accent); }
+  html.embedded .embed-back:hover { background:#081a0e; }
+
+  /* ── RESPONSIVO (pagina real no mobile) ── */
+  @media (max-width:480px) {
+    body { padding:84px 0 28px !important; background:#E4E8EB !important; }
+    html.embedded body { padding:14px 0 28px !important; }
+    .mockup-header { padding:0 18px; margin-bottom:0; max-width:100%; }
+    .mockup-header .badge { font-size:9px; padding:4px 11px; margin-bottom:9px; }
+    .mockup-header h1 { font-size:19px; margin-bottom:5px; }
+    .mockup-header .sub { font-size:11px; margin-bottom:6px; }
+    .mockup-header p { font-size:12.5px; line-height:1.55; }
+    .toggle-row { display:none !important; }
+    .devices { gap:0 !important; width:100%; padding:0 14px; box-sizing:border-box; }
+    #device-desktop { display:none !important; }
+    #device-mobile { display:block !important; width:100%; margin-top:22px; }
+    #device-mobile .device-label {
+      display:flex !important; align-items:center; justify-content:center; gap:7px;
+      font-size:0; font-weight:600; color:var(--muted); text-transform:uppercase;
+      letter-spacing:1.4px; margin-bottom:11px;
+    }
+    #device-mobile .device-label::before {
+      content:""; width:13px; height:20px; border:1.6px solid var(--muted);
+      border-radius:4px; display:inline-block; flex-shrink:0;
+    }
+    #device-mobile .device-label::after {
+      content:"Visualizacao do app"; font-size:10px; letter-spacing:1.4px;
+    }
+    .frame-mobile {
+      width:100% !important; max-width:420px !important; margin:0 auto !important;
+      height:auto !important; min-height:72vh;
+      border-radius:26px !important;
+      border:1px solid rgba(26,74,42,0.10) !important;
+      box-shadow:0 18px 44px rgba(13,43,21,0.16), 0 2px 8px rgba(13,43,21,0.08) !important;
+    }
+    .notch { display:none !important; }
+    .viewport-m { height:auto !important; padding-top:0 !important; border-radius:25px; overflow:hidden; }
+  }
+</style>
+</head>
+<body>
+
+<a class="embed-back" href="index.html" aria-label="Voltar aos mockups">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Voltar aos mockups
+</a>
+
+<header class="shared-header">
+  <div class="sh-left">
+    <a href="../01-documentacao-tecnica.html"><img class="sh-logo" src="../favicon.png" alt="VinPlast" /></a>
+    <div class="sh-divider"></div>
+    <a href="../01-documentacao-tecnica.html" class="sh-project">VinPlast CRM</a>
+  </div>
+  <nav class="sh-nav">
+    <a href="../01-documentacao-tecnica.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Documentacao</a>
+    <a href="index.html" class="active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Mockups</a>
+    <a href="../design-system.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>Design System</a>
+  </nav>
+  <button class="sh-hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</header>
+<div id="menuOverlay" class="sh-overlay" onclick="toggleMobileMenu()"></div>
+<nav id="mobileMenu" class="sh-mobile-menu">
+  <a href="../01-documentacao-tecnica.html">Documentacao</a>
+  <a href="index.html" class="active">Mockups</a>
+  <a href="../design-system.html">Design System</a>
+</nav>
+
+<div class="mockup-header">
+  <div class="badge">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Tela S1
+  </div>
+  <h1>Erro 404</h1>
+  <div class="sub">Agente de Atendimento + CRM VinPlast</div>
+  <p>Pagina de erro exibida quando o usuario acessa uma URL inexistente. Layout centralizado sem sidebar.</p>
+</div>
+
+<div class="toggle-row">
+  <button id="btn-desktop" class="toggle-btn active" onclick="showDevice('desktop')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Desktop</button>
+  <button id="btn-mobile" class="toggle-btn" onclick="showDevice('mobile')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Mobile</button>
+</div>
+
+<div class="devices">
+
+  <!-- ══════════ DESKTOP ══════════ -->
+  <div class="device visible" id="device-desktop">
+    <div class="device-label">Desktop — 1440px</div>
+    <div class="frame-desktop">
+      <div class="browser-bar">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <div class="browser-url">crm.vinplast.com.br/pagina-inexistente</div>
+      </div>
+      <div class="viewport-d">
+
+        <div class="error-page">
+          <div class="error-container">
+            <!-- FileQuestion icon (Lucide) -->
+            <svg class="error-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <path d="M10 10.3c.2-.4.5-.8.9-1a2.1 2.1 0 0 1 2.6.4c.3.4.5.8.5 1.3 0 1.3-2 2-2 2"/>
+              <path d="M12 17h.01"/>
+            </svg>
+            <h1 class="error-title">Pagina nao encontrada</h1>
+            <p class="error-text">A pagina que voce procura nao existe ou foi movida.</p>
+            <button class="error-btn" type="button">
+              <!-- ArrowLeft icon (Lucide) -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar ao Dashboard
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MOBILE ══════════ -->
+  <div class="device" id="device-mobile">
+    <div class="device-label">Mobile — 375px</div>
+    <div class="frame-mobile">
+      <div class="notch"></div>
+      <div class="viewport-m">
+
+        <div class="error-page">
+          <div class="error-container" style="padding:40px 28px;">
+            <!-- FileQuestion icon (Lucide) — menor -->
+            <svg class="error-icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <path d="M10 10.3c.2-.4.5-.8.9-1a2.1 2.1 0 0 1 2.6.4c.3.4.5.8.5 1.3 0 1.3-2 2-2 2"/>
+              <path d="M12 17h.01"/>
+            </svg>
+            <h1 class="error-title" style="font-size:22px;">Pagina nao encontrada</h1>
+            <p class="error-text" style="font-size:14px;">A pagina que voce procura nao existe ou foi movida.</p>
+            <button class="error-btn" type="button" style="width:100%;">
+              <!-- ArrowLeft icon (Lucide) -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar ao Dashboard
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <img src="../logo-labrego.png" alt="Labrego IA" onerror="this.style.display='none'">
+  <span>Mockup gerado por <strong>Labrego IA</strong></span>
+</div>
+
+<script>
+function showDevice(d) {
+  document.getElementById('device-desktop').classList.toggle('visible', d==='desktop');
+  document.getElementById('device-mobile').classList.toggle('visible', d==='mobile');
+  document.getElementById('btn-desktop').classList.toggle('active', d==='desktop');
+  document.getElementById('btn-mobile').classList.toggle('active', d==='mobile');
+}
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('menuOverlay').classList.toggle('open');
+}
+</script>
+<script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
+</body>
+</html>

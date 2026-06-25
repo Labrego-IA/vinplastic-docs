@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VinPlast CRM · Esqueceu a Senha | Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50:#E8F5E9;--green-100:#C8E6C9;--green-200:#A5D6A7;--green-300:#81C784;--green-400:#66BB6A;--green-500:#4CAF50;--green-600:#43A047;--green-700:#388E3C;--green-800:#2E7D32;--green-900:#1A4A2A;--green-950:#0D2B15;
+    --lime-50:#F1F8E9;--lime-100:#DCEDC8;--lime-200:#C5E1A5;--lime-300:#AED581;--lime-400:#9CCC65;--lime-500:#8BC34A;
+    --slate-50:#F8FAFB;--slate-100:#F0F3F5;--slate-200:#E2E7EB;--slate-300:#CBD3DA;--slate-400:#9BA8B4;--slate-500:#6B7B8A;--slate-600:#546471;--slate-700:#3E4C57;--slate-800:#2B3640;--slate-900:#1A2129;--slate-950:#0F1419;
+    --success:#2E8B57;--success-bg:#E6F2EB;--warning:#E6A817;--warning-bg:#FFF8E1;--danger:#D32F2F;--danger-bg:#FFEBEE;--info:#1976D2;--info-bg:#E3F2FD;
+    --bg:#F8FAFB;--surface:#FFFFFF;--surface-2:#F0F3F5;--text:#1A2129;--text-2:#546471;--muted:#6B7B8A;--border:#E2E7EB;--primary:#1A4A2A;--primary-contrast:#FFFFFF;--accent:#4CAF50;
+    --r-sm:6px;--r:10px;--r-md:14px;--r-lg:20px;
+    --font-head:'Plus Jakarta Sans',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow-sm:0 1px 2px rgba(26,33,41,.04),0 1px 3px rgba(26,33,41,.06);
+    --shadow-md:0 4px 16px rgba(26,33,41,0.07),0 1px 4px rgba(26,33,41,.05);
+    --shadow-lg:0 18px 44px rgba(13,43,21,0.12),0 4px 12px rgba(13,43,21,.06);
+    --ring-focus:0 0 0 3px rgba(76,175,80,.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); background:#E2E7EB; color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:92px 20px 48px; -webkit-font-smoothing:antialiased; }
+
+  /* ── HEADER FIXO COMPARTILHADO ── */
+  .shared-header { position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--green-950); height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; box-shadow:0 2px 12px rgba(0,0,0,0.18); }
+  .sh-left { display:flex; align-items:center; gap:14px; }
+  .sh-left a { text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .sh-logo { width:26px; height:26px; border-radius:4px; }
+  .sh-divider { width:1px; height:22px; background:rgba(255,255,255,0.15); }
+  .sh-project { color:#fff; font-family:var(--font-head); font-size:15px; font-weight:700; text-decoration:none; }
+  .sh-nav { display:flex; align-items:center; gap:8px; }
+  .sh-nav a { color:rgba(255,255,255,0.7); font-size:12px; font-weight:500; text-decoration:none; padding:6px 14px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:6px; transition:all 0.2s; }
+  .sh-nav a:hover { color:#fff; border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); }
+  .sh-nav a.active { color:var(--accent); border-color:rgba(76,175,80,0.45); background:rgba(76,175,80,0.14); }
+  .sh-hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .sh-hamburger svg { stroke:rgba(255,255,255,0.8); }
+  .sh-mobile-menu { display:none; position:fixed; top:52px; left:0; right:0; background:var(--green-950); border-top:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 24px rgba(0,0,0,0.3); z-index:9998; padding:8px 0; }
+  .sh-mobile-menu.open { display:block; }
+  .sh-mobile-menu a { display:flex; align-items:center; gap:10px; padding:12px 24px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px; font-weight:500; }
+  .sh-mobile-menu a.active { color:var(--accent); }
+  .sh-overlay { display:none; position:fixed; inset:0; top:52px; background:rgba(0,0,0,0.4); z-index:9997; }
+  .sh-overlay.open { display:block; }
+  @media (max-width:768px) { .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; } }
+
+  /* ── MOCKUP HEADER + TOGGLE ── */
+  .mockup-header { text-align:center; margin-bottom:26px; max-width:700px; }
+  .mockup-header .badge { display:inline-block; background:var(--primary); color:#fff; font-size:10px; font-weight:600; padding:5px 14px; border-radius:20px; margin-bottom:12px; letter-spacing:0.8px; text-transform:uppercase; }
+  .mockup-header h1 { font-family:var(--font-head); font-size:29px; font-weight:700; color:var(--slate-900); margin-bottom:7px; letter-spacing:-0.025em; line-height:1.1; }
+  .mockup-header p { font-size:14px; color:var(--text-2); line-height:1.6; }
+  .toggle-row { display:flex; gap:6px; justify-content:center; margin:0 auto 36px; background:#fff; padding:4px; border-radius:40px; box-shadow:var(--shadow-sm); border:1px solid var(--border); width:fit-content; }
+  .toggle-btn { padding:10px 22px; border:none; border-radius:36px; background:transparent; font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--text-2); cursor:pointer; transition:all 0.25s; display:flex; align-items:center; gap:6px; }
+  .toggle-btn.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(26,74,42,0.3); }
+  .toggle-btn svg { stroke:currentColor; }
+
+  .devices { display:flex; gap:48px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+  .device { display:none; }
+  .device.visible { display:block; }
+  .device-label { text-align:center; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:14px; }
+
+  /* ── FRAMES ── */
+  .frame-desktop { width:1100px; max-width:95vw; height:680px; background:var(--bg); border-radius:14px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.06); }
+  .browser-bar { height:38px; background:var(--slate-100); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; gap:8px; }
+  .browser-dot { width:10px; height:10px; border-radius:50%; }
+  .browser-dot.red { background:#ff5f57; } .browser-dot.yellow { background:#febc2e; } .browser-dot.green { background:#28c840; }
+  .browser-url { flex:1; margin-left:12px; background:#fff; border-radius:6px; padding:5px 14px; font-size:11.5px; color:var(--muted); border:1px solid var(--border); font-family:var(--font-body); }
+  .viewport-d { height:calc(100% - 38px); overflow:hidden; }
+
+  .frame-mobile { width:375px; height:760px; background:var(--bg); border-radius:44px; overflow:hidden; box-shadow:var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.08); position:relative; border:6px solid #1c1c1e; }
+  .notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:126px; height:28px; background:#1c1c1e; border-radius:0 0 18px 18px; z-index:10; }
+  .viewport-m { height:100%; overflow:auto; padding-top:28px; background:var(--bg); }
+
+  /* ══════════════════════════════════════════════════
+     LOGIN LAYOUT — SPLIT 50/50
+     ══════════════════════════════════════════════════ */
+
+  .login-shell { display:flex; height:100%; width:100%; }
+
+  /* ── PAINEL ESQUERDO (marca + industrial) ── */
+  .login-brand {
+    width:50%; flex-shrink:0;
+    background:var(--green-900);
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:40px;
+  }
+  .login-brand-bg {
+    position:absolute; inset:0;
+    background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800');
+    background-size:cover; background-position:center;
+    filter:saturate(0.3);
+  }
+  .login-brand-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(168deg, rgba(13,43,21,0.92) 0%, rgba(26,74,42,0.88) 40%, rgba(13,43,21,0.94) 100%);
+  }
+  .login-brand-content {
+    position:relative; z-index:2;
+    display:flex; flex-direction:column;
+    align-items:center; text-align:center;
+    gap:20px;
+  }
+  .login-brand-logo {
+    width:180px; height:auto;
+    filter:brightness(0) invert(1);
+    opacity:0.95;
+  }
+  .login-brand-divider {
+    width:48px; height:2px;
+    background:rgba(76,175,80,0.5);
+    border-radius:2px;
+  }
+  .login-brand-tagline {
+    font-family:var(--font-body);
+    font-size:16px; font-weight:400;
+    color:rgba(255,255,255,0.75);
+    letter-spacing:0.02em;
+    line-height:1.5;
+    max-width:280px;
+  }
+  .login-brand-footer {
+    position:absolute; bottom:32px; left:0; right:0;
+    z-index:2; text-align:center;
+  }
+  .login-brand-footer-text {
+    font-family:var(--font-mono);
+    font-size:10px; font-weight:400;
+    color:rgba(255,255,255,0.25);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+  }
+
+  /* ── PAINEL DIREITO (formulario) ── */
+  .login-form-panel {
+    width:50%; flex-shrink:0;
+    background:var(--surface);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:48px 40px;
+    position:relative;
+  }
+  .login-form-wrap {
+    width:100%; max-width:400px;
+  }
+  .login-form-title {
+    font-family:var(--font-head);
+    font-size:30px; font-weight:700;
+    color:var(--text);
+    letter-spacing:-0.025em;
+    line-height:1.1;
+    margin-bottom:8px;
+  }
+  .login-form-subtitle {
+    font-size:14px; color:var(--muted);
+    line-height:1.5; margin-bottom:36px;
+  }
+
+  /* Form fields */
+  .field-group { margin-bottom:22px; }
+  .field-label {
+    display:block;
+    font-size:13px; font-weight:600;
+    color:var(--text);
+    margin-bottom:7px;
+    letter-spacing:-0.01em;
+  }
+  .field-label .req { color:var(--danger); margin-left:2px; }
+  .field-input-wrap {
+    position:relative;
+    display:flex; align-items:center;
+    background:var(--surface);
+    border:1.5px solid var(--border);
+    border-radius:var(--r);
+    padding:0 14px;
+    height:48px;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .field-input-wrap:hover {
+    border-color:var(--slate-300);
+  }
+  .field-input-wrap:focus-within {
+    border-color:var(--accent);
+    box-shadow:var(--ring-focus);
+  }
+  .field-input-wrap svg.field-icon {
+    width:18px; height:18px;
+    stroke:var(--slate-400);
+    flex-shrink:0;
+    margin-right:10px;
+    transition:stroke 0.2s;
+  }
+  .field-input-wrap:focus-within svg.field-icon {
+    stroke:var(--accent);
+  }
+  .field-input-wrap input {
+    flex:1;
+    border:none; outline:none;
+    background:transparent;
+    font-family:var(--font-body);
+    font-size:14px; color:var(--text);
+    height:100%;
+  }
+  .field-input-wrap input::placeholder {
+    color:var(--slate-400);
+    font-weight:400;
+  }
+
+  .btn-entrar {
+    width:100%;
+    height:48px;
+    border:none; border-radius:var(--r);
+    background:var(--primary);
+    color:var(--primary-contrast);
+    font-family:var(--font-body);
+    font-size:15px; font-weight:600;
+    cursor:pointer;
+    display:flex; align-items:center;
+    justify-content:center; gap:8px;
+    transition:background 0.2s, box-shadow 0.2s, transform 0.15s;
+    letter-spacing:0.01em;
+  }
+  .btn-entrar:hover {
+    background:var(--green-800);
+    box-shadow:0 4px 16px rgba(26,74,42,0.25);
+  }
+  .btn-entrar:active {
+    transform:scale(0.985);
+  }
+  .btn-entrar svg {
+    stroke:var(--primary-contrast);
+    width:18px; height:18px;
+  }
+
+  /* ── Link voltar ao login ── */
+  .back-link {
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    margin-top:20px;
+    font-size:14px; font-weight:600;
+    color:var(--primary);
+    text-decoration:none;
+    transition:color 0.15s;
+  }
+  .back-link:hover {
+    color:var(--accent);
+  }
+  .back-link svg {
+    width:16px; height:16px;
+    stroke:currentColor;
+  }
+
+  /* ── Success card ── */
+  .success-card {
+    display:flex; align-items:flex-start; gap:12px;
+    background:var(--success-bg);
+    border:1px solid rgba(46,139,87,0.2);
+    border-radius:var(--r);
+    padding:16px 18px;
+    margin-bottom:24px;
+  }
+  .success-card svg {
+    width:20px; height:20px;
+    stroke:var(--success);
+    flex-shrink:0;
+    margin-top:1px;
+  }
+  .success-card p {
+    font-size:13px;
+    color:var(--success);
+    font-weight:500;
+    line-height:1.5;
+  }
+
+  .login-footer-labrego {
+    position:absolute;
+    bottom:28px; left:0; right:0;
+    text-align:center;
+  }
+  .login-footer-labrego-inner {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; font-weight:500;
+    color:var(--slate-400);
+  }
+  .login-footer-labrego-inner img {
+    height:16px; width:auto; opacity:0.5;
+  }
+
+  /* ══════════════════════════════
+     MOBILE LOGIN LAYOUT
+     ══════════════════════════════ */
+  .m-login-shell { display:flex; flex-direction:column; min-height:100%; background:var(--surface); }
+
+  .m-login-banner {
+    height:140px; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .m-login-banner-bg {
+    position:absolute; inset:0;
+    background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800');
+    background-size:cover; background-position:center 40%;
+    filter:saturate(0.3);
+  }
+  .m-login-banner-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(13,43,21,0.90) 0%, rgba(26,74,42,0.85) 100%);
+  }
+  .m-login-banner-content {
+    position:relative; z-index:2;
+    display:flex; flex-direction:column;
+    align-items:center; gap:8px;
+  }
+  .m-login-banner-logo {
+    width:140px; height:auto;
+    filter:brightness(0) invert(1);
+    opacity:0.95;
+  }
+  .m-login-banner-tagline {
+    font-family:var(--font-body);
+    font-size:12px; color:rgba(255,255,255,0.7);
+    letter-spacing:0.02em;
+  }
+
+  .m-login-form-area {
+    flex:1; padding:32px 24px 24px;
+    display:flex; flex-direction:column;
+  }
+  .m-login-form-area .login-form-title { font-size:24px; margin-bottom:6px; }
+  .m-login-form-area .login-form-subtitle { font-size:13px; margin-bottom:28px; }
+  .m-login-form-area .field-group { margin-bottom:18px; }
+  .m-login-form-area .field-input-wrap { height:46px; }
+  .m-login-form-area .btn-entrar { height:46px; font-size:14px; }
+  .m-login-form-area .back-link { margin-top:18px; font-size:13px; }
+
+  .m-login-footer {
+    padding:18px 24px 22px;
+    text-align:center;
+  }
+  .m-login-footer-inner {
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:10px; font-weight:500; color:var(--slate-400);
+  }
+  .m-login-footer-inner img {
+    height:14px; width:auto; opacity:0.5;
+  }
+
+  /* ── FOOTER GERAL DA PAGINA ── */
+  .page-footer { margin-top:40px; text-align:center; font-size:12px; color:var(--muted); line-height:1.7; }
+  .page-footer strong { color:var(--text-2); }
+  .page-footer .ft-logo { height:18px; width:auto; opacity:0.4; display:inline-block; vertical-align:middle; margin-right:6px; }
+
+  /* ── EMBED STYLE ── */
+  html.embedded .shared-header, html.embedded .sh-mobile-menu, html.embedded .sh-overlay { display:none !important; }
+  html.embedded body { padding-top:0 !important; }
+  .embed-back { display:none; }
+  html.embedded .embed-back {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; position:sticky; top:0; z-index:9999;
+    background:var(--green-950); color:#fff; text-decoration:none;
+    font-family:var(--font-body); font-size:13px; font-weight:600;
+    padding:13px 18px; box-shadow:0 2px 10px rgba(0,0,0,0.16);
+    border-radius:0 0 12px 12px;
+  }
+  html.embedded .embed-back svg { stroke:var(--accent); }
+  html.embedded .embed-back:hover { background:#081a0e; }
+
+  /* ── RESPONSIVO (pagina real no mobile) ── */
+  @media (max-width:480px) {
+    body { padding:84px 0 28px !important; background:#E2E7EB !important; }
+    html.embedded body { padding:14px 0 28px !important; }
+    .mockup-header { padding:0 18px; margin-bottom:0; max-width:100%; }
+    .mockup-header .badge { font-size:9px; padding:4px 11px; margin-bottom:9px; }
+    .mockup-header h1 { font-size:19px; margin-bottom:5px; }
+    .mockup-header p { font-size:12.5px; line-height:1.55; }
+    .toggle-row { display:none !important; }
+    .devices { gap:0 !important; width:100%; padding:0 14px; box-sizing:border-box; }
+    #device-desktop { display:none !important; }
+    #device-mobile { display:block !important; width:100%; margin-top:22px; }
+    #device-mobile .device-label {
+      display:flex !important; align-items:center; justify-content:center; gap:7px;
+      font-size:0; font-weight:600; color:var(--muted); text-transform:uppercase;
+      letter-spacing:1.4px; margin-bottom:11px;
+    }
+    #device-mobile .device-label::before {
+      content:""; width:13px; height:20px; border:1.6px solid var(--muted);
+      border-radius:4px; display:inline-block; flex-shrink:0;
+    }
+    #device-mobile .device-label::after {
+      content:"Visualizacao do app"; font-size:10px; letter-spacing:1.4px;
+    }
+    .frame-mobile {
+      width:100% !important; max-width:420px !important; margin:0 auto !important;
+      height:auto !important; min-height:72vh;
+      border-radius:26px !important;
+      border:1px solid rgba(26,74,42,0.10) !important;
+      box-shadow:0 18px 44px rgba(13,43,21,0.16), 0 2px 8px rgba(13,43,21,0.08) !important;
+    }
+    .notch { display:none !important; }
+    .viewport-m { height:auto !important; padding-top:0 !important; border-radius:25px; overflow:hidden; }
+  }
+</style>
+</head>
+<body>
+
+<a class="embed-back" href="index.html" aria-label="Voltar aos mockups">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Voltar aos mockups
+</a>
+
+<header class="shared-header">
+  <div class="sh-left">
+    <a href="../01-documentacao-tecnica.html"><img class="sh-logo" src="../favicon.png" alt="VinPlast" /></a>
+    <div class="sh-divider"></div>
+    <a href="../01-documentacao-tecnica.html" class="sh-project">VinPlast CRM</a>
+  </div>
+  <nav class="sh-nav">
+    <a href="../01-documentacao-tecnica.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Documentacao</a>
+    <a href="index.html" class="active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Mockups</a>
+    <a href="../design-system.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>Design System</a>
+  </nav>
+  <button class="sh-hamburger" onclick="document.getElementById('sh-menu').classList.toggle('open');document.getElementById('sh-overlay').classList.toggle('open');" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</header>
+<div id="sh-overlay" class="sh-overlay" onclick="this.classList.remove('open');document.getElementById('sh-menu').classList.remove('open');"></div>
+<nav id="sh-menu" class="sh-mobile-menu">
+  <a href="../01-documentacao-tecnica.html">Documentacao</a>
+  <a href="index.html" class="active">Mockups</a>
+  <a href="../design-system.html">Design System</a>
+</nav>
+
+<div class="mockup-header">
+  <span class="badge">Mockup 09 — Esqueceu a Senha</span>
+  <h1>Recuperacao de senha</h1>
+  <p>Formulario para solicitar envio de link de redefinicao de senha por e-mail.</p>
+</div>
+
+<div class="toggle-row">
+  <button class="toggle-btn active" onclick="showView('desktop')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Desktop</button>
+  <button class="toggle-btn" onclick="showView('mobile')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Mobile</button>
+  <button class="toggle-btn" onclick="showView('both')">Ambos</button>
+</div>
+
+<div class="devices">
+
+  <!-- ══════════ DESKTOP ══════════ -->
+  <div class="device visible" id="device-desktop">
+    <div class="device-label">Desktop — 1100px</div>
+    <div class="frame-desktop">
+      <div class="browser-bar">
+        <span class="browser-dot red"></span>
+        <span class="browser-dot yellow"></span>
+        <span class="browser-dot green"></span>
+        <div class="browser-url">crm.vinplast.com.br/esqueceu-senha</div>
+      </div>
+      <div class="viewport-d">
+
+        <div class="login-shell">
+          <!-- PAINEL ESQUERDO: marca industrial -->
+          <div class="login-brand">
+            <div class="login-brand-bg"></div>
+            <div class="login-brand-overlay"></div>
+            <div class="login-brand-content">
+              <img class="login-brand-logo" src="../logo-vinplast.webp" alt="VinPlast" />
+              <div class="login-brand-divider"></div>
+              <p class="login-brand-tagline">Distribuidora de embalagens plasticas</p>
+            </div>
+            <div class="login-brand-footer">
+              <span class="login-brand-footer-text">CRM + Agente de Atendimento</span>
+            </div>
+          </div>
+
+          <!-- PAINEL DIREITO: formulario de recuperacao -->
+          <div class="login-form-panel">
+            <div class="login-form-wrap">
+              <h1 class="login-form-title">Esqueceu sua senha?</h1>
+              <p class="login-form-subtitle">Informe o e-mail da sua conta e enviaremos um link para redefinir sua senha.</p>
+
+              <!-- Success state (visivel apos envio) -->
+              <div class="success-card" id="success-card-d" style="display:none;">
+                <!-- CheckCircle icon (Lucide) -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <p>E-mail enviado com sucesso! Verifique sua caixa de entrada e spam.</p>
+              </div>
+
+              <div id="form-fields-d">
+                <div class="field-group">
+                  <label class="field-label">E-mail<span class="req">*</span></label>
+                  <div class="field-input-wrap">
+                    <!-- Mail icon (Lucide) -->
+                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <input type="email" placeholder="seu@email.com.br" />
+                  </div>
+                </div>
+
+                <button class="btn-entrar" type="button" onclick="showSuccess('d')">
+                  <!-- Send icon (Lucide) -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+                  Enviar link de recuperacao
+                </button>
+              </div>
+
+              <a href="01-login.html" class="back-link">
+                <!-- ArrowLeft icon (Lucide) -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                Voltar ao login
+              </a>
+            </div>
+
+            <div class="login-footer-labrego">
+              <span class="login-footer-labrego-inner">
+                <img src="../logo-labrego.png" alt="Labrego IA" />
+                Desenvolvido por Labrego IA
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MOBILE ══════════ -->
+  <div class="device" id="device-mobile">
+    <div class="device-label">Mobile — 375px</div>
+    <div class="frame-mobile">
+      <div class="notch"></div>
+      <div class="viewport-m">
+
+        <div class="m-login-shell">
+          <!-- Banner compacto com marca -->
+          <div class="m-login-banner">
+            <div class="m-login-banner-bg"></div>
+            <div class="m-login-banner-overlay"></div>
+            <div class="m-login-banner-content">
+              <img class="m-login-banner-logo" src="../logo-vinplast.webp" alt="VinPlast" />
+              <p class="m-login-banner-tagline">Distribuidora de embalagens plasticas</p>
+            </div>
+          </div>
+
+          <!-- Formulario -->
+          <div class="m-login-form-area">
+            <h1 class="login-form-title">Esqueceu sua senha?</h1>
+            <p class="login-form-subtitle">Informe o e-mail da sua conta e enviaremos um link para redefinir sua senha.</p>
+
+            <!-- Success state (visivel apos envio) -->
+            <div class="success-card" id="success-card-m" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              <p>E-mail enviado com sucesso! Verifique sua caixa de entrada e spam.</p>
+            </div>
+
+            <div id="form-fields-m">
+              <div class="field-group">
+                <label class="field-label">E-mail<span class="req">*</span></label>
+                <div class="field-input-wrap">
+                  <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <input type="email" placeholder="seu@email.com.br" />
+                </div>
+              </div>
+
+              <button class="btn-entrar" type="button" onclick="showSuccess('m')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+                Enviar link de recuperacao
+              </button>
+            </div>
+
+            <a href="01-login.html" class="back-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+              Voltar ao login
+            </a>
+          </div>
+
+          <div class="m-login-footer">
+            <span class="m-login-footer-inner">
+              <img src="../logo-labrego.png" alt="Labrego IA" />
+              Desenvolvido por Labrego IA
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <img class="ft-logo" src="../logo-labrego.png" alt="Labrego IA" />
+  <strong>Labrego IA</strong> — Mockup de alta fidelidade<br>
+  Agente de Atendimento + CRM VinPlast
+</div>
+
+<script>
+function showView(view) {
+  document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('active'); });
+  event.target.closest('.toggle-btn').classList.add('active');
+  var d = document.getElementById('device-desktop');
+  var m = document.getElementById('device-mobile');
+  d.classList.remove('visible');
+  m.classList.remove('visible');
+  if (view === 'desktop') d.classList.add('visible');
+  else if (view === 'mobile') m.classList.add('visible');
+  else { d.classList.add('visible'); m.classList.add('visible'); }
+}
+
+function showSuccess(suffix) {
+  var card = document.getElementById('success-card-' + suffix);
+  card.style.display = 'flex';
+}
+</script>
+<script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
+</body>
+</html>
