@@ -31,6 +31,7 @@ export default {
     { id: 'spec', label: 'Referência Técnica', num: '04', desc: 'Telas, campos, regras de negócio e integrações — referência interna para o time de desenvolvimento' },
     { id: 'crono', label: 'Cronograma', num: '05', desc: '8 semanas de desenvolvimento + 21 dias de Hyper Care — go-live previsto para 12/08/2026' },
     { id: 'design', label: 'Design System', num: '06', desc: 'Identidade visual, componentes e padrões visuais do sistema VinPlast' },
+    { id: 'mockups', label: 'Mockups', num: '07', desc: '28 telas navegáveis de alta fidelidade — do login ao painel de configurações' },
   ],
 
   // ── Tab 1: Hoje (as-is) ──────────────────────────────────
@@ -584,9 +585,10 @@ export default {
     ],
   },
 
-  // ── Embeds (iframes para fluxo e design system) ──────────
+  // ── Embeds (iframes para fluxo, design system e mockups) ─
   fluxograma: { htmlPath: '/02-fluxograma.html' },
   designSystem: { htmlPath: '/design-system.html' },
+  mockups: { htmlPath: '/mockups/index.html' },
 
   // ── Tab 6: Design System ──────────────────────────────────
   design: {
