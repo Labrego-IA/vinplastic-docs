@@ -296,7 +296,9 @@
   }
   @media(max-width:420px){
     .scale{grid-template-columns:repeat(3,1fr);}
+    .scale .sw{font-size:10px;height:56px;}
     .kanban-prev{grid-template-columns:1fr;}
+    table{min-width:auto;}
   }
 </style>
 <style id="embed-style">
@@ -305,6 +307,7 @@
   html.embedded .index,
   html.embedded footer{display:none !important;}
   html.embedded .ds-main{padding-top:8px;}
+  html.embedded body{overflow-x:hidden;}
 </style>
 </head>
 <body>

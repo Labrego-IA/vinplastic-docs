@@ -6,6 +6,7 @@ import TabSpec from './components/TabSpec'
 import TabCrono from './components/TabCrono'
 import TabDesign from './components/TabDesign'
 import TabFluxo from './components/TabFluxo'
+import TabMockups from './components/TabMockups'
 
 // ── Icones SVG inline ───────────────────────────────────────
 
@@ -77,12 +78,22 @@ const IconFlow = () => (
 )
 
 // Mapa de icones por ID da tab
+const IconGrid = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+)
+
 const tabIcons = {
   hoje: <IconAlertCircle />,
   sistema: <IconLayout />,
   fluxo: <IconFlow />,
   spec: <IconFileText />,
   crono: <IconCalendar />,
+  mockups: <IconGrid />,
   design: <IconPalette />,
 }
 
@@ -90,7 +101,7 @@ const tabIcons = {
 const tabColors = ['#1A4A2A', '#2E7D32', '#1B5E20', '#1A4A2A', '#2E7D32', '#1B5E20']
 
 // Abas renderizadas via iframe
-const embedTabs = ['fluxo', 'design']
+const embedTabs = ['fluxo', 'mockups', 'design']
 
 // ── Brand tokens ────────────────────────────────────────────
 function hexToRgbTriplet(hex) {
@@ -183,6 +194,7 @@ function App() {
     fluxo: config.fluxograma ? <TabFluxo /> : null,
     spec: config.spec ? <TabSpec /> : null,
     crono: config.crono ? <TabCrono /> : null,
+    mockups: config.mockups ? <TabMockups /> : null,
     design: config.designSystem ? <TabDesign /> : null,
   }
 

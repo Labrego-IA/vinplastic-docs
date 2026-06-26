@@ -30,7 +30,8 @@ export default {
     { id: 'fluxo', label: 'Fluxograma', num: '03', desc: 'Fluxo visual do processo — do lead no WhatsApp até o fechamento da venda' },
     { id: 'spec', label: 'Referência Técnica', num: '04', desc: 'Telas, campos, regras de negócio e integrações — referência interna para o time de desenvolvimento' },
     { id: 'crono', label: 'Cronograma', num: '05', desc: '8 semanas de desenvolvimento + 21 dias de Hyper Care — go-live previsto para 12/08/2026' },
-    { id: 'design', label: 'Design System', num: '06', desc: 'Identidade visual, componentes e padrões visuais do sistema VinPlast' },
+    { id: 'mockups', label: 'Mockups', num: '06', desc: 'Protótipos de alta fidelidade de todas as telas do sistema — desktop e mobile' },
+    { id: 'design', label: 'Design System', num: '07', desc: 'Identidade visual, componentes e padrões visuais do sistema VinPlast' },
   ],
 
   // ── Tab 1: Hoje (as-is) ──────────────────────────────────
@@ -586,6 +587,7 @@ export default {
 
   // ── Embeds (iframes para fluxo e design system) ──────────
   fluxograma: { htmlPath: '/02-fluxograma.html' },
+  mockups: { htmlPath: '/mockups/index.html' },
   designSystem: { htmlPath: '/design-system.html' },
 
   // ── Tab 6: Design System ──────────────────────────────────
