@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VinPlast CRM · Templates de Mensagens | Mockup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,15 +80,13 @@
   /* ─── SIDEBAR ─── */
   .side { width:256px; background:var(--primary); color:#fff; padding:0; flex-shrink:0; display:flex; flex-direction:column; overflow-y:auto; }
   .side-brand { padding:20px 20px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.08); }
-  .brand-sub { display:none !important; }
-  .brand-name { font-size:10px; font-weight:600; color:rgba(255,255,255,0.4); letter-spacing:1.6px; text-transform:uppercase; }
   .side-brand img { height:32px; width:auto; border-radius:4px; }
   .side-brand .brand-text { display:flex; flex-direction:column; }
   .side-brand .brand-name { font-family:var(--font-head); font-size:15px; font-weight:800; color:#fff; letter-spacing:-0.01em; }
   .side-brand .brand-sub { font-size:9.5px; font-weight:500; color:rgba(255,255,255,0.45); letter-spacing:0.8px; text-transform:uppercase; margin-top:1px; }
   .nav-section { padding:18px 0 6px; }
   .nav-label { font-size:9.5px; font-weight:600; color:rgba(255,255,255,0.3); letter-spacing:1.2px; text-transform:uppercase; padding:0 20px 8px; }
-  .side a { display:flex; align-items:center; gap:12px; padding:9px 12px; border-radius:6px; color:rgba(255,255,255,0.65); font-size:13.5px; font-weight:500; text-decoration:none; transition:all 0.18s; border-left:3px solid transparent; margin:1px 0; }
+  .side a { display:flex; align-items:center; gap:12px; padding:10px 20px; color:rgba(255,255,255,0.65); font-size:13.5px; font-weight:500; text-decoration:none; transition:all 0.18s; border-left:3px solid transparent; margin:1px 0; }
   .side a:hover { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.9); }
   .side a.active { background:rgba(76,175,80,0.12); color:#fff; border-left-color:var(--green-400); font-weight:600; }
   .side a.active svg { stroke:#fff; }
@@ -238,7 +236,7 @@
   html.embedded .embed-back:hover { background:#081a0e; }
 
   /* ── RESPONSIVO ── */
-  @media (max-width:480px) {
+  @media (max-width:768px) {
     body { padding:84px 0 28px !important; background:#E2E7EB !important; }
     html.embedded body { padding:14px 0 28px !important; }
     .mockup-header { padding:0 18px; margin-bottom:0; max-width:100%; }
@@ -283,7 +281,7 @@
 <!-- SHARED HEADER -->
 <header class="shared-header">
   <div class="sh-left">
-    <a href="../01-documentacao-tecnica.html"><img class="sh-logo" src="../favicon.png" alt="VinPlast" onerror="this.style.display='none'" /></a>
+    <a href="../01-documentacao-tecnica.html"><img class="sh-logo" src="../logo-vinplast.webp" alt="VinPlast" onerror="this.style.display='none'" /></a>
     <div class="sh-divider"></div>
     <a href="../01-documentacao-tecnica.html" class="sh-project">VinPlast CRM</a>
   </div>
@@ -301,7 +299,11 @@
       Design System
     </a>
   </nav>
-<div id="sh-overlay" class="sh-overlay" onclick="document.getElementById('sh-menu').classList.toggle('open');document.getElementById('sh-overlay').classList.toggle('open');"></div>
+  <button class="sh-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</header>
+<div id="sh-overlay" class="sh-overlay" onclick="toggleMobileMenu()"></div>
 <nav id="sh-menu" class="sh-mobile-menu">
   <a href="../01-documentacao-tecnica.html">Documentacao</a>
   <a href="index.html" class="active">Mockups</a>
@@ -883,7 +885,10 @@ function showDevice(d) {
   document.getElementById('btn-desktop').classList.toggle('active', d==='desktop');
   document.getElementById('btn-mobile').classList.toggle('active', d==='mobile');
 }
-
+function toggleMobileMenu() {
+  document.getElementById('sh-menu').classList.toggle('open');
+  document.getElementById('sh-overlay').classList.toggle('open');
+}
 </script>
 <script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
 </body>

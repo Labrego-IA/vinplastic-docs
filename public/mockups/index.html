@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mockups Navegaveis — CRM VinPlast</title>
-<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -198,10 +198,6 @@ body {
   .cover .meta-row { gap:20px; }
   .wrap { padding:0 16px; }
 }
-
-/* ── Modo embed (iframe) — oculta topbar proprio ── */
-html.embedded .topbar { display:none !important; }
-html.embedded body { padding-top: 0 !important; }
 </style>
 </head>
 <body>
@@ -841,14 +837,6 @@ html.embedded body { padding-top: 0 !important; }
   <img src="../logo-labrego.png" alt="Labrego IA">
   <span>Labrego IA — Mockups gerados por Blueprint (Atlas)</span>
 </div>
-
-
-<script>
-// Detectar iframe e ocultar topbar propria (evitar duplo header no app React)
-if (window.location !== window.parent.location || new URLSearchParams(window.location.search).has('embed')) {
-  document.documentElement.classList.add('embedded');
-}
-</script>
 
 </body>
 </html>
