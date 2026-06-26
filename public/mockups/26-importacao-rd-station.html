@@ -82,13 +82,15 @@
   /* ─── SIDEBAR ─── */
   .side { width:256px; background:var(--primary); color:#fff; padding:0; flex-shrink:0; display:flex; flex-direction:column; overflow-y:auto; }
   .side-brand { padding:20px 20px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .brand-sub { display:none !important; }
+  .brand-name { font-size:10px; font-weight:600; color:rgba(255,255,255,0.4); letter-spacing:1.6px; text-transform:uppercase; }
   .side-brand img { height:32px; width:auto; border-radius:4px; }
   .side-brand .brand-text { display:flex; flex-direction:column; }
   .side-brand .brand-name { font-family:var(--font-head); font-size:15px; font-weight:800; color:#fff; letter-spacing:-0.01em; }
   .side-brand .brand-sub { font-size:9.5px; font-weight:500; color:rgba(255,255,255,0.45); letter-spacing:0.8px; text-transform:uppercase; margin-top:1px; }
   .nav-section { padding:18px 0 6px; }
   .nav-label { font-size:9.5px; font-weight:600; color:rgba(255,255,255,0.3); letter-spacing:1.2px; text-transform:uppercase; padding:0 20px 8px; }
-  .side a { display:flex; align-items:center; gap:12px; padding:10px 20px; color:rgba(255,255,255,0.65); font-size:13.5px; font-weight:500; text-decoration:none; transition:all 0.18s; border-left:3px solid transparent; margin:1px 0; }
+  .side a { display:flex; align-items:center; gap:12px; padding:9px 12px; border-radius:6px; color:rgba(255,255,255,0.65); font-size:13.5px; font-weight:500; text-decoration:none; transition:all 0.18s; border-left:3px solid transparent; margin:1px 0; }
   .side a:hover { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.9); }
   .side a.active { background:rgba(76,175,80,0.12); color:#fff; border-left-color:var(--green-400); font-weight:600; }
   .side a.active svg { stroke:#fff; }

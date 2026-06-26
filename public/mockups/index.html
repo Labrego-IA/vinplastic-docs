@@ -198,6 +198,10 @@ body {
   .cover .meta-row { gap:20px; }
   .wrap { padding:0 16px; }
 }
+
+/* ── Modo embed (iframe) — oculta topbar proprio ── */
+html.embedded .topbar { display:none !important; }
+html.embedded body { padding-top: 0 !important; }
 </style>
 </head>
 <body>
@@ -837,6 +841,14 @@ body {
   <img src="../logo-labrego.png" alt="Labrego IA">
   <span>Labrego IA — Mockups gerados por Blueprint (Atlas)</span>
 </div>
+
+
+<script>
+// Detectar iframe e ocultar topbar propria (evitar duplo header no app React)
+if (window.location !== window.parent.location || new URLSearchParams(window.location.search).has('embed')) {
+  document.documentElement.classList.add('embedded');
+}
+</script>
 
 </body>
 </html>
