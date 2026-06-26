@@ -31,7 +31,6 @@ export default {
     { id: 'spec', label: 'Referência Técnica', num: '04', desc: 'Telas, campos, regras de negócio e integrações — referência interna para o time de desenvolvimento' },
     { id: 'crono', label: 'Cronograma', num: '05', desc: '8 semanas de desenvolvimento + 21 dias de Hyper Care — go-live previsto para 12/08/2026' },
     { id: 'design', label: 'Design System', num: '06', desc: 'Identidade visual, componentes e padrões visuais do sistema VinPlast' },
-    { id: 'mockups', label: 'Mockups', num: '07', desc: '28 telas navegáveis de alta fidelidade — do login ao painel de configurações' },
   ],
 
   // ── Tab 1: Hoje (as-is) ──────────────────────────────────
@@ -513,7 +512,7 @@ export default {
 
   // ── Tab 5: Cronograma ─────────────────────────────────────
   crono: {
-    intro: 'O projeto tem duração de 8 semanas a partir da assinatura e confirmação do pagamento do sinal (17/06/2026), seguido de 21 dias de Hyper Care. Go-live previsto para 12/08/2026.',
+    intro: 'O projeto tem duração de 8 semanas a partir da assinatura (17/06/2026), seguido de 21 dias de Hyper Care. Go-live previsto para 12/08/2026.',
     fases: [
       {
         num: '01',
@@ -571,7 +570,7 @@ export default {
           'Até 8 ajustes técnicos ou 10 horas de trabalho (o que ocorrer primeiro)',
           'Correção ilimitada de bugs',
           'Suporte via WhatsApp e App com SLA de 4h (P1)',
-          'Transição para Manutenção Continuada (tier PRO — R$ 999/mês)',
+          'Transição para Manutenção Continuada',
         ],
         entregavel: 'Sistema estabilizado + transição para manutenção mensal',
       },
@@ -585,10 +584,9 @@ export default {
     ],
   },
 
-  // ── Embeds (iframes para fluxo, design system e mockups) ─
+  // ── Embeds (iframes para fluxo e design system) ──────────
   fluxograma: { htmlPath: '/02-fluxograma.html' },
   designSystem: { htmlPath: '/design-system.html' },
-  mockups: { htmlPath: '/mockups/index.html' },
 
   // ── Tab 6: Design System ──────────────────────────────────
   design: {

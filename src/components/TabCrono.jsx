@@ -119,29 +119,6 @@ export default function TabCrono() {
         </>
       )}
 
-      {/* ── Marcos do projeto ── */}
-      {dados.marcos && dados.marcos.length > 0 && (
-        <>
-          <h3 className="sub-title" style={{ marginTop: 40 }}>Marcos do projeto</h3>
-
-          <div className="timeline-done">
-            {dados.marcos.map((marco, i) => (
-              <div className="timeline-item" key={i}>
-                <div className="timeline-icon">
-                  <MarcoIcon color="var(--brand-principal)" />
-                </div>
-                <div className="timeline-body">
-                  <span className="timeline-date" style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                    <CalendarIcon />
-                    {marco.data}
-                  </span>
-                  <p style={{ fontWeight: 500 }}>{marco.titulo}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
     </section>
   )
 }

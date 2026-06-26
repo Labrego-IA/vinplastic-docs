@@ -265,7 +265,21 @@
     }
 
     .flow-body .mermaid {
-      min-width: 560px;
+      min-width: 800px;
+    }
+
+    .flow-body .mermaid svg {
+      font-size: 14px !important;
+    }
+
+    .flow-body .mermaid .nodeLabel {
+      font-size: 13px !important;
+      white-space: normal !important;
+      max-width: 200px;
+    }
+
+    .flow-body .mermaid .edgeLabel {
+      font-size: 12px !important;
     }
 
     /* ─── LEGENDA ─── */
@@ -382,6 +396,20 @@
   </style>
 </head>
 <body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img src="/logo-vinplast.webp" alt="VinPlast" class="header-logo" />
+      <div class="header-divider"></div>
+      <span class="header-title">Agente de Atendimento + CRM</span>
+      <nav class="header-nav">
+        <a href="/index.html">Documentação</a>
+        <a href="/02-fluxograma.html" class="active">Fluxograma</a>
+        <a href="/design-system.html">Design System</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
@@ -803,9 +831,9 @@ flowchart LR
       flowchart: {
         htmlLabels: true,
         curve: 'basis',
-        rankSpacing: 60,
-        nodeSpacing: 40,
-        padding: 20
+        rankSpacing: 80,
+        nodeSpacing: 60,
+        padding: 25
       }
     });
   </script>

@@ -960,6 +960,16 @@ function toggleMenu() {
   menu.classList.toggle('open');
   overlay.classList.toggle('open');
 }
+
+// Auto-switch to mobile on small screens
+if (window.innerWidth <= 768) {
+  document.querySelectorAll('.device').forEach(function(d) { d.classList.remove('visible'); });
+  document.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+  var mob = document.getElementById('device-mobile') || document.getElementById('view-mobile');
+  if (mob) mob.classList.add('visible');
+  var btns = document.querySelectorAll('.toggle-btn');
+  if (btns[1]) btns[1].classList.add('active');
+}
 </script>
 <script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
 </body>

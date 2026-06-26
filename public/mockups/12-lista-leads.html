@@ -917,6 +917,16 @@ function toggleMobileMenu() {
 if (window.location !== window.parent.location || new URLSearchParams(window.location.search).has('embed')) {
   document.documentElement.classList.add('embedded');
 }
+
+// Auto-switch to mobile on small screens
+if (window.innerWidth <= 768) {
+  document.querySelectorAll('.device').forEach(function(d) { d.classList.remove('visible'); });
+  document.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+  var mob = document.getElementById('device-mobile') || document.getElementById('view-mobile');
+  if (mob) mob.classList.add('visible');
+  var btns = document.querySelectorAll('.toggle-btn');
+  if (btns[1]) btns[1].classList.add('active');
+}
 </script>
 </body>
 </html>
