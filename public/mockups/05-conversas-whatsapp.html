@@ -290,16 +290,6 @@ html.embedded .embed-back:hover{background:#091a0e;}
   <a href="index.html" class="active">Mockups</a>
   <a href="../design-system.html">Design System</a>
 </nav>
-  <button class="sh-hamburger" onclick="toggleMenu()">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-  </button>
-</header>
-<div class="sh-mobile-menu" id="shMenu">
-  <a href="../01-documentacao-tecnica.html">Documentacao</a>
-  <a href="index.html" class="active">Mockups</a>
-  <a href="../design-system.html">Design System</a>
-</div>
-<div class="sh-overlay" id="shOverlay" onclick="toggleMenu()"></div>
 
 <!-- ══════════ EMBED BACK ══════════ -->
 <a class="embed-back" href="index.html?embed=1">
@@ -964,12 +954,7 @@ function showView(view) {
   else { d.classList.add('visible'); m.classList.add('visible'); }
 }
 
-function toggleMenu() {
-  var menu = document.getElementById('shMenu');
-  var overlay = document.getElementById('shOverlay');
-  menu.classList.toggle('open');
-  overlay.classList.toggle('open');
-}
+
 </script>
 <script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
 </body>
