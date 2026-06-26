@@ -43,7 +43,8 @@
   .sh-mobile-menu a.active{color:var(--green-400);}
   .sh-overlay{display:none;position:fixed;inset:0;top:52px;background:rgba(0,0,0,0.4);z-index:9997;}
   .sh-overlay.open{display:block;}
-  @media (max-width:768px){.sh-nav{display:none !important;}.sh-hamburger{display:block !important;}.sh-divider{display:none;}}
+  @media (max-width:768px){
+    .mockup-header,.toggle-row,.device-label,.embed-back{display:none !important;}.sh-nav{display:none !important;}.sh-hamburger{display:block !important;}.sh-divider{display:none;}}
 
   /* ── EMBED ── */
   .embed-back{display:none;}
@@ -242,6 +243,7 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width:768px){
+    .mockup-header,.toggle-row,.device-label,.embed-back{display:none !important;}
     body{padding:84px 0 28px !important;background:#E2E7EB !important;}
     html.embedded body{padding:14px 0 28px !important;}
     .mockup-header{padding:0 16px;}

@@ -1974,43 +1974,44 @@ body {
   .header-logo { height: 20px; }
 
   .hamburger-btn {
-    display: flex;
+    display: none;
   }
 
   .mobile-only {
-    display: flex;
+    display: none;
   }
 
   .header-nav {
-    display: none;
+    display: flex;
     width: 100%;
-    flex-direction: column;
-    background: var(--brand-escuro);
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 0;
+    padding: 0 8px;
+    gap: 0;
   }
 
-  .header-nav.open {
-    display: flex;
-  }
+  .header-nav::-webkit-scrollbar { display: none; }
 
   .header-tab {
-    padding: 14px 20px;
-    font-size: 14px;
+    padding: 10px 12px;
+    font-size: 12px;
     flex-shrink: 0;
-    height: auto;
+    height: 42px;
     white-space: nowrap;
-    justify-content: flex-start;
-    gap: 10px;
+    justify-content: center;
+    gap: 5px;
     border-radius: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 2px solid transparent;
   }
 
-  .header-tab svg { display: inline-block; }
+  .header-tab svg { display: none; }
 
   .header-tab.active {
-    background: rgba(216, 160, 88, 0.14);
-    border-bottom-color: transparent;
+    color: var(--brand-vibrante);
+    border-bottom-color: var(--brand-vibrante);
   }
 
   .menu-overlay {
