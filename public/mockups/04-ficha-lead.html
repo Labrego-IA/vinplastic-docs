@@ -366,8 +366,9 @@
     .notch { display:none !important; }
     .viewport-m { height:auto !important; padding-top:0 !important; border-radius:25px; overflow:hidden; }
   }
-/* EMBEDDED-MOBILE: iframe no mobile — manter frame, fixar altura, esconder wrappers */
-@media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E2E7EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
+
+/* === EMBEDDED-MOBILE === */
+@media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E4E8EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
 </style>
 </head>
 <body>
@@ -1137,11 +1138,11 @@
 
           <!-- Mobile Bottom Nav -->
           <div class="m-bottom-nav">
-            <a href="#" class="m-bottom-link">
+            <a href="02-dashboard.html" class="m-bottom-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
               Dashboard
             </a>
-            <a href="#" class="m-bottom-link">
+            <a href="03-funil-kanban.html" class="m-bottom-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
               Funil
             </a>
@@ -1149,11 +1150,11 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               Leads
             </a>
-            <a href="#" class="m-bottom-link">
+            <a href="05-conversas-whatsapp.html" class="m-bottom-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
               Conversas
             </a>
-            <a href="#" class="m-bottom-link">
+            <a href="06-follow-up.html" class="m-bottom-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               Follow-ups
             </a>

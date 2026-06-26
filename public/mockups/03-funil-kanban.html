@@ -250,12 +250,19 @@
     .mockup-header h1{font-size:22px;}
     .toggle-row{margin-bottom:20px;}
     .device-label{display:none;}
-    .frame-mobile{border-radius:0;border:none;width:100%;height:auto;min-height:100vh;box-shadow:none;}
+    .frame-mobile {
+       width:100% !important; max-width:420px !important; margin:0 auto !important;
+       height:auto !important; min-height:72vh;
+       border-radius:26px !important;
+       border:1px solid rgba(26,74,42,0.10) !important;
+       box-shadow:0 18px 44px rgba(13,43,21,0.16), 0 2px 8px rgba(13,43,21,0.08) !important;
+     }
     .notch{display:none;}
     .viewport-m{padding-top:0;}
   }
-/* EMBEDDED-MOBILE: iframe no mobile — manter frame, fixar altura, esconder wrappers */
-@media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E2E7EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
+
+/* === EMBEDDED-MOBILE === */
+@media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E4E8EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
 </style>
 </head>
 <body>
@@ -309,11 +316,11 @@
 
 <!-- TOGGLE -->
 <div class="toggle-row">
-  <button class="toggle-btn active" onclick="switchView('desktop')">
+  <button class="toggle-btn active" onclick="showDevice('desktop')">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
     Desktop
   </button>
-  <button class="toggle-btn" onclick="switchView('mobile')">
+  <button class="toggle-btn" onclick="showDevice('mobile')">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
     Mobile
   </button>
@@ -322,7 +329,7 @@
 <!-- ════════════════════════════════════════ -->
 <!-- DESKTOP VIEW                            -->
 <!-- ════════════════════════════════════════ -->
-<div class="device visible" id="view-desktop">
+<div class="device visible" id="device-desktop">
   <div class="device-label">Desktop — 1100 x 720</div>
   <div class="frame-desktop">
     <div class="browser-bar">
@@ -950,7 +957,7 @@
 <!-- ════════════════════════════════════════ -->
 <!-- MOBILE VIEW                             -->
 <!-- ════════════════════════════════════════ -->
-<div class="device" id="view-mobile">
+<div class="device" id="device-mobile">
   <div class="device-label">Mobile — 375 x 760</div>
   <div class="frame-mobile">
     <div class="notch"></div>
@@ -1232,7 +1239,7 @@
 </div>
 
 <script>
-function switchView(view) {
+function showDevice(view) {
   document.querySelectorAll('.device').forEach(d => d.classList.remove('visible'));
   document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('view-' + view).classList.add('visible');
@@ -1248,7 +1255,7 @@ if (window.location !== window.parent.location || new URLSearchParams(window.loc
 if (window.innerWidth <= 768) {
   document.querySelectorAll('.device').forEach(function(d) { d.classList.remove('visible'); });
   document.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-  var mob = document.getElementById('device-mobile') || document.getElementById('view-mobile');
+  var mob = document.getElementById('device-mobile');
   if (mob) mob.classList.add('visible');
   var btns = document.querySelectorAll('.toggle-btn');
   if (btns[1]) btns[1].classList.add('active');
