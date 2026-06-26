@@ -43,7 +43,6 @@
   .sh-mobile-menu a.active { color:var(--accent); }
   .sh-overlay { display:none; position:fixed; inset:0; top:52px; background:rgba(0,0,0,0.4); z-index:9997; }
   .sh-overlay.open { display:block; }
-  @media (max-width:768px) { .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; } }
 
   /* ── MOCKUP HEADER + TOGGLE ── */
   .mockup-header { text-align:center; margin-bottom:26px; max-width:700px; }
@@ -107,14 +106,12 @@
   html.embedded .embed-back:hover { background:#081a0e; }
 
   /* ── RESPONSIVO (pagina real no mobile) ── */
+
+
+
   @media (max-width:768px) {
-    body { padding:84px 0 28px !important; background:#E4E8EB !important; }
-    html.embedded body { padding:14px 0 28px !important; }
-    .mockup-header { padding:0 18px; margin-bottom:0; max-width:100%; }
-    .mockup-header .badge { font-size:9px; padding:4px 11px; margin-bottom:9px; }
-    .mockup-header h1 { font-size:19px; margin-bottom:5px; }
-    .mockup-header .sub { font-size:11px; margin-bottom:6px; }
-    .mockup-header p { font-size:12.5px; line-height:1.55; }
+    .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; }
+    .mockup-header { display:none !important; }
     .toggle-row { display:none !important; }
     .devices { gap:0 !important; width:100%; padding:0 14px; box-sizing:border-box; }
     #device-desktop { display:none !important; }
@@ -141,7 +138,6 @@
     .notch { display:none !important; }
     .viewport-m { height:auto !important; padding-top:0 !important; border-radius:25px; overflow:hidden; }
   }
-
 /* === EMBEDDED-MOBILE === */
 @media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E4E8EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
 </style>
