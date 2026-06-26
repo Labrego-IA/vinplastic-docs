@@ -114,7 +114,7 @@
   .sb-brand span { font-family:var(--font-head); font-size:11.5px; font-weight:700; color:rgba(255,255,255,0.75); letter-spacing:0.12em; text-transform:uppercase; }
   .sb-group { padding:20px 0 6px; }
   .sb-group-label { font-size:10px; font-weight:700; color:rgba(255,255,255,0.3); letter-spacing:0.14em; text-transform:uppercase; padding:0 22px 8px; }
-  .sb-item { display:flex; align-items:center; gap:11px; padding:10px 22px; color:rgba(255,255,255,0.6); font-size:13.5px; font-weight:500; cursor:pointer; transition:all 0.15s; text-decoration:none; position:relative; border-left:3px solid transparent; }
+  .sb-item { display:flex; align-items:center; gap:11px; padding:9px 12px; border-radius:6px; color:rgba(255,255,255,0.6); font-size:13.5px; font-weight:500; cursor:pointer; transition:all 0.15s; text-decoration:none; position:relative; border-left:3px solid transparent; }
   .sb-item:hover { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.04); }
   .sb-item.active { color:#fff; background:rgba(76,175,80,0.12); border-left-color:var(--accent); }
   .sb-item svg { width:18px; height:18px; stroke:currentColor; flex-shrink:0; }
@@ -290,16 +290,6 @@ html.embedded .embed-back:hover{background:#091a0e;}
   <a href="index.html" class="active">Mockups</a>
   <a href="../design-system.html">Design System</a>
 </nav>
-  <button class="sh-hamburger" onclick="toggleMenu()">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-  </button>
-</header>
-<div class="sh-mobile-menu" id="shMenu">
-  <a href="../01-documentacao-tecnica.html">Documentacao</a>
-  <a href="index.html" class="active">Mockups</a>
-  <a href="../design-system.html">Design System</a>
-</div>
-<div class="sh-overlay" id="shOverlay" onclick="toggleMenu()"></div>
 
 <!-- ══════════ EMBED BACK ══════════ -->
 <a class="embed-back" href="index.html?embed=1">
@@ -964,12 +954,7 @@ function showView(view) {
   else { d.classList.add('visible'); m.classList.add('visible'); }
 }
 
-function toggleMenu() {
-  var menu = document.getElementById('shMenu');
-  var overlay = document.getElementById('shOverlay');
-  menu.classList.toggle('open');
-  overlay.classList.toggle('open');
-}
+
 </script>
 <script id="embed-script">(function(){try{var p=new URLSearchParams(location.search);if(p.get("embed")==="1"||window.self!==window.top){document.documentElement.classList.add("embedded");}}catch(e){}})();</script>
 </body>
