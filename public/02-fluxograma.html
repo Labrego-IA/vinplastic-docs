@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fluxograma — Agente de Atendimento + CRM VinPlast</title>
+  <script>
+    // Detecta modo embedded (dentro de um iframe do app React) ou ?embed=1
+    // e marca o <html> para esconder o header/footer internos (evita header duplicado).
+    (function () {
+      try {
+        var embedded = window.self !== window.top ||
+          new URLSearchParams(window.location.search).has('embed');
+        if (embedded) document.documentElement.classList.add('embedded');
+      } catch (e) {
+        document.documentElement.classList.add('embedded');
+      }
+    })();
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     :root {
@@ -266,20 +279,79 @@
 
     .flow-body .mermaid {
       min-width: 800px;
+      /* Esconde o diagrama (e o codigo-fonte cru) ate o mermaid renderizar
+         E ate ajustarmos a largura das caixas (evita FOUC e flash de texto cortado) */
+      visibility: hidden;
+    }
+
+    /* So revela apos render + ajuste de largura das caixas */
+    .flow-body .mermaid.bp-ready {
+      visibility: visible;
     }
 
     .flow-body .mermaid svg {
       font-size: 14px !important;
+      max-width: none !important;
     }
 
-    .flow-body .mermaid .nodeLabel {
+    /* Texto dos nos: legivel, sem corte, sem espremer palavra por linha.
+       nowrap impede o empilhamento palavra-a-palavra; as quebras intencionais
+       (<br/>) continuam funcionando normalmente. */
+    .flow-body .mermaid .nodeLabel,
+    .flow-body .mermaid .nodeLabel p,
+    .flow-body .mermaid .nodeLabel span {
       font-size: 13px !important;
-      white-space: normal !important;
-      max-width: 200px;
+      line-height: 1.4 !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
     }
 
+    .flow-body .mermaid foreignObject {
+      overflow: visible !important;
+    }
+
+    /* Rotulos das setas: fundo branco solido + texto escuro para contraste */
     .flow-body .mermaid .edgeLabel {
       font-size: 12px !important;
+    }
+
+    .flow-body .mermaid .edgeLabel rect,
+    .flow-body .mermaid .edgeLabel .labelBkg {
+      fill: #FFFFFF !important;
+      opacity: 1 !important;
+    }
+
+    .flow-body .mermaid .edgeLabel,
+    .flow-body .mermaid .edgeLabel p,
+    .flow-body .mermaid .edgeLabel span,
+    .flow-body .mermaid .edgeLabel foreignObject > div {
+      background: #FFFFFF !important;
+      color: #0D2B15 !important;
+      font-weight: 600 !important;
+    }
+
+    .flow-body .mermaid .edgeLabel foreignObject > div,
+    .flow-body .mermaid .edgeLabel .edgeLabel {
+      padding: 2px 7px !important;
+      border-radius: 5px !important;
+      border: 1px solid #C8E6C9 !important;
+      box-shadow: 0 1px 3px rgba(13,43,21,0.14) !important;
+    }
+
+    /* Badge branco para o logo VinPlast manter contraste sobre o header verde */
+    .site-header .header-logo {
+      background: #FFFFFF;
+      padding: 5px 7px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(13,43,21,0.18);
+    }
+
+    /* Modo embedded (dentro do app React): esconde header/footer internos
+       para nao duplicar a navegacao do app */
+    html.embedded .site-header,
+    html.embedded .site-footer {
+      display: none !important;
     }
 
     /* ─── LEGENDA ─── */
@@ -468,8 +540,16 @@
     'nodeBorder': '#1A4A2A',
     'clusterBkg': '#F1F8E9',
     'titleColor': '#1A4A2A',
-    'edgeLabelBackground': '#F1F8E9',
+    'edgeLabelBackground': '#FFFFFF',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
   }
 }}%%
 flowchart TD
@@ -554,8 +634,16 @@ flowchart TD
     'nodeBorder': '#1A4A2A',
     'clusterBkg': '#F1F8E9',
     'titleColor': '#1A4A2A',
-    'edgeLabelBackground': '#F1F8E9',
+    'edgeLabelBackground': '#FFFFFF',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
   }
 }}%%
 flowchart LR
@@ -628,8 +716,16 @@ flowchart LR
     'nodeBorder': '#1A4A2A',
     'clusterBkg': '#F1F8E9',
     'titleColor': '#1A4A2A',
-    'edgeLabelBackground': '#F1F8E9',
+    'edgeLabelBackground': '#FFFFFF',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
   }
 }}%%
 flowchart TD
@@ -706,8 +802,16 @@ flowchart TD
     'nodeBorder': '#1A4A2A',
     'clusterBkg': '#F1F8E9',
     'titleColor': '#1A4A2A',
-    'edgeLabelBackground': '#F1F8E9',
+    'edgeLabelBackground': '#FFFFFF',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
   }
 }}%%
 flowchart LR
@@ -825,17 +929,63 @@ flowchart LR
         nodeBorder: '#1A4A2A',
         clusterBkg: '#F1F8E9',
         titleColor: '#1A4A2A',
-        edgeLabelBackground: '#F1F8E9',
+        edgeLabelBackground: '#FFFFFF',
         fontFamily: 'Segoe UI, system-ui, sans-serif'
       },
       flowchart: {
         htmlLabels: true,
         curve: 'basis',
         rankSpacing: 80,
-        nodeSpacing: 60,
-        padding: 25
+        nodeSpacing: 70,
+        padding: 18,
+        wrappingWidth: 10000,
+        useMaxWidth: false
       }
     });
+
+    // Apos o mermaid renderizar, ajusta a largura de cada caixa (foreignObject)
+    // para caber o texto inteiro — o mermaid subdimensiona a caixa em alguns px,
+    // o que cortava palavras (ex.: "WhatsApp VinPla..."). So entao revela.
+    function bpFitLabels(mermaidEl) {
+      mermaidEl.querySelectorAll('foreignObject').forEach(function (fo) {
+        var div = fo.firstElementChild;
+        if (!div) return;
+        var need = Math.ceil(Math.max(div.scrollWidth || 0, div.offsetWidth || 0));
+        var cur = parseFloat(fo.getAttribute('width')) || 0;
+        if (need > cur + 1) {
+          var delta = (need - cur) + 8;
+          fo.setAttribute('width', cur + delta);
+          var x = parseFloat(fo.getAttribute('x')) || 0;
+          fo.setAttribute('x', x - delta / 2); // mantem centralizado na caixa
+        }
+      });
+    }
+
+    function bpReveal() {
+      var all = document.querySelectorAll('.flow-body .mermaid');
+      all.forEach(function (el) {
+        if (el.querySelector('svg') && !el.classList.contains('bp-ready')) {
+          bpFitLabels(el);
+          el.classList.add('bp-ready');
+        }
+      });
+      return all.length > 0 && Array.prototype.every.call(all, function (el) {
+        return el.classList.contains('bp-ready');
+      });
+    }
+
+    var bpTries = 0;
+    var bpTimer = setInterval(function () {
+      bpTries++;
+      if (bpReveal() || bpTries > 50) clearInterval(bpTimer);
+    }, 100);
+
+    // Seguranca: revela tudo apos 4s mesmo que algo falhe (nunca deixa em branco)
+    setTimeout(function () {
+      document.querySelectorAll('.flow-body .mermaid').forEach(function (el) {
+        el.classList.add('bp-ready');
+      });
+    }, 4000);
   </script>
 </body>
 </html>
