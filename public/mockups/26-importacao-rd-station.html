@@ -181,13 +181,6 @@
      MOBILE LAYOUT
      ══════════════════════════════════════════════════ */
   .m-app-shell { display:flex; flex-direction:column; min-height:100%; background:var(--bg); }
-  .m-topbar { height:56px; background:var(--green-900); display:flex; align-items:center; padding:0 16px; gap:12px; flex-shrink:0; }
-  .m-topbar-logo { height:24px; filter:brightness(0) invert(1); opacity:0.9; }
-  .m-topbar-spacer { flex:1; }
-  .m-topbar-bell { background:none; border:none; cursor:pointer; position:relative; padding:4px; }
-  .m-topbar-bell svg { width:18px; height:18px; stroke:#fff; }
-  .m-topbar-bell .m-bell-badge { position:absolute; top:0; right:0; width:14px; height:14px; background:var(--danger); border-radius:50%; border:2px solid var(--green-900); font-size:7px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; }
-  .m-topbar-av { width:28px; height:28px; border-radius:50%; background:var(--green-700); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-head); font-weight:700; font-size:10px; }
 
   .m-content { flex:1; padding:18px 16px; overflow-y:auto; }
   .m-page-title { font-family:var(--font-head); font-size:18px; font-weight:700; color:var(--text); margin-bottom:4px; }
@@ -234,10 +227,6 @@
   .m-btn-primary { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:11px 16px; border:none; border-radius:var(--r); background:var(--primary); color:#fff; font-family:var(--font-body); font-size:12px; font-weight:600; cursor:pointer; }
   .m-btn-primary svg { stroke:currentColor; flex-shrink:0; }
 
-  .m-bottom-bar { height:56px; background:var(--surface); border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-around; flex-shrink:0; }
-  .m-bottom-item { display:flex; flex-direction:column; align-items:center; gap:2px; font-size:9px; font-weight:500; color:var(--muted); text-decoration:none; padding:4px 8px; }
-  .m-bottom-item.active { color:var(--primary); }
-  .m-bottom-item svg { width:18px; height:18px; stroke:currentColor; }
 
   /* ── FOOTER GERAL DA PAGINA ── */
   .page-footer { margin-top:40px; text-align:center; font-size:12px; color:var(--muted); line-height:1.7; display:flex; flex-direction:column; align-items:center; gap:6px; }
@@ -261,7 +250,19 @@
 
   /* ── RESPONSIVO ── */
 
-
+  /* ═══════ MOBILE NAV CANONICO ═══════ */
+  .m-top { background:var(--primary); color:#fff; }
+  .m-top-bar { padding:14px 18px; display:flex; align-items:center; gap:10px; }
+  .m-top-title { font-family:var(--font-head); font-size:14px; font-weight:700; color:#fff; flex:1; }
+  .m-top-actions { display:flex; align-items:center; gap:12px; }
+  .m-top .m-tabs { display:flex; padding:0 12px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-top:1px solid rgba(255,255,255,0.08); gap:0; background:transparent; border-bottom:none; }
+  .m-tab { display:block; padding:10px 14px; font-size:12px; font-weight:600; color:rgba(255,255,255,0.6); text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent; transition:all 0.15s; }
+  .m-tab.active { color:#fff; border-bottom-color:var(--accent); }
+  .m-tabbar { position:sticky; bottom:0; background:var(--surface); border-top:1px solid var(--border); display:flex; justify-content:space-around; padding:8px 0 12px; }
+  .m-tabbar a { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9.5px; color:var(--muted); text-decoration:none; font-weight:600; transition:color 0.15s; }
+  .m-tabbar a.active { color:var(--accent); }
+  .m-tabbar a.active svg { stroke:var(--accent); }
+  .m-tabbar a svg { stroke:var(--muted); width:18px; height:18px; }
 
   @media (max-width:768px) {
     .sh-nav { display:none !important; } .sh-hamburger { display:block !important; } .sh-divider { display:none; }
@@ -603,14 +604,15 @@
       <div class="viewport-m">
 
         <div class="m-app-shell">
-          <div class="m-topbar">
-            <img class="m-topbar-logo" src="../logo-vinplast.webp" alt="VinPlast" />
-            <div class="m-topbar-spacer"></div>
-            <button class="m-topbar-bell">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              <span class="m-bell-badge">3</span>
-            </button>
-            <div class="m-topbar-av">VF</div>
+          <div class="m-top">
+            <div class="m-top-bar">
+              <img src="../logo-vinplast.webp" alt="VinPlast" style="height:28px;border-radius:4px;">
+              <span class="m-top-title">VinPlast CRM</span>
+              <div class="m-top-actions">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+            </div>
           </div>
 
           <div class="m-content">
@@ -761,28 +763,29 @@
 
           </div>
 
-          <nav class="m-bottom-bar">
-            <a class="m-bottom-item" href="02-dashboard.html">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <!-- MOBILE TAB BAR -->
+          <div class="m-tabbar">
+            <a href="#" class="active">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
               Home
             </a>
-            <a class="m-bottom-item" href="03-funil-kanban.html">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="6" width="5" height="15" rx="1"/><rect x="17" y="9" width="5" height="12" rx="1"/></svg>
+            <a href="03-funil-kanban.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
               Funil
             </a>
-            <a class="m-bottom-item" href="12-lista-leads.html">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <a href="12-lista-leads.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               Leads
             </a>
-            <a class="m-bottom-item" href="05-conversas-whatsapp.html">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+            <a href="05-conversas-whatsapp.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
               Chat
             </a>
-            <a class="m-bottom-item active">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            <a href="07-config-agente.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
               Config
             </a>
-          </nav>
+          </div>
         </div>
 
       </div>
