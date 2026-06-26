@@ -239,6 +239,8 @@
   .m-section-card-head { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; font-family:var(--font-head); font-weight:700; font-size:14px; color:var(--text); }
   .m-section-card-head svg { stroke:var(--muted); }
   .m-section-card-body { padding:16px; }
+/* EMBEDDED-MOBILE: iframe no mobile — manter frame, fixar altura, esconder wrappers */
+@media(max-width:768px){html.embedded body{padding:8px 0 0!important;background:#E2E7EB!important;min-height:auto!important;}html.embedded .mockup-header,html.embedded .page-footer,html.embedded .embed-back,html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none!important;}html.embedded .devices{padding:0 10px!important;gap:0!important;}html.embedded #device-mobile{margin-top:4px!important;}html.embedded .frame-mobile{height:78vh!important;min-height:78vh!important;max-height:78vh!important;}html.embedded .viewport-m{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding-top:0!important;}}
 </style>
 <style id="embed-style">
 html.embedded .shared-header,html.embedded .sh-mobile-menu,html.embedded .sh-overlay{display:none !important;}
