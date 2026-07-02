@@ -341,9 +341,11 @@
 
     /* Arestas sem rotulo geram um edgeLabel VAZIO que herdava o fundo/borda
        branco acima e aparecia como uma "caixinha" solta no canto do diagrama.
-       Esconde qualquer label de aresta sem texto. */
-    .flow-body .mermaid span.edgeLabel:empty,
-    .flow-body .mermaid .edgeLabel foreignObject > div:empty {
+       Esconde o GRUPO inteiro do label quando o texto esta vazio. */
+    .flow-body .mermaid g.edgeLabel:has(span.edgeLabel:empty) {
+      display: none !important;
+    }
+    .flow-body .mermaid span.edgeLabel:empty {
       display: none !important;
       background: transparent !important;
       border: none !important;
