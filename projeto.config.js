@@ -13,7 +13,7 @@ export default {
   // ── Brand ─────────────────────────────────────────────────
   brand: {
     logo: '/logo-labrego.png',
-    clientLogo: '/logo-vinplast.webp',
+    clientLogo: '/logo-vinplast-hq.png',
     cores: { principal: '#1A4A2A', vibrante: '#4CAF50', escuro: '#0D2B15' },
   },
 
@@ -489,7 +489,9 @@ export default {
           'As configurações aplicam-se imediatamente após salvamento — sem necessidade de reinicializar a Lumi.',
           'As faixas de score Serasa + prática de mercado (para definir condição de pagamento do lead) são configuradas em uma subseção específica desta tela: score >= 560 → faturamento a prazo; score < 560 com prática de mercado a prazo → faturamento; score < 560 com prática à vista → venda à vista. CPF = sempre à vista.',
           'E-mails de redirecionamento: prestador de serviço → comercial@vinplastic.com.br; saque → sac@vinplastic.com.br — configuráveis nesta tela.',
-          'Perguntas frequentes (FAQ): respostas sobre localização, cobertura nacional, se são fabricantes e retirada no local — editáveis nesta tela.',
+          'Perguntas frequentes (FAQ) que a Lumi responde (base de conhecimento, editável): "Onde fica localizada a empresa?", "Vocês enviam para todo o Brasil?", "Vocês são fabricantes?", "Como funciona a retirada no local?".',
+          'Perguntas de qualificação que a Lumi faz ao lead (roteiro de triagem): 1) Qual a quantidade do item solicitado? 2) Será para uso e consumo ou revenda? 3) Você já tem alguma transportadora para indicar, ou gostaria que cotássemos o frete? 4) Poderia nos fornecer os dados cadastrais para realizarmos a proposta em nosso sistema? 5) A demanda é imediata ou é um projeto futuro? 6) Você já realizou alguma cotação desse item?',
+          'Gestor do site (implementação do formulário de captura): Susana Mendonça — links@addz.com.br / (11) 98044-7563.',
           'Catálogo de produtos (PDF): upload e gestão do catálogo que a Lumi envia quando solicitado.',
         ],
         dados: {
