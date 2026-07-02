@@ -495,18 +495,22 @@
     <div class="index-inner">
       <a href="#fluxo-1">
         <span class="index-num">1</span>
-        Jornada do Lead
+        Entrada e Triagem
       </a>
       <a href="#fluxo-2">
         <span class="index-num">2</span>
-        Qualificação Detalhada
+        Qualificação e Score
       </a>
       <a href="#fluxo-3">
         <span class="index-num">3</span>
-        Cadência de Follow-up
+        Atendimento e Proposta
       </a>
       <a href="#fluxo-4">
         <span class="index-num">4</span>
+        Cadência de Follow-up
+      </a>
+      <a href="#fluxo-5">
+        <span class="index-num">5</span>
         Funil do CRM
       </a>
     </div>
@@ -520,9 +524,9 @@
       <div class="flow-card-header">
         <div class="flow-num">1</div>
         <div class="flow-title-group">
-          <div class="flow-label">Visão Geral</div>
-          <div class="flow-title">Jornada Completa do Lead</div>
-          <div class="flow-subtitle">Do clique no anúncio até o fechamento ou descarte</div>
+          <div class="flow-label">Fase 1 · Triagem</div>
+          <div class="flow-title">Entrada e Identificação do Perfil</div>
+          <div class="flow-subtitle">Do primeiro contato no WhatsApp até saber quem é o lead</div>
         </div>
       </div>
       <div class="flow-body">
@@ -553,198 +557,193 @@
   }
 }}%%
 flowchart TD
-    A([<b>Lead chega ao WhatsApp</b><br/>Google Ads / Formulário / Direto]) --> B[<b>Lumi</b> responde em segundos<br/>Saudação + apresentação]
-    B --> C[Coleta dados iniciais:<br/>nome, produto, quantidade]
-    C --> C2{Cliente pede catálogo?}
-    C2 -->|Sim| C3[Lumi envia catálogo PDF<br/>e continua qualificação]
-    C2 -->|Não| D
-    C3 --> D
+    A([<b>Lead chega ao WhatsApp</b><br/>Google Ads · Formulário do site · Contato direto]) --> B[<b>Lumi</b> responde em segundos<br/>Saudação natural + apresentação]
+    B --> C2{Lead pede catálogo?}
+    C2 -->|Sim| C3[Lumi envia catálogo em PDF<br/>e oferece produtos para a cotação]
+    C2 -->|Não| C
+    C3 --> C
+    C[Lumi coleta dados iniciais:<br/>nome · produto · quantidade] --> D{<b>Lumi identifica o perfil</b>}
 
-    D{<b>Lumi identifica perfil</b>}
     D -->|Fornecedor querendo vender| E[Mensagem gentil de recusa]
-    D -->|Prestador de serviço| E2[Direciona para<br/>comercial@vinas.com.br]
-    D -->|Saque / Reclamação| E3[Direciona para<br/>saque@plasice.com.br]
-    D -->|Revendedor| F[Revendedor identificado<br/>Sempre venda à vista]
-    D -->|Consumidor final| G{Ticket estimado?}
-
-    F --> L
-
-    G -->|Abaixo de R$ 2.000| H[Direciona ao e-commerce]
-    G -->|Acima de R$ 2.000| G2[Coleta subgrupo:<br/>indústria / alimentícia /<br/>hospital / condomínio / hotel]
-
-    G2 --> G3[Verifica: cliente novo<br/>ou recorrente? Tag aplicada]
-    G3 --> G4[Pergunta: tem transportadora?<br/>Já cotou com concorrente?]
-    G4 --> I2{Tem CNPJ?}
-
-    I2 -->|Não — CPF| I3[Venda à vista<br/>Segue para vendedor]
-    I2 -->|Sim| K[<b>Consulta Serasa</b><br/>Score + prática de mercado]
-
-    K --> K2{Score e prática?}
-    K2 -->|Score >= 560| K3[Pode faturar a prazo<br/>Limite registrado]
-    K2 -->|Score < 560 com prática a prazo| K3
-    K2 -->|Score < 560 prática à vista| K4[Venda à vista]
-    K2 -->|Sem score| K4
-
-    K3 --> L[<b>Resumo do lead gerado</b><br/>Nome · Produto · Score ·<br/>Prática · Subgrupo · Tag]
-    K4 --> L
-    I3 --> L
-
-    L --> M{<b>Vendedor responde em 5 min?</b>}
-    M -->|Sim| N[Vendedor assume atendimento]
-    M -->|Não — timeout| O[Passa ao outro vendedor]
-    O --> N
-
-    N --> Q[Proposta no Bling<br/>PDF anexado no CRM]
-    Q --> R[Card move para <b>Proposta Enviada</b>]
-    R --> S[<b>Lumi inicia follow-up diário</b>]
-
-    S --> T{Cliente responde?}
-    T -->|Interesse| U[Vendedor avisado<br/>Negociação humana]
-    T -->|Pediu prazo| V[Lumi anota data<br/>Retoma na data combinada]
-    T -->|Descartou| W[Capta motivo<br/>Move para <b>Perdido</b>]
-    T -->|Sem resposta| X{10 dias completados?}
-    X -->|Não| S
-    X -->|Sim| W
-
-    U --> Y[<b>Fechado</b><br/>CRM + Dashboard atualizados]
+    D -->|Prestador de serviço<br/>transportadora · factoring · sistema| E2[Direciona para<br/>comercial@vinplastic.com.br]
+    D -->|Saque / Reclamação<br/>QR code do folder do produto| E3[Direciona para<br/>sac@vinplastic.com.br]
+    D -->|Revendedor| F([Segue para a Fase 2<br/>Qualificação →])
+    D -->|Consumidor final| G([Segue para a Fase 2<br/>Qualificação →])
 
     style A fill:#1A4A2A,color:#fff,stroke:#1A4A2A
+    style C fill:#1A4A2A,color:#fff,stroke:#1A4A2A
+    style C3 fill:#4CAF50,color:#fff,stroke:#2E7D32
     style E fill:#90A4AE,color:#fff,stroke:#607D8B
     style E2 fill:#78909C,color:#fff,stroke:#607D8B
     style E3 fill:#78909C,color:#fff,stroke:#607D8B
-    style H fill:#78909C,color:#fff,stroke:#607D8B
-    style F fill:#4CAF50,color:#fff,stroke:#2E7D32
-    style W fill:#EF5350,color:#fff,stroke:#C62828
-    style Y fill:#2E7D32,color:#fff,stroke:#1A4A2A
-    style K fill:#1A4A2A,color:#fff,stroke:#1A4A2A
-    style Q fill:#4CAF50,color:#fff,stroke:#2E7D32
-    style S fill:#4CAF50,color:#fff,stroke:#2E7D32
-    style L fill:#2E7D32,color:#fff,stroke:#1A4A2A
-    style C3 fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style F fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style G fill:#2E7D32,color:#fff,stroke:#1A4A2A
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Ação da Lumi (IA)</div>
+        <div class="legend-item"><div class="legend-dot dot-verde"></div>Segue para a próxima fase</div>
+        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionamento (recusa / e-mail)</div>
+      </div>
+    </section>
+
+    <!-- ── FLUXO 2: Qualificação, Ticket e Score ── -->
+    <section class="flow-card" id="fluxo-2">
+      <div class="flow-card-header">
+        <div class="flow-num">2</div>
+        <div class="flow-title-group">
+          <div class="flow-label">Fase 2 · Qualificação</div>
+          <div class="flow-title">Ticket, Roteamento e Score</div>
+          <div class="flow-subtitle">Do perfil identificado até o resumo do lead pronto para o vendedor</div>
+        </div>
+      </div>
+      <div class="flow-body">
+        <div class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#1A4A2A',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#2E7D32',
+    'lineColor': '#4CAF50',
+    'secondaryColor': '#2E7D32',
+    'tertiaryColor': '#F1F8E9',
+    'background': '#FFFFFF',
+    'nodeBorder': '#1A4A2A',
+    'clusterBkg': '#F1F8E9',
+    'titleColor': '#1A4A2A',
+    'edgeLabelBackground': '#FFFFFF',
+    'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
+  }
+}}%%
+flowchart TD
+    START([Perfil identificado na Fase 1<br/>revendedor ou consumidor final]) --> P0{Qual o perfil?}
+
+    P0 -->|Revendedor| RV[Sem tabela de revenda<br/>Lumi pede qual produto o revendedor quer]
+    RV --> RV2{Ticket do revendedor}
+    RV2 -->|Abaixo de R$ 5.000| CT
+    RV2 -->|Acima de R$ 5.000| RV3[Segue para o vendedor por e-mail<br/>3 primeiros pedidos sempre à vista<br/>fluxo não imediato]
+    RV3 --> TRANSP
+
+    P0 -->|Consumidor final| Q0{CPF ou CNPJ?}
+    Q0 -->|CPF — pessoa física| CPF[Consumidor final<br/>Sempre venda à vista]
+    Q0 -->|CNPJ — empresa| CT
+    CPF --> CT{Ticket estimado}
+    CT -->|Abaixo de R$ 2.000| ECOM[Direciona ao e-commerce do site]
+    CT -->|Acima de R$ 2.000| SUB[Coleta subgrupo:<br/>indústria · alimentícia · hospital · condomínio · hotel]
+
+    SUB --> IMED{Demanda imediata<br/>ou projeto futuro?}
+    IMED -->|Projeto futuro · ex: licitação| FUT[Pergunta a data / mês<br/>Direciona ao comercial por e-mail<br/>não passa pelo filtro de 5 min]
+    IMED -->|Imediata| TAG[Verifica tag:<br/>cliente novo ou recorrente]
+    TAG --> COT[Pergunta: já cotou com concorrente?<br/>sim / não — sem pedir valor]
+    COT --> DOC{É CPF ou CNPJ?}
+    DOC -->|CPF — só à vista| VISTA[Venda à vista]
+    DOC -->|CNPJ| SER[<b>Consulta CNPJ no Serasa</b><br/>score + prática de mercado]
+
+    SER --> SC{Score e prática?}
+    SC -->|Score maior ou igual a 560| PRAZO[Pode faturar a prazo<br/>limite registrado]
+    SC -->|Score abaixo de 560 · prática a prazo| PRAZO
+    SC -->|Score abaixo de 560 · prática à vista| VISTA
+    SC -->|Sem score no Serasa| VISTA
+
+    PRAZO --> TRANSP[Tem transportadora?<br/>Senão coleta o endereço de entrega<br/>ou usa o endereço do CNPJ]
+    VISTA --> TRANSP
+    TRANSP --> RESUMO[<b>Resumo do lead gerado</b><br/>nome · produto · ticket · score<br/>prática · subgrupo · tag]
+    RESUMO --> NOTIF([Notifica o vendedor no WhatsApp<br/>5 min para assumir → Fase 3])
+
+    style START fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style RV fill:#1A4A2A,color:#fff,stroke:#1A4A2A
+    style RV3 fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style CPF fill:#1A4A2A,color:#fff,stroke:#1A4A2A
+    style ECOM fill:#78909C,color:#fff,stroke:#607D8B
+    style FUT fill:#78909C,color:#fff,stroke:#607D8B
+    style SER fill:#1A4A2A,color:#fff,stroke:#1A4A2A
+    style PRAZO fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style VISTA fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style RESUMO fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style NOTIF fill:#2E7D32,color:#fff,stroke:#1A4A2A
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Ação da Lumi (IA)</div>
+        <div class="legend-item"><div class="legend-dot dot-verde"></div>Lead qualificado para vendedor</div>
+        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionado (e-commerce / e-mail)</div>
+      </div>
+    </section>
+
+    <!-- ── FLUXO 3: Atendimento e Proposta ── -->
+    <section class="flow-card" id="fluxo-3">
+      <div class="flow-card-header">
+        <div class="flow-num">3</div>
+        <div class="flow-title-group">
+          <div class="flow-label">Fase 3 · Atendimento</div>
+          <div class="flow-title">Do Vendedor à Proposta Enviada</div>
+          <div class="flow-subtitle">Quando o lead qualificado é distribuído e o vendedor assume</div>
+        </div>
+      </div>
+      <div class="flow-body">
+        <div class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#1A4A2A',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#2E7D32',
+    'lineColor': '#4CAF50',
+    'secondaryColor': '#2E7D32',
+    'tertiaryColor': '#F1F8E9',
+    'background': '#FFFFFF',
+    'nodeBorder': '#1A4A2A',
+    'clusterBkg': '#F1F8E9',
+    'titleColor': '#1A4A2A',
+    'edgeLabelBackground': '#FFFFFF',
+    'fontFamily': 'Segoe UI, system-ui, sans-serif'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'wrappingWidth': 10000,
+    'useMaxWidth': false,
+    'nodeSpacing': 70,
+    'rankSpacing': 80,
+    'padding': 18
+  }
+}}%%
+flowchart TD
+    A([Lead distribuído na Fase 2<br/>com resumo completo]) --> M{<b>Vendedor responde em 5 min?</b>}
+    M -->|Sim| N[Vendedor assume o atendimento<br/>Card em <b>Em Atendimento</b>]
+    M -->|Não — timeout| O[Passa ao próximo vendedor da fila]
+    O --> N
+    N --> PROP[Vendedor monta a proposta no Bling<br/>e anexa o PDF no CRM]
+    PROP --> ENV[Card move para <b>Proposta Enviada</b><br/>enviada por WhatsApp / e-mail / sistema]
+    ENV --> FUP([Lumi inicia a cadência<br/>de follow-up → Fase 4])
+
+    style A fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style N fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style PROP fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style ENV fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style FUP fill:#1A4A2A,color:#fff,stroke:#1A4A2A
         </div>
       </div>
       <div class="legend">
         <div class="legend-item"><div class="legend-dot dot-escuro"></div>Ação da Lumi (IA)</div>
         <div class="legend-item"><div class="legend-dot dot-verde"></div>Ação do Vendedor</div>
-        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionamento (e-commerce / e-mail)</div>
-        <div class="legend-item"><div class="legend-dot dot-vermelho"></div>Perdido</div>
       </div>
     </section>
 
-    <!-- ── FLUXO 2: Qualificação Detalhada ── -->
-    <section class="flow-card" id="fluxo-2">
+    <!-- ── FLUXO 4: Cadência de Follow-up ── -->
+    <section class="flow-card" id="fluxo-4">
       <div class="flow-card-header">
-        <div class="flow-num">2</div>
+        <div class="flow-num">4</div>
         <div class="flow-title-group">
-          <div class="flow-label">Etapa de Triagem</div>
-          <div class="flow-title">Qualificação do Lead em Detalhe</div>
-          <div class="flow-subtitle">Lógica completa de identificação, score e roteamento</div>
-        </div>
-      </div>
-      <div class="flow-body">
-        <div class="mermaid">
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#1A4A2A',
-    'primaryTextColor': '#FFFFFF',
-    'primaryBorderColor': '#2E7D32',
-    'lineColor': '#4CAF50',
-    'secondaryColor': '#2E7D32',
-    'tertiaryColor': '#F1F8E9',
-    'background': '#FFFFFF',
-    'nodeBorder': '#1A4A2A',
-    'clusterBkg': '#F1F8E9',
-    'titleColor': '#1A4A2A',
-    'edgeLabelBackground': '#FFFFFF',
-    'fontFamily': 'Segoe UI, system-ui, sans-serif'
-  },
-  'flowchart': {
-    'htmlLabels': true,
-    'wrappingWidth': 10000,
-    'useMaxWidth': false,
-    'nodeSpacing': 70,
-    'rankSpacing': 80,
-    'padding': 18
-  }
-}}%%
-flowchart TD
-    A([Mensagem no WhatsApp]) --> B[Lumi coleta dados iniciais:<br/>nome, produto, quantidade]
-    B --> B2{Cliente pede catálogo?}
-    B2 -->|Sim| B3[Envia catálogo PDF]
-    B2 -->|Não| C
-    B3 --> C
-
-    C{<b>CPF ou CNPJ?</b>}
-
-    C -->|CPF — Pessoa Física| D[Consumidor final<br/>Sempre venda à vista]
-    D --> D2[Coleta subgrupo:<br/>indústria / alimentícia /<br/>hospital / condomínio / hotel]
-    D2 --> E{Ticket estimado}
-    E -->|Menor que R$ 2.000| F[Envia link do e-commerce]
-    E -->|Maior que R$ 2.000| G[Segue para vendedor<br/>Condição: à vista]
-
-    C -->|CNPJ — Empresa| H{<b>Tipo de empresa?</b>}
-    H -->|Fornecedor querendo vender| I[Descarte gentil]
-    H -->|Prestador de serviço| I2[Direciona p/<br/>comercial@vinas.com.br]
-    H -->|Saque / Reclamação| I3[Direciona p/<br/>saque@plasice.com.br]
-    H -->|Revendedor| J2[Revendedor identificado<br/>Sempre venda à vista]
-    H -->|Consumidor final| J{Ticket estimado}
-
-    J2 --> K2
-
-    J -->|Menor que R$ 2.000| F
-    J -->|Maior que R$ 2.000| J4[Coleta subgrupo p/ marketing]
-    J4 --> K[<b>Consulta Serasa API</b><br/>Score + prática de mercado]
-
-    G --> K2[Verifica tag:<br/>cliente novo ou recorrente]
-    K --> K2
-
-    K2 --> L{Score e prática?}
-    L -->|Score >= 560| M[Pode faturar a prazo]
-    L -->|Score < 560 + prática a prazo| M
-    L -->|Score < 560 + prática à vista| M2[Venda à vista]
-    L -->|Sem score / sem dados| M2
-
-    M --> N[Pergunta: tem transportadora?]
-    M2 --> N
-    N --> N2{Tem transportadora?}
-    N2 -->|Sim| N3[Registra dados da transp.]
-    N2 -->|Não| N4[Coleta endereço de entrega<br/>ou usa endereço do CNPJ]
-    N3 --> N5[Já cotou com concorrente?]
-    N4 --> N5
-
-    N5 --> O[<b>Resumo completo gerado</b><br/>Nome · CNPJ · Produto · Ticket<br/>Score · Prática · Subgrupo · Tag]
-
-    O --> P[Notificação no WhatsApp<br/>do vendedor responsável]
-    P --> Q([Lead distribuído<br/>Aguardando resposta em 5 min])
-
-    style A fill:#1A4A2A,color:#fff,stroke:#1A4A2A
-    style I fill:#90A4AE,color:#fff,stroke:#607D8B
-    style I2 fill:#78909C,color:#fff,stroke:#607D8B
-    style I3 fill:#78909C,color:#fff,stroke:#607D8B
-    style F fill:#78909C,color:#fff,stroke:#607D8B
-    style K fill:#1A4A2A,color:#fff,stroke:#1A4A2A
-    style O fill:#2E7D32,color:#fff,stroke:#1A4A2A
-    style P fill:#4CAF50,color:#fff,stroke:#2E7D32
-    style Q fill:#2E7D32,color:#fff,stroke:#1A4A2A
-    style J2 fill:#4CAF50,color:#fff,stroke:#2E7D32
-    style B3 fill:#4CAF50,color:#fff,stroke:#2E7D32
-        </div>
-      </div>
-      <div class="legend">
-        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Lumi consulta API</div>
-        <div class="legend-item"><div class="legend-dot dot-verde"></div>Lead qualificado para vendedor</div>
-        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionado (e-commerce / e-mail)</div>
-        <div class="legend-item"><div class="legend-dot dot-vermelho"></div>Descartado</div>
-      </div>
-    </section>
-
-    <!-- ── FLUXO 3: Cadência de Follow-up ── -->
-    <section class="flow-card" id="fluxo-3">
-      <div class="flow-card-header">
-        <div class="flow-num">3</div>
-        <div class="flow-title-group">
-          <div class="flow-label">Automação de Relacionamento</div>
+          <div class="flow-label">Fase 4 · Relacionamento</div>
           <div class="flow-title">Cadência de Follow-up</div>
           <div class="flow-subtitle">Régua automática de até 10 dias após o envio da proposta</div>
         </div>
@@ -825,12 +824,12 @@ flowchart TD
       </div>
     </section>
 
-    <!-- ── FLUXO 4: Funil do CRM ── -->
-    <section class="flow-card" id="fluxo-4">
+    <!-- ── FLUXO 5: Funil do CRM ── -->
+    <section class="flow-card" id="fluxo-5">
       <div class="flow-card-header">
-        <div class="flow-num">4</div>
+        <div class="flow-num">5</div>
         <div class="flow-title-group">
-          <div class="flow-label">Kanban e Dashboards</div>
+          <div class="flow-label">Visão de Estados · Kanban</div>
           <div class="flow-title">Funil do CRM — Estados do Lead</div>
           <div class="flow-subtitle">7 colunas do kanban + coluna de reativação (projeto paralelo)</div>
         </div>
