@@ -553,35 +553,54 @@
   }
 }}%%
 flowchart TD
-    A([<b>Lead clica no Google Ads</b>]) --> B[Preenche formulário]
-    B --> C[Mensagem chega ao WhatsApp VinPlast]
-    C --> D{<b>Agente identifica perfil</b>}
+    A([<b>Lead chega ao WhatsApp</b><br/>Google Ads / Formulário / Direto]) --> B[<b>Lumi</b> responde em segundos<br/>Saudação + apresentação]
+    B --> C[Coleta dados iniciais:<br/>nome, produto, quantidade]
+    C --> C2{Cliente pede catálogo?}
+    C2 -->|Sim| C3[Lumi envia catálogo PDF<br/>e continua qualificação]
+    C2 -->|Não| D
+    C3 --> D
 
+    D{<b>Lumi identifica perfil</b>}
     D -->|Fornecedor querendo vender| E[Mensagem gentil de recusa]
-    D -->|Revendedor| F[Sem tabela para revenda — descarta]
-    D -->|Consumidor final| G{Ticket estimado}
+    D -->|Prestador de serviço| E2[Direciona para<br/>comercial@vinas.com.br]
+    D -->|Saque / Reclamação| E3[Direciona para<br/>saque@plasice.com.br]
+    D -->|Revendedor| F[Revendedor identificado<br/>Sempre venda à vista]
+    D -->|Consumidor final| G{Ticket estimado?}
 
-    G -->|Abaixo de R$ 2.000| H[Direciona ao e-commerce do site]
-    G -->|Acima de R$ 2.000| I{Tem CNPJ?}
+    F --> L
 
-    I -->|Não| J[Orienta abrir CNPJ ou<br/>aguardar volume maior]
-    I -->|Sim| K[<b>Consulta Serasa</b><br/>Score + limite de crédito]
+    G -->|Abaixo de R$ 2.000| H[Direciona ao e-commerce]
+    G -->|Acima de R$ 2.000| G2[Coleta subgrupo:<br/>indústria / alimentícia /<br/>hospital / condomínio / hotel]
 
-    K --> L[Resumo do lead gerado<br/>e enviado ao vendedor]
+    G2 --> G3[Verifica: cliente novo<br/>ou recorrente? Tag aplicada]
+    G3 --> G4[Pergunta: tem transportadora?<br/>Já cotou com concorrente?]
+    G4 --> I2{Tem CNPJ?}
+
+    I2 -->|Não — CPF| I3[Venda à vista<br/>Segue para vendedor]
+    I2 -->|Sim| K[<b>Consulta Serasa</b><br/>Score + prática de mercado]
+
+    K --> K2{Score e prática?}
+    K2 -->|Score >= 560| K3[Pode faturar a prazo<br/>Limite registrado]
+    K2 -->|Score < 560 com prática a prazo| K3
+    K2 -->|Score < 560 prática à vista| K4[Venda à vista]
+    K2 -->|Sem score| K4
+
+    K3 --> L[<b>Resumo do lead gerado</b><br/>Nome · Produto · Score ·<br/>Prática · Subgrupo · Tag]
+    K4 --> L
+    I3 --> L
+
     L --> M{<b>Vendedor responde em 5 min?</b>}
-
     M -->|Sim| N[Vendedor assume atendimento]
     M -->|Não — timeout| O[Passa ao outro vendedor]
-    O --> P[Vendedor 2 assume]
+    O --> N
 
     N --> Q[Proposta no Bling<br/>PDF anexado no CRM]
-    P --> Q
     Q --> R[Card move para <b>Proposta Enviada</b>]
-    R --> S[<b>Agente inicia follow-up diário</b>]
+    R --> S[<b>Lumi inicia follow-up diário</b>]
 
     S --> T{Cliente responde?}
     T -->|Interesse| U[Vendedor avisado<br/>Negociação humana]
-    T -->|Pediu prazo| V[Agente anota data<br/>Retoma na data combinada]
+    T -->|Pediu prazo| V[Lumi anota data<br/>Retoma na data combinada]
     T -->|Descartou| W[Capta motivo<br/>Move para <b>Perdido</b>]
     T -->|Sem resposta| X{10 dias completados?}
     X -->|Não| S
@@ -591,20 +610,23 @@ flowchart TD
 
     style A fill:#1A4A2A,color:#fff,stroke:#1A4A2A
     style E fill:#90A4AE,color:#fff,stroke:#607D8B
-    style F fill:#90A4AE,color:#fff,stroke:#607D8B
+    style E2 fill:#78909C,color:#fff,stroke:#607D8B
+    style E3 fill:#78909C,color:#fff,stroke:#607D8B
     style H fill:#78909C,color:#fff,stroke:#607D8B
-    style J fill:#90A4AE,color:#fff,stroke:#607D8B
+    style F fill:#4CAF50,color:#fff,stroke:#2E7D32
     style W fill:#EF5350,color:#fff,stroke:#C62828
     style Y fill:#2E7D32,color:#fff,stroke:#1A4A2A
     style K fill:#1A4A2A,color:#fff,stroke:#1A4A2A
     style Q fill:#4CAF50,color:#fff,stroke:#2E7D32
     style S fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style L fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style C3 fill:#4CAF50,color:#fff,stroke:#2E7D32
         </div>
       </div>
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Ação do Agente IA</div>
+        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Ação da Lumi (IA)</div>
         <div class="legend-item"><div class="legend-dot dot-verde"></div>Ação do Vendedor</div>
-        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Descarte automático</div>
+        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionamento (e-commerce / e-mail)</div>
         <div class="legend-item"><div class="legend-dot dot-vermelho"></div>Perdido</div>
       </div>
     </section>
@@ -646,47 +668,73 @@ flowchart TD
     'padding': 18
   }
 }}%%
-flowchart LR
-    A([Mensagem no WhatsApp]) --> B[Agente coleta<br/>dados iniciais]
-    B --> C{<b>CPF ou CNPJ?</b>}
+flowchart TD
+    A([Mensagem no WhatsApp]) --> B[Lumi coleta dados iniciais:<br/>nome, produto, quantidade]
+    B --> B2{Cliente pede catálogo?}
+    B2 -->|Sim| B3[Envia catálogo PDF]
+    B2 -->|Não| C
+    B3 --> C
 
-    C -->|CPF — Pessoa Física| D[Consumidor final<br/>identificado]
-    D --> E{Calcula ticket<br/>estimado}
-    E -->|Menor que R$ 2.000| F[Envia link<br/>do e-commerce]
-    E -->|Maior que R$ 2.000| G[Coleta CNPJ se tiver<br/>ou encaminha assim]
+    C{<b>CPF ou CNPJ?</b>}
+
+    C -->|CPF — Pessoa Física| D[Consumidor final<br/>Sempre venda à vista]
+    D --> D2[Coleta subgrupo:<br/>indústria / alimentícia /<br/>hospital / condomínio / hotel]
+    D2 --> E{Ticket estimado}
+    E -->|Menor que R$ 2.000| F[Envia link do e-commerce]
+    E -->|Maior que R$ 2.000| G[Segue para vendedor<br/>Condição: à vista]
 
     C -->|CNPJ — Empresa| H{<b>Tipo de empresa?</b>}
-    H -->|Revendedor| I[Descarte<br/>Sem tabela revenda]
-    H -->|Consumidor final| J{<b>Ticket estimado</b>}
+    H -->|Fornecedor querendo vender| I[Descarte gentil]
+    H -->|Prestador de serviço| I2[Direciona p/<br/>comercial@vinas.com.br]
+    H -->|Saque / Reclamação| I3[Direciona p/<br/>saque@plasice.com.br]
+    H -->|Revendedor| J2[Revendedor identificado<br/>Sempre venda à vista]
+    H -->|Consumidor final| J{Ticket estimado}
+
+    J2 --> K2
 
     J -->|Menor que R$ 2.000| F
-    J -->|Maior que R$ 2.000| K[<b>Consulta Serasa API</b>]
+    J -->|Maior que R$ 2.000| J4[Coleta subgrupo p/ marketing]
+    J4 --> K[<b>Consulta Serasa API</b><br/>Score + prática de mercado]
 
-    G --> K
+    G --> K2[Verifica tag:<br/>cliente novo ou recorrente]
+    K --> K2
 
-    K --> L{Score disponível?}
-    L -->|Sim| M[Score + limite de crédito<br/>incluídos no resumo]
-    L -->|Não — timeout ou sem dados| N[Resumo sem score<br/>Nota ao vendedor]
+    K2 --> L{Score e prática?}
+    L -->|Score >= 560| M[Pode faturar a prazo]
+    L -->|Score < 560 + prática a prazo| M
+    L -->|Score < 560 + prática à vista| M2[Venda à vista]
+    L -->|Sem score / sem dados| M2
 
-    M --> O[<b>Resumo completo gerado</b><br/>Nome · CNPJ · Produto<br/>Ticket · Score · Limite]
-    N --> O
+    M --> N[Pergunta: tem transportadora?]
+    M2 --> N
+    N --> N2{Tem transportadora?}
+    N2 -->|Sim| N3[Registra dados da transp.]
+    N2 -->|Não| N4[Coleta endereço de entrega<br/>ou usa endereço do CNPJ]
+    N3 --> N5[Já cotou com concorrente?]
+    N4 --> N5
+
+    N5 --> O[<b>Resumo completo gerado</b><br/>Nome · CNPJ · Produto · Ticket<br/>Score · Prática · Subgrupo · Tag]
 
     O --> P[Notificação no WhatsApp<br/>do vendedor responsável]
-    P --> Q([Lead distribuído<br/>Aguardando resposta])
+    P --> Q([Lead distribuído<br/>Aguardando resposta em 5 min])
 
     style A fill:#1A4A2A,color:#fff,stroke:#1A4A2A
-    style I fill:#EF5350,color:#fff,stroke:#C62828
+    style I fill:#90A4AE,color:#fff,stroke:#607D8B
+    style I2 fill:#78909C,color:#fff,stroke:#607D8B
+    style I3 fill:#78909C,color:#fff,stroke:#607D8B
     style F fill:#78909C,color:#fff,stroke:#607D8B
     style K fill:#1A4A2A,color:#fff,stroke:#1A4A2A
     style O fill:#2E7D32,color:#fff,stroke:#1A4A2A
     style P fill:#4CAF50,color:#fff,stroke:#2E7D32
     style Q fill:#2E7D32,color:#fff,stroke:#1A4A2A
+    style J2 fill:#4CAF50,color:#fff,stroke:#2E7D32
+    style B3 fill:#4CAF50,color:#fff,stroke:#2E7D32
         </div>
       </div>
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Agente consulta API</div>
+        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Lumi consulta API</div>
         <div class="legend-item"><div class="legend-dot dot-verde"></div>Lead qualificado para vendedor</div>
-        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionado ao e-commerce</div>
+        <div class="legend-item"><div class="legend-dot dot-cinza"></div>Redirecionado (e-commerce / e-mail)</div>
         <div class="legend-item"><div class="legend-dot dot-vermelho"></div>Descartado</div>
       </div>
     </section>
@@ -729,15 +777,15 @@ flowchart LR
   }
 }}%%
 flowchart TD
-    A([Card em <b>Proposta Enviada</b>]) --> B[Agente aguarda 1 dia]
+    A([Card em <b>Proposta Enviada</b>]) --> B[Lumi aguarda 1 dia]
     B --> C[Envia mensagem de follow-up<br/><i>texto varia a cada envio</i>]
     C --> D{<b>Cliente respondeu?</b>}
 
-    D -->|Sim — tem interesse| E[Agente avisa vendedor<br/>via WhatsApp]
+    D -->|Sim — tem interesse| E[Lumi avisa vendedor<br/>via WhatsApp]
     E --> F[Vendedor retira do<br/>follow-up automático]
     F --> G[Negociação humana<br/>Card em <b>Em Atendimento</b>]
 
-    D -->|Sim — pediu prazo| H[Agente registra data<br/>no CRM]
+    D -->|Sim — pediu prazo| H[Lumi registra data<br/>no CRM]
     H --> I[Follow-up pausado]
     I --> J{Data combinada chegou?}
     J -->|Não| I
@@ -770,7 +818,7 @@ flowchart TD
         </div>
       </div>
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Agente envia mensagem</div>
+        <div class="legend-item"><div class="legend-dot dot-escuro"></div>Lumi envia mensagem</div>
         <div class="legend-item"><div class="legend-dot dot-verde"></div>Vendedor assume</div>
         <div class="legend-item"><div class="legend-dot dot-amarelo"></div>Aguarda decisão humana</div>
         <div class="legend-item"><div class="legend-dot dot-vermelho"></div>Lead perdido</div>
@@ -784,7 +832,7 @@ flowchart TD
         <div class="flow-title-group">
           <div class="flow-label">Kanban e Dashboards</div>
           <div class="flow-title">Funil do CRM — Estados do Lead</div>
-          <div class="flow-subtitle">7 colunas do kanban com responsáveis por cada transição</div>
+          <div class="flow-subtitle">7 colunas do kanban + coluna de reativação (projeto paralelo)</div>
         </div>
       </div>
       <div class="flow-body">
@@ -866,13 +914,22 @@ flowchart LR
       L1 --> L2
     end
 
-    col1 -->|"🤖 Agente move"| col2
-    col2 -->|"🤖 Agente move"| col3
+    subgraph col8 ["🔁 &nbsp;REATIVAÇÃO"]
+      direction TB
+      R1[Agente separado<br/>Número próprio]
+      R2[Importação de base<br/>nome / tel / email / cidade]
+      R3[Projeto paralelo]
+      R1 --> R2 --> R3
+    end
+
+    col1 -->|"🤖 Lumi move"| col2
+    col2 -->|"🤖 Lumi move"| col3
     col3 -->|"👤 Vendedor move"| col4
-    col4 -->|"🤖 Agente move"| col5
+    col4 -->|"🤖 Lumi move"| col5
     col5 -->|"👤 Vendedor move"| col6
     col5 -->|"Sem resposta<br/>ou recusa"| col7
     col3 -->|"Desqualificado"| col7
+    col7 -.->|"Leads inativos"| col8
 
     style col1 fill:#E3F2FD,stroke:#90CAF9,color:#1A2A1A
     style col2 fill:#F1F8E9,stroke:#A5D6A7,color:#1A2A1A
@@ -881,6 +938,7 @@ flowchart LR
     style col5 fill:#FFF8E1,stroke:#FFD54F,color:#1A2A1A
     style col6 fill:#1A4A2A,stroke:#1A4A2A,color:#fff
     style col7 fill:#FFEBEE,stroke:#EF9A9A,color:#1A2A1A
+    style col8 fill:#E8EAF6,stroke:#9FA8DA,color:#1A2A1A
         </div>
       </div>
       <div class="legend">
@@ -889,7 +947,7 @@ flowchart LR
             <rect width="14" height="14" rx="7" fill="#1A4A2A"/>
             <text x="7" y="10" text-anchor="middle" fill="#fff" font-size="9" font-family="sans-serif">IA</text>
           </svg>
-          <span>Agente move automaticamente</span>
+          <span>Lumi move automaticamente</span>
         </div>
         <div class="legend-item">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
